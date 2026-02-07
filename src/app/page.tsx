@@ -19,18 +19,19 @@ const Hero = () => {
       minH={"100dvh"}
       align={"center"}
       justify={"center"}
+      gap={8}
       p={8}
       mx={"auto"}
     >
-      <CContainer align={"center"} my={"auto"}>
-        <P className="fd" fontSize={"2rem"} textAlign={"center"} mt={8}>
+      <CContainer align={"center"} gap={"40px"} my={"auto"}>
+        <P className="fd" fontSize={"1.5rem"} textAlign={"center"} mt={8}>
           THE WEDDING OF
         </P>
 
-        <CContainer w={"fit"} mt={24}>
+        <CContainer w={"fit"}>
           <P
             className="fd"
-            fontSize={"4rem"}
+            fontSize={"3rem"}
             fontWeight={"bold"}
             // textAlign={"center"}
             lineHeight={1}
@@ -39,7 +40,7 @@ const Hero = () => {
           </P>
           <P
             className="fd"
-            fontSize={"4rem"}
+            fontSize={"3rem"}
             fontWeight={"bold"}
             // textAlign={"center"}
             lineHeight={1}
@@ -48,54 +49,50 @@ const Hero = () => {
           </P>
         </CContainer>
 
-        <Box maxW={"400px"} mx={"auto"} mt={24}>
-          <svg
-            width="100%"
-            height="80"
-            viewBox="0 0 900 80"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g
-              fill="none"
-              stroke="#fff"
-              stroke-width="3"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+        <CContainer>
+          <Box maxW={"300px"} mx={"auto"}>
+            <svg
+              width="100%"
+              height="80"
+              viewBox="0 0 900 80"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <line x1="40" y1="40" x2="330" y2="40" />
-              <circle cx="350" cy="40" r="6" />
-              <circle cx="370" cy="40" r="4" />
+              <g
+                fill="none"
+                stroke="#fff"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="40" y1="40" x2="330" y2="40" />
+                <circle cx="350" cy="40" r="6" />
+                <circle cx="370" cy="40" r="4" />
 
-              <g transform="translate(450 40)">
-                <ellipse cx="0" cy="-14" rx="6" ry="10" />
-                <ellipse cx="14" cy="0" rx="10" ry="6" />
-                <ellipse cx="0" cy="14" rx="6" ry="10" />
-                <ellipse cx="-14" cy="0" rx="10" ry="6" />
+                <g transform="translate(450 40)">
+                  <ellipse cx="0" cy="-14" rx="6" ry="10" />
+                  <ellipse cx="14" cy="0" rx="10" ry="6" />
+                  <ellipse cx="0" cy="14" rx="6" ry="10" />
+                  <ellipse cx="-14" cy="0" rx="10" ry="6" />
+                </g>
+
+                <circle cx="530" cy="40" r="4" />
+                <circle cx="550" cy="40" r="6" />
+                <line x1="570" y1="40" x2="860" y2="40" />
               </g>
+            </svg>
+          </Box>
 
-              <circle cx="530" cy="40" r="4" />
-              <circle cx="550" cy="40" r="6" />
-              <line x1="570" y1="40" x2="860" y2="40" />
-            </g>
-          </svg>
-        </Box>
+          <P className="fdn" fontSize={"1.5rem"} textAlign={"center"}>
+            31.05.2026
+          </P>
+        </CContainer>
 
-        <P className="fdn" fontSize={"2rem"} textAlign={"center"}>
-          31.05.2026
-        </P>
-
-        <CContainer
-          maxW={"350px"}
-          align={"center"}
-          p={4}
-          bg={"whiteAlpha.200"}
-          mt={24}
-        >
-          <P className="fd" fontSize={"1.25rem"} color={"fg.muted"}>
+        <CContainer maxW={"350px"} align={"center"} p={4} bg={"whiteAlpha.200"}>
+          <P className="fd" fontSize={"1rem"} color={"fg.muted"}>
             Kepada Yth. Bpk / Ibu / Saudara/i
           </P>
 
-          <P className="fd" fontSize={"2rem"} fontWeight={"bold"} my={4}>
+          <P className="fd" fontSize={"1.5rem"} fontWeight={"bold"} my={4}>
             {name}
           </P>
         </CContainer>
