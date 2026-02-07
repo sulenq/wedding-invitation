@@ -27,7 +27,7 @@ const Hero = () => {
           THE WEDDING OF
         </P>
 
-        <CContainer w={"fit"} mt={12}>
+        <CContainer w={"fit"} mt={24}>
           <P
             className="fd"
             fontSize={"4rem"}
