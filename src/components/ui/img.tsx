@@ -39,7 +39,7 @@ export const Img = (props: Props__Img) => {
   return (
     <CContainer
       w={"auto"}
-      h={"auto"}
+      h={"100vh"}
       justify={"center"}
       align={"center"}
       pos={"relative"}
