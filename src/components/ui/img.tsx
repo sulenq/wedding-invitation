@@ -39,7 +39,7 @@ export const Img = (props: Props__Img) => {
   return (
     <CContainer
       w={"auto"}
-      h={"100vh"}
+      h={"auto"}
       justify={"center"}
       align={"center"}
       pos={"relative"}
@@ -59,7 +59,7 @@ export const Img = (props: Props__Img) => {
         fill={!fluid}
         width={fluid ? 0 : undefined}
         height={fluid ? 0 : undefined}
-        quality={80}
+        quality={100}
         sizes={
           imageProps?.sizes ??
           "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

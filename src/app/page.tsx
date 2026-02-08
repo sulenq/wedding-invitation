@@ -5,9 +5,12 @@ import { useColorMode } from "@/components/ui/color-mode";
 import { Img } from "@/components/ui/img";
 import { P } from "@/components/ui/p";
 import { AppIcon } from "@/components/widget/AppIcon";
+import { CountDown } from "@/components/widget/CountDown";
+import { DividerOrnament } from "@/components/widget/DividerOrnament";
+import { ContainerLayout } from "@/components/widget/Page";
 import { PaperTexture } from "@/components/widget/PaperTexture";
 import { IMAGES_PATH } from "@/constants/paths";
-import { Box } from "@chakra-ui/react";
+import { Box, SimpleGrid, VStack } from "@chakra-ui/react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -45,12 +48,12 @@ const Hero = () => {
         {
           scale: 1.5,
           ease: "none",
-          duration: 2.5,
+          // duration: 2.5,
         },
         {
           scale: 3,
           ease: "none",
-          duration: 2.5,
+          // duration: 2.5,
         },
       )
         .to(
@@ -58,7 +61,7 @@ const Hero = () => {
           {
             scale: 1.8,
             ease: "none",
-            duration: 2.5,
+            // duration: 2.5,
           },
           "<",
         )
@@ -67,7 +70,7 @@ const Hero = () => {
           {
             scale: 1.3,
             ease: "none",
-            duration: 2.5,
+            // duration: 2.5,
           },
           "<",
         )
@@ -76,7 +79,7 @@ const Hero = () => {
           {
             opacity: 0,
             ease: "none",
-            duration: 2.5,
+            // duration: 2.5,
           },
           ">",
         )
@@ -85,7 +88,7 @@ const Hero = () => {
           {
             opacity: 0,
             ease: "none",
-            duration: 2.5,
+            // duration: 2.5,
           },
           "<",
         )
@@ -94,16 +97,16 @@ const Hero = () => {
           {
             opacity: 1,
             ease: "none",
-            duration: 2.5,
+            // duration: 1.5,
           },
-          ">+0.2",
+          ">",
         )
         .to(
           ".hero_brief_line",
           {
             height: "100px",
             ease: "none",
-            duration: 2.5,
+            // duration: 1.5,
           },
           ">",
         )
@@ -112,7 +115,7 @@ const Hero = () => {
           {
             opacity: 0,
             ease: "none",
-            duration: 2.5,
+            // duration: 1.5,
           },
           ">",
         )
@@ -121,7 +124,7 @@ const Hero = () => {
           {
             opacity: 0,
             ease: "none",
-            duration: 2.5,
+            // duration: 1.5,
           },
           "<",
         );
@@ -131,13 +134,11 @@ const Hero = () => {
 
   return (
     <CContainer ref={containerRef} pos={"relative"} overflow={"clip"}>
-      <CContainer
-        maxW={"720px"}
+      <ContainerLayout
         minH={"100dvh"}
         align={"center"}
         justify={"center"}
         p={8}
-        mx={"auto"}
       >
         {/* Bg */}
         <CContainer className="hero_bg" h={"full"} pos={"absolute"} top={0}>
@@ -146,7 +147,7 @@ const Hero = () => {
           <PaperTexture h={"full"} w={"full"} pos={"absolute"} top={0} />
         </CContainer>
 
-        {/* Cover Content */}
+        {/* Cover content */}
         <CContainer
           h={"full"}
           align={"center"}
@@ -193,37 +194,7 @@ const Hero = () => {
             </CContainer>
 
             <CContainer>
-              <Box maxW={"300px"} mx={"auto"}>
-                <svg
-                  width="100%"
-                  height="80"
-                  viewBox="0 0 900 80"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g
-                    fill="none"
-                    stroke="#fff"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <line x1="40" y1="40" x2="330" y2="40" />
-                    <circle cx="350" cy="40" r="6" />
-                    <circle cx="370" cy="40" r="4" />
-
-                    <g transform="translate(450 40)">
-                      <ellipse cx="0" cy="-14" rx="6" ry="10" />
-                      <ellipse cx="14" cy="0" rx="10" ry="6" />
-                      <ellipse cx="0" cy="14" rx="6" ry="10" />
-                      <ellipse cx="-14" cy="0" rx="10" ry="6" />
-                    </g>
-
-                    <circle cx="530" cy="40" r="4" />
-                    <circle cx="550" cy="40" r="6" />
-                    <line x1="570" y1="40" x2="860" y2="40" />
-                  </g>
-                </svg>
-              </Box>
+              <DividerOrnament />
 
               <P
                 className="fd"
@@ -265,11 +236,11 @@ const Hero = () => {
           >
             <P
               className="hero_brief_content"
-              fontSize={"18px"}
+              fontSize={["1rem", null, "1.25rem"]}
               textAlign={"center"}
               maxW={"600px"}
             >
-              “Dengan memohon ridha Allah SWT, kami melangkah ke dalam ikatan
+              “Dengan memohon ridho Allah SWT, kami melangkah ke dalam ikatan
               pernikahan sebagai bentuk ibadah dan ketaatan kepada-Nya.”
             </P>
 
@@ -277,7 +248,7 @@ const Hero = () => {
               className="hero_brief_line"
               bg={"light"}
               opacity={0.5}
-              w={"2px"}
+              w={"1.2px"}
               h={"0"}
               pos={"absolute"}
               bottom={"50px"}
@@ -312,6 +283,7 @@ const Hero = () => {
           />
         </>
 
+        {/* Chevron down */}
         <AppIcon
           className="chevron_down"
           icon={ChevronDownIcon}
@@ -321,13 +293,133 @@ const Hero = () => {
           zIndex={5}
           mt={"auto"}
         />
-      </CContainer>
+      </ContainerLayout>
     </CContainer>
   );
 };
 
 const Intro = () => {
-  return <CContainer minH={"2000px"}></CContainer>;
+  const LINE_H = `200px`;
+
+  // Refs
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // GSAP
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 50%",
+          end: "+=300",
+          scrub: true,
+          // pin: true,
+          // pinSpacing: true,
+          // markers: true, // debug
+        },
+      });
+
+      tl.fromTo(
+        ".intro_line",
+        {
+          height: "0px",
+          ease: "none",
+          // duration: 2.5,
+        },
+        {
+          height: LINE_H,
+          ease: "none",
+          // duration: 2.5,
+        },
+      );
+    },
+    { scope: containerRef },
+  );
+
+  return (
+    <CContainer
+      ref={containerRef}
+      gap={"48px"}
+      px={4}
+      py={"48px"}
+      bg={"light"}
+      color={"dark"}
+    >
+      <DividerOrnament color="black" />
+
+      <ContainerLayout align={"center"} gap={"48px"}>
+        <SimpleGrid columns={2} gap={"64px"}>
+          <CContainer align={"end"}>
+            <P
+              className="fd"
+              maxW={"100px"}
+              fontSize={"1rem"}
+              lineHeight={1.4}
+              textAlign={"right"}
+            >
+              Adelia Dian Pratiwi
+            </P>
+          </CContainer>
+
+          <CContainer mt={"50px"}>
+            <P className="fd" maxW={"100px"} fontSize={"1rem"} lineHeight={1.4}>
+              Fatwa Linovera
+            </P>
+          </CContainer>
+        </SimpleGrid>
+        <VStack h={LINE_H}>
+          <Box
+            className="intro_line"
+            bg={"dark"}
+            w={"1.2px"}
+            h={"0"}
+            zIndex={5}
+          />
+        </VStack>
+        <Img
+          src={`${IMAGES_PATH}/intro.jpeg`}
+          fluid
+          w={"full"}
+          maxW={"200px"}
+        />
+        <P textAlign={"center"}>{`We're getting married!`}</P>
+
+        <CountDown targetAt="2026-05-31T08:00:00+07:00" />
+      </ContainerLayout>
+
+      <DividerOrnament color="black" />
+    </CContainer>
+  );
+};
+
+const BrideAndGroom = () => {
+  return (
+    <CContainer>
+      <Img
+        src={`${IMAGES_PATH}/brideAndGroom.gif`}
+        fluid
+        aspectRatio={16 / 10}
+        w={"full"}
+      />
+
+      <ContainerLayout gap={"48px"} px={4} py={"48px"}>
+        <P textAlign={"center"}>
+          Dengan penuh rasa syukur, kami mengundang Bapak/Ibu/Saudara/i untuk
+          hadir dan memberikan doa restu pada acara pernikahan kami.
+        </P>
+
+        {/* Adelia */}
+        <CContainer>
+          <Img src={`${IMAGES_PATH}/adelia.jpeg`} fluid w={"full"} />
+        </CContainer>
+
+        {/* Fatwa */}
+        <CContainer>
+          <Img src={`${IMAGES_PATH}/fatwa.jpeg`} fluid w={"full"} />
+        </CContainer>
+      </ContainerLayout>
+    </CContainer>
+  );
 };
 
 export default function Page() {
@@ -343,6 +435,8 @@ export default function Page() {
       <Hero />
 
       <Intro />
+
+      <BrideAndGroom />
     </CContainer>
   );
 }

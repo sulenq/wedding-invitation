@@ -39,9 +39,23 @@ export const PageContainer = forwardRef<HTMLDivElement, StackProps>(
         {children}
       </CContainer>
     );
-  }
+  },
 );
 PageContainer.displayName = "PageContainer";
+
+export const ContainerLayout = forwardRef<HTMLDivElement, StackProps>(
+  (props, ref) => {
+    // Props
+    const { children, ...restProps } = props;
+
+    return (
+      <CContainer ref={ref} maxW={"720px"} mx={"auto"} {...restProps}>
+        {children}
+      </CContainer>
+    );
+  },
+);
+ContainerLayout.displayName = "ContainerLayout";
 
 export const NavBreadcrumb = (props: any) => {
   // Props
@@ -174,6 +188,6 @@ export const PageContent = forwardRef<HTMLDivElement, StackProps>(
         {children}
       </CContainer>
     );
-  }
+  },
 );
 PageContent.displayName = "PageContent";
