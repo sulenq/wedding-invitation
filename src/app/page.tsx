@@ -344,7 +344,16 @@ const Intro = () => {
       py={"48px"}
       bg={"light"}
       color={"dark"}
+      pos={"relative"}
     >
+      <PaperTexture
+        h={"full"}
+        opacity={0.25}
+        pos={"absolute"}
+        top={0}
+        left={0}
+      />
+
       <DividerOrnament color="black" />
 
       <ContainerLayout align={"center"} gap={"48px"}>
