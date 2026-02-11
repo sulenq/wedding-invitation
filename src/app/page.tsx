@@ -1,8 +1,11 @@
 "use client";
 
+import { Btn } from "@/components/ui/btn";
 import { CContainer } from "@/components/ui/c-container";
 import { useColorMode } from "@/components/ui/color-mode";
+import { HelperText } from "@/components/ui/helper-text";
 import { Img } from "@/components/ui/img";
+import { NavLink } from "@/components/ui/nav-link";
 import { P } from "@/components/ui/p";
 import { AppIcon } from "@/components/widget/AppIcon";
 import { CountDown } from "@/components/widget/CountDown";
@@ -10,11 +13,16 @@ import { DividerOrnament } from "@/components/widget/DividerOrnament";
 import { ContainerLayout } from "@/components/widget/Page";
 import { PaperTexture } from "@/components/widget/PaperTexture";
 import { IMAGES_PATH } from "@/constants/paths";
-import { Box, SimpleGrid, VStack } from "@chakra-ui/react";
+import { Box, Center, HStack, SimpleGrid, VStack } from "@chakra-ui/react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ChevronDownIcon } from "lucide-react";
+import {
+  ArrowUpRightIcon,
+  CalendarIcon,
+  ChevronDownIcon,
+  MapPinIcon,
+} from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 
@@ -362,7 +370,7 @@ const Intro = () => {
             <P
               className="fd"
               maxW={"100px"}
-              fontSize={"1rem"}
+              fontSize={"1.25rem"}
               lineHeight={1.4}
               textAlign={"right"}
             >
@@ -371,11 +379,17 @@ const Intro = () => {
           </CContainer>
 
           <CContainer mt={"50px"}>
-            <P className="fd" maxW={"100px"} fontSize={"1rem"} lineHeight={1.4}>
+            <P
+              className="fd"
+              maxW={"100px"}
+              fontSize={"1.25rem"}
+              lineHeight={1.4}
+            >
               Fatwa Linovera
             </P>
           </CContainer>
         </SimpleGrid>
+
         <VStack h={LINE_H}>
           <Box
             className="intro_line"
@@ -385,6 +399,7 @@ const Intro = () => {
             zIndex={5}
           />
         </VStack>
+
         <Img
           src={`${IMAGES_PATH}/intro.jpeg`}
           fluid
@@ -403,7 +418,16 @@ const Intro = () => {
 
 const BrideAndGroom = () => {
   return (
-    <CContainer>
+    <CContainer pos={"relative"}>
+      <PaperTexture
+        w={"full"}
+        h={"full"}
+        pos={"absolute"}
+        top={0}
+        left={0}
+        opacity={0.125}
+      />
+
       <Img
         src={`${IMAGES_PATH}/brideAndGroom.gif`}
         fluid
@@ -418,13 +442,292 @@ const BrideAndGroom = () => {
         </P>
 
         {/* Adelia */}
-        <CContainer>
-          <Img src={`${IMAGES_PATH}/adelia.jpeg`} fluid w={"full"} />
+        <CContainer p={4}>
+          <Center px={8} pos={"relative"}>
+            <Img src={`${IMAGES_PATH}/adel.jpeg`} fluid w={"full"} />
+            <Img
+              src={`${IMAGES_PATH}/adelLineart.jpg`}
+              fluid
+              w={"100px"}
+              pos={"absolute"}
+              bottom={"-50px"}
+              right={0}
+            />
+          </Center>
+
+          <CContainer zIndex={2}>
+            <P
+              className="fd"
+              fontSize={"2xl"}
+              fontWeight={"semibold"}
+              textAlign={"center"}
+              my={6}
+            >
+              Adelia Dian Pratiwi
+            </P>
+
+            <CContainer color={"fg.muted"}>
+              <P textAlign={"center"}>Putri termuda dari</P>
+              <P textAlign={"center"}>Widodo</P>
+              <P textAlign={"center"}>dan</P>
+              <P textAlign={"center"}>Tri Wahyuningsih</P>
+            </CContainer>
+          </CContainer>
         </CContainer>
 
         {/* Fatwa */}
-        <CContainer>
-          <Img src={`${IMAGES_PATH}/fatwa.jpeg`} fluid w={"full"} />
+        <CContainer p={4} mt={24}>
+          <Center px={8} pos={"relative"}>
+            <Img src={`${IMAGES_PATH}/fatwa.jpeg`} fluid w={"full"} />
+            <Img
+              src={`${IMAGES_PATH}/fatwaLineart.jpg`}
+              fluid
+              w={"100px"}
+              pos={"absolute"}
+              top={"-50px"}
+              left={0}
+            />
+          </Center>
+
+          <CContainer zIndex={2}>
+            <P
+              className="fd"
+              fontSize={"2xl"}
+              fontWeight={"semibold"}
+              textAlign={"center"}
+              my={6}
+            >
+              Fatwa Linovera
+            </P>
+
+            <CContainer color={"fg.muted"}>
+              <P textAlign={"center"}>Putra termuda dari</P>
+              <P textAlign={"center"}>Muhamad Nurfuad</P>
+              <P textAlign={"center"}>dan</P>
+              <P textAlign={"center"}>Sri Rahayu</P>
+            </CContainer>
+          </CContainer>
+        </CContainer>
+      </ContainerLayout>
+    </CContainer>
+  );
+};
+
+const Story = () => {
+  return (
+    <CContainer pos={"relative"}>
+      <PaperTexture
+        w={"full"}
+        h={"full"}
+        pos={"absolute"}
+        top={0}
+        left={0}
+        opacity={0.125}
+      />
+
+      <Img
+        src={`${IMAGES_PATH}/brideAndGroom.gif`}
+        fluid
+        aspectRatio={16 / 10}
+        w={"full"}
+      />
+
+      <ContainerLayout p={4} py={12}>
+        <P
+          className="fd"
+          fontSize={"1.5rem"}
+          fontWeight={"semibold"}
+          textAlign={"center"}
+          mb={8}
+        >
+          Cerita Kami
+        </P>
+
+        <CContainer
+          gap={8}
+          p={8}
+          border={"1px solid"}
+          borderColor={"ibody"}
+          rounded={"md"}
+        >
+          <P>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
+            porro officia exercitationem earum aut dolor. Corrupti maiores,
+            vitae et perferendis excepturi, cumque cum facere quam, qui ea
+            architecto officia ex?
+          </P>
+          <P>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
+            porro officia exercitationem earum aut dolor. Corrupti maiores,
+            vitae et perferendis excepturi, cumque cum facere quam, qui ea
+            architecto officia ex?
+          </P>
+          <P>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
+            porro officia exercitationem earum aut dolor. Corrupti maiores,
+            vitae et perferendis excepturi, cumque cum facere quam, qui ea
+            architecto officia ex?
+          </P>
+          <P>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
+            porro officia exercitationem earum aut dolor. Corrupti maiores,
+            vitae et perferendis excepturi, cumque cum facere quam, qui ea
+            architecto officia ex?
+          </P>
+        </CContainer>
+      </ContainerLayout>
+    </CContainer>
+  );
+};
+
+const EventDetails = () => {
+  return (
+    <CContainer pos={"relative"} bg={"light"} color={"dark"}>
+      <PaperTexture
+        w={"full"}
+        h={"full"}
+        pos={"absolute"}
+        top={0}
+        left={0}
+        opacity={0.25}
+      />
+
+      <Img
+        src={`${IMAGES_PATH}/brideAndGroom.gif`}
+        fluid
+        aspectRatio={16 / 10}
+        w={"full"}
+      />
+
+      <ContainerLayout p={4} py={"48px"}>
+        <P
+          className="fd"
+          fontSize={"1.5rem"}
+          fontWeight={"semibold"}
+          textAlign={"center"}
+          mb={8}
+        >
+          Acara & Tempat
+        </P>
+
+        <CContainer px={8} zIndex={2}>
+          <CContainer
+            gap={12}
+            p={8}
+            border={"1px solid"}
+            borderColor={"dark"}
+            rounded={"md"}
+            bg={"light"}
+          >
+            {/* Time */}
+            <CContainer gap={8} align={"center"}>
+              <CContainer>
+                <P className="fd" textAlign={"center"}>
+                  Minggu
+                </P>
+                <P
+                  className="fd"
+                  fontSize={"3.5rem"}
+                  fontWeight={"bold"}
+                  textAlign={"center"}
+                  lineHeight={1.4}
+                  color={"fg.error"}
+                >
+                  31
+                </P>
+                <P className="fd" textAlign={"center"}>
+                  Mei 2026
+                </P>
+              </CContainer>
+
+              <HStack w={"full"} align={"stretch"}>
+                <CContainer gap={8} align={"center"} py={4}>
+                  <P
+                    className="fd"
+                    fontSize={"1.25rem"}
+                    fontWeight={"semibold"}
+                    textAlign={"center"}
+                  >
+                    Akad
+                  </P>
+
+                  <CContainer align={"center"}>
+                    <P textAlign={"center"}>08.00 WIB</P>
+                    <P textAlign={"center"}>-</P>
+                    <P textAlign={"center"}>09.00 WIB</P>
+                  </CContainer>
+                </CContainer>
+
+                <Box flexShrink={0} w={"1.2px"} bg={"dark"} />
+
+                <CContainer gap={8} align={"center"} py={4}>
+                  <P
+                    className="fd"
+                    fontSize={"1.25rem"}
+                    fontWeight={"semibold"}
+                    textAlign={"center"}
+                  >
+                    Resepsi
+                  </P>
+
+                  <CContainer align={"center"}>
+                    <P textAlign={"center"}>08.00 WIB</P>
+                    <P textAlign={"center"}>-</P>
+                    <P textAlign={"center"}>09.00 WIB</P>
+                  </CContainer>
+                </CContainer>
+              </HStack>
+
+              <CContainer align={"center"} gap={4}>
+                <a href="/assets/icss/resepsi.ics">
+                  <Btn variant={"outline"} color={"dark"}>
+                    <AppIcon icon={CalendarIcon} />
+                    Simpan ke Kalender
+                  </Btn>
+                </a>
+
+                <HelperText textAlign={"center"}>
+                  Jika tidak muncul konfirmasi tambah ke kalender, silakan buka
+                  file .ics secara manual.
+                </HelperText>
+              </CContainer>
+            </CContainer>
+
+            {/* Place */}
+            <CContainer align={"center"} gap={6}>
+              <AppIcon
+                icon={MapPinIcon}
+                boxSize={10}
+                strokeWidth={2}
+                color={"fg.error"}
+              />
+
+              <P
+                className="fd"
+                fontSize={"1.25rem"}
+                fontWeight={"semibold"}
+                textAlign={"center"}
+              >
+                {`Gedung Semeru BP2KLK Semarang (D'ELANG)`}
+              </P>
+
+              <P textAlign={"center"}>
+                Jl. Elang Raya No.2, Mangunharjo, Kec. Tembalang, Kota Semarang,
+                Jawa Tengah 50272
+              </P>
+
+              <NavLink
+                to="https://www.google.com/maps/place/Gedung+Semeru+BP2KLK+Semarang+(D'ELANG)/@-7.0435184,110.4631783,17z/data=!3m1!4b1!4m6!3m5!1s0x2e708d3e64c0fd9f:0xc751ad1bae92fbf6!8m2!3d-7.0435237!4d110.4657532!16s%2Fg%2F11h53ph_8v?entry=ttu&g_ep=EgoyMDI2MDIwOC4wIKXMDSoASAFQAw%3D%3D"
+                external
+                rel="noopener noreferrer"
+              >
+                <Btn variant={"outline"} color={"dark"}>
+                  Google Maps
+                  <AppIcon icon={ArrowUpRightIcon} />
+                </Btn>
+              </NavLink>
+            </CContainer>
+          </CContainer>
         </CContainer>
       </ContainerLayout>
     </CContainer>
@@ -442,10 +745,10 @@ export default function Page() {
   return (
     <CContainer>
       <Hero />
-
       <Intro />
-
       <BrideAndGroom />
+      <Story />
+      <EventDetails />
     </CContainer>
   );
 }

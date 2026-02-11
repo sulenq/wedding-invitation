@@ -39,7 +39,7 @@ export const NavLink = forwardRef<HTMLDivElement, Props__NavLink>(
         {children}
       </CContainer>
     );
-  }
+  },
 );
 
 NavLink.displayName = "NavLink";
