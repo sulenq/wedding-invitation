@@ -794,7 +794,7 @@ const Gift = () => {
           textAlign={"center"}
           mb={8}
         >
-          Bayaran
+          Hadiah Pernikahan
         </P>
 
         <CContainer gap={4}>
