@@ -76,8 +76,8 @@ const EVENT = {
       end: "Selesai",
     },
     resepsi: {
-      start: "10.00 WIB",
-      end: "Selesai",
+      start: "11.00 WIB",
+      end: "13.00 WIB",
     },
   },
   place: {
@@ -654,7 +654,7 @@ const EventDetails = () => {
           Acara & Tempat
         </P>
 
-        <CContainer px={8} zIndex={2}>
+        <CContainer px={4} zIndex={2}>
           <CContainer
             gap={12}
             p={8}
