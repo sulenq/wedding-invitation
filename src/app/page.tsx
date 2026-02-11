@@ -10,6 +10,7 @@ import { P } from "@/components/ui/p";
 import { AppIcon } from "@/components/widget/AppIcon";
 import { CountDown } from "@/components/widget/CountDown";
 import { DividerOrnament } from "@/components/widget/DividerOrnament";
+import { ImgViewer } from "@/components/widget/ImgViewer";
 import { ContainerLayout } from "@/components/widget/Page";
 import { PaperTexture } from "@/components/widget/PaperTexture";
 import { IMAGES_PATH } from "@/constants/paths";
@@ -28,13 +29,23 @@ import { useEffect, useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const COVER_PHOTO = `${IMAGES_PATH}/cover.jpeg`;
+const GALLERY_PHOTOS = [
+  `${IMAGES_PATH}/gallery/1.jpeg`,
+  `${IMAGES_PATH}/gallery/2.jpeg`,
+  `${IMAGES_PATH}/gallery/3.jpeg`,
+  `${IMAGES_PATH}/gallery/4.jpeg`,
+  `${IMAGES_PATH}/gallery/5.jpeg`,
+  `${IMAGES_PATH}/gallery/6.jpeg`,
+];
+
 const Hero = () => {
   // Refs
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Hooks
   const searchParams = useSearchParams();
-  const name = searchParams.get("to") || "Kamu Ga Diundang";
+  const name = searchParams.get("to") || "Tamu Undangan";
 
   // GSAP
   useGSAP(
@@ -150,7 +161,7 @@ const Hero = () => {
       >
         {/* Bg */}
         <CContainer className="hero_bg" h={"full"} pos={"absolute"} top={0}>
-          <Img src={`${IMAGES_PATH}/heroBg.jpeg`} fluid h={"full"} w={"full"} />
+          <Img src={COVER_PHOTO} fluid h={"full"} w={"full"} />
 
           <PaperTexture h={"full"} w={"full"} pos={"absolute"} top={0} />
         </CContainer>
@@ -168,7 +179,7 @@ const Hero = () => {
           <CContainer
             className="hero_container"
             align={"center"}
-            gap={"48px"}
+            gap={12}
             my={"auto"}
           >
             <P
@@ -347,9 +358,9 @@ const Intro = () => {
   return (
     <CContainer
       ref={containerRef}
-      gap={"48px"}
+      gap={12}
       px={4}
-      py={"48px"}
+      py={12}
       bg={"light"}
       color={"dark"}
       pos={"relative"}
@@ -364,7 +375,7 @@ const Intro = () => {
 
       <DividerOrnament color="black" />
 
-      <ContainerLayout align={"center"} gap={"48px"}>
+      <ContainerLayout align={"center"} gap={12}>
         <SimpleGrid columns={2} gap={"64px"}>
           <CContainer align={"end"}>
             <P
@@ -435,7 +446,7 @@ const BrideAndGroom = () => {
         w={"full"}
       />
 
-      <ContainerLayout gap={"48px"} px={4} py={"48px"}>
+      <ContainerLayout gap={12} px={4} py={12}>
         <P textAlign={"center"}>
           Dengan penuh rasa syukur, kami mengundang Bapak/Ibu/Saudara/i untuk
           hadir dan memberikan doa restu pada acara pernikahan kami.
@@ -543,13 +554,7 @@ const Story = () => {
           Cerita Kami
         </P>
 
-        <CContainer
-          gap={8}
-          p={8}
-          border={"1px solid"}
-          borderColor={"ibody"}
-          rounded={"md"}
-        >
+        <CContainer gap={8} p={8} border={"1px solid"} borderColor={"ibody"}>
           <P>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
             porro officia exercitationem earum aut dolor. Corrupti maiores,
@@ -599,7 +604,7 @@ const EventDetails = () => {
         w={"full"}
       />
 
-      <ContainerLayout p={4} py={"48px"}>
+      <ContainerLayout p={4} py={12}>
         <P
           className="fd"
           fontSize={"1.5rem"}
@@ -616,13 +621,12 @@ const EventDetails = () => {
             p={8}
             border={"1px solid"}
             borderColor={"dark"}
-            rounded={"md"}
             bg={"light"}
           >
             {/* Time */}
             <CContainer gap={8} align={"center"}>
               <CContainer>
-                <P className="fd" textAlign={"center"}>
+                <P className="fd" fontWeight={"medium"} textAlign={"center"}>
                   Minggu
                 </P>
                 <P
@@ -635,7 +639,7 @@ const EventDetails = () => {
                 >
                   31
                 </P>
-                <P className="fd" textAlign={"center"}>
+                <P className="fd" fontWeight={"medium"} textAlign={"center"}>
                   Mei 2026
                 </P>
               </CContainer>
@@ -654,7 +658,7 @@ const EventDetails = () => {
                   <CContainer align={"center"}>
                     <P textAlign={"center"}>08.00 WIB</P>
                     <P textAlign={"center"}>-</P>
-                    <P textAlign={"center"}>09.00 WIB</P>
+                    <P textAlign={"center"}>Selesai</P>
                   </CContainer>
                 </CContainer>
 
@@ -671,9 +675,9 @@ const EventDetails = () => {
                   </P>
 
                   <CContainer align={"center"}>
-                    <P textAlign={"center"}>08.00 WIB</P>
+                    <P textAlign={"center"}>11:00 WIB</P>
                     <P textAlign={"center"}>-</P>
-                    <P textAlign={"center"}>09.00 WIB</P>
+                    <P textAlign={"center"}>13:00 WIB</P>
                   </CContainer>
                 </CContainer>
               </HStack>
@@ -734,6 +738,137 @@ const EventDetails = () => {
   );
 };
 
+const Gift = () => {
+  return (
+    <CContainer pos={"relative"} bg={"light"} color={"dark"}>
+      <PaperTexture
+        w={"full"}
+        h={"full"}
+        pos={"absolute"}
+        top={0}
+        left={0}
+        opacity={0.25}
+      />
+
+      <ContainerLayout p={4} py={12}>
+        <P
+          className="fd"
+          fontSize={"1.5rem"}
+          fontWeight={"semibold"}
+          textAlign={"center"}
+          mb={8}
+        >
+          Bayaran
+        </P>
+
+        <CContainer gap={4}>
+          <P>QRIS</P>
+          <P>BCA</P>
+          <P>Mandiri</P>
+        </CContainer>
+      </ContainerLayout>
+    </CContainer>
+  );
+};
+
+const Gallery = () => {
+  const GAP = 4;
+
+  return (
+    <CContainer pos={"relative"} bg={"light"} color={"dark"}>
+      <PaperTexture
+        w={"full"}
+        h={"full"}
+        pos={"absolute"}
+        top={0}
+        left={0}
+        opacity={0.25}
+      />
+
+      <ContainerLayout p={4} py={12}>
+        <SimpleGrid columns={[1, null, 2]} gap={GAP}>
+          <SimpleGrid columns={2} gap={GAP}>
+            <CContainer gap={GAP}>
+              <ImgViewer srcs={GALLERY_PHOTOS} srcIndex={0}>
+                <Img src={GALLERY_PHOTOS[0]} fluid />
+              </ImgViewer>
+              <ImgViewer srcs={GALLERY_PHOTOS} srcIndex={1}>
+                <Img src={GALLERY_PHOTOS[1]} fluid />
+              </ImgViewer>
+            </CContainer>
+
+            <CContainer>
+              <ImgViewer srcs={GALLERY_PHOTOS} srcIndex={2} h={"full"}>
+                <Img src={GALLERY_PHOTOS[2]} fluid h={"full"} />
+              </ImgViewer>
+            </CContainer>
+          </SimpleGrid>
+
+          <CContainer gap={GAP} h={"full"}>
+            <ImgViewer srcs={GALLERY_PHOTOS} srcIndex={3} h={"full"}>
+              <Img src={GALLERY_PHOTOS[3]} fluid h={"full"} />
+            </ImgViewer>
+
+            <SimpleGrid columns={2} gap={GAP}>
+              <ImgViewer srcs={GALLERY_PHOTOS} srcIndex={4} h={"full"}>
+                <Img src={GALLERY_PHOTOS[4]} fluid h={"full"} />
+              </ImgViewer>
+              <ImgViewer srcs={GALLERY_PHOTOS} srcIndex={5} h={"full"}>
+                <Img src={GALLERY_PHOTOS[5]} fluid h={"full"} />
+              </ImgViewer>
+            </SimpleGrid>
+          </CContainer>
+        </SimpleGrid>
+      </ContainerLayout>
+    </CContainer>
+  );
+};
+
+const Footer = () => {
+  return (
+    <CContainer pos={"relative"}>
+      <PaperTexture
+        w={"full"}
+        h={"full"}
+        pos={"absolute"}
+        top={0}
+        left={0}
+        opacity={0.125}
+      />
+
+      <ContainerLayout px={8} py={12}>
+        <CContainer
+          gap={4}
+          p={8}
+          border={"1px solid"}
+          borderColor={"light"}
+          pos={"relative"}
+          justify={"end"}
+          mt={"70%"}
+        >
+          <Img src={`${IMAGES_PATH}/footer.png`} fluid w={"full"} mt={"-70%"} />
+
+          <CContainer gap={4} my={12}>
+            <P
+              className="fd"
+              fontSize={"2rem"}
+              fontWeight={"bold"}
+              textAlign={"center"}
+            >
+              Thank You!
+            </P>
+
+            <P textAlign={"center"}>
+              Saat kami memulai perjalanan hidup bersama sebagai satu keluarga,
+              kami berterima kasih atas doa, dukungan, dan kehadiran Anda.
+            </P>
+          </CContainer>
+        </CContainer>
+      </ContainerLayout>
+    </CContainer>
+  );
+};
+
 export default function Page() {
   // Hooks
   const { setColorMode } = useColorMode();
@@ -749,6 +884,9 @@ export default function Page() {
       <BrideAndGroom />
       <Story />
       <EventDetails />
+      <Gift />
+      <Gallery />
+      <Footer />
     </CContainer>
   );
 }
