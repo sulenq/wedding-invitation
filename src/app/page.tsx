@@ -434,6 +434,7 @@ const Intro = () => {
       pos={"relative"}
     >
       <PaperTexture
+        w={"full"}
         h={"full"}
         opacity={0.25}
         pos={"absolute"}
