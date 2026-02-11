@@ -36,7 +36,7 @@ import useLang from "@/context/useLang";
 import useRenderTrigger from "@/context/useRenderTrigger";
 import { useThemeConfig } from "@/context/useThemeConfig";
 import useBackOnClose from "@/hooks/useBackOnClose";
-import { useContainerDimension } from "@/hooks/useContainerDimension";
+import { useDimension } from "@/hooks/useDimension";
 import useDataState from "@/hooks/useDataState";
 import useRequest from "@/hooks/useRequest";
 import { isEmptyArray, last } from "@/utils/array";
@@ -133,7 +133,7 @@ const Update = (props: any) => {
     disclosureId(`${ID}-${resolvedData?.id}`),
     open,
     onOpen,
-    onClose
+    onClose,
   );
   const { req, loading } = useRequest({
     id: ID,
@@ -560,7 +560,7 @@ export default function Page() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Hooks
-  const dimension = useContainerDimension(containerRef);
+  const dimension = useDimension(containerRef);
 
   // States
   const isValidDimension = isDimensionValid(dimension);

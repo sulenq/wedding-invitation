@@ -50,7 +50,7 @@ import {
 import useLang from "@/context/useLang";
 import { useThemeConfig } from "@/context/useThemeConfig";
 import useBackOnClose from "@/hooks/useBackOnClose";
-import { useContainerDimension } from "@/hooks/useContainerDimension";
+import { useDimension } from "@/hooks/useDimension";
 import useDataState from "@/hooks/useDataState";
 import useRequest from "@/hooks/useRequest";
 import { isEmptyArray } from "@/utils/array";
@@ -75,7 +75,7 @@ interface Props__AvatarInputDisclosureTrigger {
   user?: Interface__User;
 }
 const AvatarInputDisclosureTrigger = (
-  props: Props__AvatarInputDisclosureTrigger
+  props: Props__AvatarInputDisclosureTrigger,
 ) => {
   // Props
   const { children, formik, user, ...restProps } = props;
@@ -107,16 +107,16 @@ const AvatarInputDisclosureTrigger = (
                 formik.setFieldValue(
                   "deleteAvatarIds",
                   Array.from(
-                    new Set([...formik.values.deleteAvatarIds, fileData.id])
-                  )
+                    new Set([...formik.values.deleteAvatarIds, fileData.id]),
+                  ),
                 );
               }}
               onUndoDeleteFile={(fileData) => {
                 formik.setFieldValue(
                   "deleteAvatarIds",
                   formik.values.deleteAvatarIds.filter(
-                    (id: string) => id !== fileData.id
-                  )
+                    (id: string) => id !== fileData.id,
+                  ),
                 );
               }}
             />
@@ -307,7 +307,7 @@ const AuthLog = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Hooks
-  const dimensions = useContainerDimension(containerRef);
+  const dimensions = useDimension(containerRef);
 
   // States
   const isSmContainer = dimensions?.width < 600;
@@ -469,7 +469,7 @@ const ActivityLog = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Hooks
-  const dimensions = useContainerDimension(containerRef);
+  const dimensions = useDimension(containerRef);
 
   // States
   const isSmContainer = dimensions?.width < 600;

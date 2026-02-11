@@ -14,7 +14,15 @@ import { ImgViewer } from "@/components/widget/ImgViewer";
 import { ContainerLayout } from "@/components/widget/Page";
 import { PaperTexture } from "@/components/widget/PaperTexture";
 import { IMAGES_PATH } from "@/constants/paths";
-import { Box, Center, HStack, SimpleGrid, VStack } from "@chakra-ui/react";
+import { useDimension } from "@/hooks/useDimension";
+import {
+  Box,
+  Center,
+  Clipboard,
+  HStack,
+  SimpleGrid,
+  VStack,
+} from "@chakra-ui/react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -29,7 +37,68 @@ import { useEffect, useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const COVER_PHOTO = `${IMAGES_PATH}/cover.jpeg`;
+const COVER = {
+  bride: "Adelia",
+  groom: "Fatwa.",
+  img: `${IMAGES_PATH}/cover.jpeg`,
+  date: "31.05.2026",
+  quote:
+    "Dengan memohon ridho Allah SWT, kami melangkah ke dalam ikatan pernikahan sebagai bentuk ibadah dan ketaatan kepada-Nya.",
+};
+const INTRO = {
+  bride: "Adelia Dian Pratiwi",
+  groom: "Fatwa Linovera",
+  img: `${IMAGES_PATH}/intro.jpeg`,
+};
+const BAG = {
+  intro:
+    "Dengan penuh rasa syukur, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu pada acara pernikahan kami.",
+  bride: "Adelia Dian Pratiwi",
+  daughterOf: "Putri termuda dari",
+  brideParents: ["Widodo", "Tri Wahyuningsih"],
+  groom: "Fatwa Linovera",
+  sonOf: "Putra termuda dari",
+  groomParents: ["Muhamad Nurfuad", "Sri Rahayu"],
+};
+const STORY = [
+  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat porro officia exercitationem earum aut dolor. Corrupti maiores, vitae et perferendis excepturi, cumque cum facere quam, qui ea architecto officia ex?",
+  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat porro officia exercitationem earum aut dolor. Corrupti maiores, vitae et perferendis excepturi, cumque cum facere quam, qui ea architecto officia ex?",
+  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat porro officia exercitationem earum aut dolor. Corrupti maiores, vitae et perferendis excepturi, cumque cum facere quam, qui ea architecto officia ex?",
+  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat porro officia exercitationem earum aut dolor. Corrupti maiores, vitae et perferendis excepturi, cumque cum facere quam, qui ea architecto officia ex?",
+];
+const EVENT = {
+  time: {
+    day: "Minggu",
+    date: "31",
+    monthAndYear: "Mei 2026",
+    akad: {
+      start: "08.00 WIB",
+      end: "Selesai",
+    },
+    resepsi: {
+      start: "10.00 WIB",
+      end: "Selesai",
+    },
+  },
+  place: {
+    name: "Gedung Semeru BP2KLK Semarang (D'ELANG)",
+    address:
+      "Jl. Elang Raya No.2, Mangunharjo, Kec. Tembalang, Kota Semarang, Jawa Tengah 50272",
+    mapsUrl:
+      "https://www.google.com/maps/place/Gedung+Semeru+BP2KLK+Semarang+(D'ELANG)/@-7.0435184,110.4631783,17z/data=!3m1!4b1!4m6!3m5!1s0x2e708d3e64c0fd9f:0xc751ad1bae92fbf6!8m2!3d-7.0435237!4d110.4657532!16s%2Fg%2F11h53ph_8v?entry=ttu&g_ep=EgoyMDI2MDIwOC4wIKXMDSoASAFQAw%3D%3D",
+  },
+};
+const GIFT = {
+  qris: `${IMAGES_PATH}/qris.jpg`,
+  bca: {
+    accountNumber: "1234567890",
+    accountHolder: "ADELIA DIAN PRATIWI",
+  },
+  mandiri: {
+    accountNumber: "0987654321",
+    accountHolder: "FATWA LINOVERA",
+  },
+};
 const GALLERY_PHOTOS = [
   `${IMAGES_PATH}/gallery/1.jpeg`,
   `${IMAGES_PATH}/gallery/2.jpeg`,
@@ -39,7 +108,7 @@ const GALLERY_PHOTOS = [
   `${IMAGES_PATH}/gallery/6.jpeg`,
 ];
 
-const Hero = () => {
+const Cover = () => {
   // Refs
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -54,7 +123,7 @@ const Hero = () => {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: () => "+=" + containerRef.current!.offsetHeight * 6,
+          end: () => "+=" + containerRef.current!.offsetHeight * 2,
           scrub: true,
           pin: true,
           pinSpacing: true,
@@ -63,7 +132,7 @@ const Hero = () => {
       });
 
       tl.fromTo(
-        ".hero_bush",
+        ".cover_bush",
         {
           scale: 1.5,
           ease: "none",
@@ -76,7 +145,7 @@ const Hero = () => {
         },
       )
         .to(
-          ".hero_bush_2",
+          ".cover_bush_2",
           {
             scale: 1.8,
             ease: "none",
@@ -85,7 +154,7 @@ const Hero = () => {
           "<",
         )
         .to(
-          ".hero_bg",
+          ".cover_bg",
           {
             scale: 1.3,
             ease: "none",
@@ -94,7 +163,7 @@ const Hero = () => {
           "<",
         )
         .to(
-          ".hero_container",
+          ".cover_container",
           {
             opacity: 0,
             ease: "none",
@@ -112,7 +181,7 @@ const Hero = () => {
           "<",
         )
         .to(
-          ".hero_brief_container",
+          ".cover_brief_container",
           {
             opacity: 1,
             ease: "none",
@@ -121,7 +190,7 @@ const Hero = () => {
           ">",
         )
         .to(
-          ".hero_brief_line",
+          ".cover_brief_line",
           {
             height: "100px",
             ease: "none",
@@ -130,7 +199,7 @@ const Hero = () => {
           ">",
         )
         .to(
-          ".hero_brief_content",
+          ".cover_brief_content",
           {
             opacity: 0,
             ease: "none",
@@ -139,7 +208,7 @@ const Hero = () => {
           ">",
         )
         .to(
-          ".hero_brief_line",
+          ".cover_brief_line",
           {
             opacity: 0,
             ease: "none",
@@ -160,8 +229,8 @@ const Hero = () => {
         p={8}
       >
         {/* Bg */}
-        <CContainer className="hero_bg" h={"full"} pos={"absolute"} top={0}>
-          <Img src={COVER_PHOTO} fluid h={"full"} w={"full"} />
+        <CContainer className="cover_bg" h={"full"} pos={"absolute"} top={0}>
+          <Img src={COVER.img} fluid h={"full"} w={"full"} />
 
           <PaperTexture h={"full"} w={"full"} pos={"absolute"} top={0} />
         </CContainer>
@@ -177,7 +246,7 @@ const Hero = () => {
           bg={"blackAlpha.700"}
         >
           <CContainer
-            className="hero_container"
+            className="cover_container"
             align={"center"}
             gap={12}
             my={"auto"}
@@ -199,7 +268,7 @@ const Hero = () => {
                 // textAlign={"center"}
                 lineHeight={1}
               >
-                Adelia
+                {COVER.bride}
               </P>
               <P
                 className="fd"
@@ -208,7 +277,7 @@ const Hero = () => {
                 // textAlign={"center"}
                 lineHeight={1}
               >
-                Fatwa.
+                {COVER.groom}
               </P>
             </CContainer>
 
@@ -221,7 +290,7 @@ const Hero = () => {
                 textAlign={"center"}
                 letterSpacing={4}
               >
-                31.05.2026
+                {COVER.date}
               </P>
             </CContainer>
 
@@ -245,7 +314,7 @@ const Hero = () => {
         {/* Quote */}
         <CContainer h={"full"} position={"absolute"} top={0} zIndex={6}>
           <CContainer
-            className="hero_brief_container"
+            className="cover_brief_container"
             h={"full"}
             align={"center"}
             p={8}
@@ -254,17 +323,16 @@ const Hero = () => {
             justify={"center"}
           >
             <P
-              className="hero_brief_content"
+              className="cover_brief_content"
               fontSize={["1rem", null, "1.25rem"]}
               textAlign={"center"}
               maxW={"600px"}
             >
-              “Dengan memohon ridho Allah SWT, kami melangkah ke dalam ikatan
-              pernikahan sebagai bentuk ibadah dan ketaatan kepada-Nya.”
+              {COVER.quote}
             </P>
 
             <Box
-              className="hero_brief_line"
+              className="cover_brief_line"
               bg={"light"}
               opacity={0.5}
               w={"1.2px"}
@@ -279,7 +347,7 @@ const Hero = () => {
         {/* Bushes */}
         <>
           <Img
-            className="hero_bush_2"
+            className="cover_bush_2"
             src={`${IMAGES_PATH}/heroBush.png`}
             alt="bush"
             h={"full"}
@@ -290,7 +358,7 @@ const Hero = () => {
             zIndex={4}
           />
           <Img
-            className="hero_bush"
+            className="cover_bush"
             src={`${IMAGES_PATH}/heroBush.png`}
             alt="bush"
             h={"full"}
@@ -385,7 +453,7 @@ const Intro = () => {
               lineHeight={1.4}
               textAlign={"right"}
             >
-              Adelia Dian Pratiwi
+              {INTRO.bride}
             </P>
           </CContainer>
 
@@ -396,7 +464,7 @@ const Intro = () => {
               fontSize={"1.25rem"}
               lineHeight={1.4}
             >
-              Fatwa Linovera
+              {INTRO.groom}
             </P>
           </CContainer>
         </SimpleGrid>
@@ -411,12 +479,7 @@ const Intro = () => {
           />
         </VStack>
 
-        <Img
-          src={`${IMAGES_PATH}/intro.jpeg`}
-          fluid
-          w={"full"}
-          maxW={"200px"}
-        />
+        <Img src={INTRO.img} fluid w={"full"} maxW={"200px"} />
         <P textAlign={"center"}>{`We're getting married!`}</P>
 
         <CountDown targetAt="2026-05-31T08:00:00+07:00" />
@@ -447,10 +510,7 @@ const BrideAndGroom = () => {
       />
 
       <ContainerLayout gap={12} px={4} py={12}>
-        <P textAlign={"center"}>
-          Dengan penuh rasa syukur, kami mengundang Bapak/Ibu/Saudara/i untuk
-          hadir dan memberikan doa restu pada acara pernikahan kami.
-        </P>
+        <P textAlign={"center"}>{BAG.intro}</P>
 
         {/* Adelia */}
         <CContainer p={4}>
@@ -474,14 +534,14 @@ const BrideAndGroom = () => {
               textAlign={"center"}
               my={6}
             >
-              Adelia Dian Pratiwi
+              {BAG.bride}
             </P>
 
             <CContainer color={"fg.muted"}>
-              <P textAlign={"center"}>Putri termuda dari</P>
-              <P textAlign={"center"}>Widodo</P>
+              <P textAlign={"center"}>{BAG.daughterOf}</P>
+              <P textAlign={"center"}>{BAG.brideParents[0]}</P>
               <P textAlign={"center"}>dan</P>
-              <P textAlign={"center"}>Tri Wahyuningsih</P>
+              <P textAlign={"center"}>{BAG.brideParents[1]}</P>
             </CContainer>
           </CContainer>
         </CContainer>
@@ -508,14 +568,14 @@ const BrideAndGroom = () => {
               textAlign={"center"}
               my={6}
             >
-              Fatwa Linovera
+              {BAG.groom}
             </P>
 
             <CContainer color={"fg.muted"}>
-              <P textAlign={"center"}>Putra termuda dari</P>
-              <P textAlign={"center"}>Muhamad Nurfuad</P>
+              <P textAlign={"center"}>{BAG.sonOf}</P>
+              <P textAlign={"center"}>{BAG.groomParents[0]}</P>
               <P textAlign={"center"}>dan</P>
-              <P textAlign={"center"}>Sri Rahayu</P>
+              <P textAlign={"center"}>{BAG.groomParents[1]}</P>
             </CContainer>
           </CContainer>
         </CContainer>
@@ -555,30 +615,9 @@ const Story = () => {
         </P>
 
         <CContainer gap={8} p={8} border={"1px solid"} borderColor={"ibody"}>
-          <P>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
-            porro officia exercitationem earum aut dolor. Corrupti maiores,
-            vitae et perferendis excepturi, cumque cum facere quam, qui ea
-            architecto officia ex?
-          </P>
-          <P>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
-            porro officia exercitationem earum aut dolor. Corrupti maiores,
-            vitae et perferendis excepturi, cumque cum facere quam, qui ea
-            architecto officia ex?
-          </P>
-          <P>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
-            porro officia exercitationem earum aut dolor. Corrupti maiores,
-            vitae et perferendis excepturi, cumque cum facere quam, qui ea
-            architecto officia ex?
-          </P>
-          <P>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
-            porro officia exercitationem earum aut dolor. Corrupti maiores,
-            vitae et perferendis excepturi, cumque cum facere quam, qui ea
-            architecto officia ex?
-          </P>
+          {STORY.map((paragraph, index) => (
+            <P key={index}>{paragraph}</P>
+          ))}
         </CContainer>
       </ContainerLayout>
     </CContainer>
@@ -627,7 +666,7 @@ const EventDetails = () => {
             <CContainer gap={8} align={"center"}>
               <CContainer>
                 <P className="fd" fontWeight={"medium"} textAlign={"center"}>
-                  Minggu
+                  {EVENT.time.day}
                 </P>
                 <P
                   className="fd"
@@ -637,10 +676,10 @@ const EventDetails = () => {
                   lineHeight={1.4}
                   color={"fg.error"}
                 >
-                  31
+                  {EVENT.time.date}
                 </P>
                 <P className="fd" fontWeight={"medium"} textAlign={"center"}>
-                  Mei 2026
+                  {EVENT.time.monthAndYear}
                 </P>
               </CContainer>
 
@@ -656,9 +695,9 @@ const EventDetails = () => {
                   </P>
 
                   <CContainer align={"center"}>
-                    <P textAlign={"center"}>08.00 WIB</P>
+                    <P textAlign={"center"}>{EVENT.time.akad.start}</P>
                     <P textAlign={"center"}>-</P>
-                    <P textAlign={"center"}>Selesai</P>
+                    <P textAlign={"center"}>{EVENT.time.akad.end}</P>
                   </CContainer>
                 </CContainer>
 
@@ -675,9 +714,9 @@ const EventDetails = () => {
                   </P>
 
                   <CContainer align={"center"}>
-                    <P textAlign={"center"}>11:00 WIB</P>
+                    <P textAlign={"center"}>{EVENT.time.resepsi.start}</P>
                     <P textAlign={"center"}>-</P>
-                    <P textAlign={"center"}>13:00 WIB</P>
+                    <P textAlign={"center"}>{EVENT.time.resepsi.end}</P>
                   </CContainer>
                 </CContainer>
               </HStack>
@@ -712,16 +751,13 @@ const EventDetails = () => {
                 fontWeight={"semibold"}
                 textAlign={"center"}
               >
-                {`Gedung Semeru BP2KLK Semarang (D'ELANG)`}
+                {EVENT.place.name}
               </P>
 
-              <P textAlign={"center"}>
-                Jl. Elang Raya No.2, Mangunharjo, Kec. Tembalang, Kota Semarang,
-                Jawa Tengah 50272
-              </P>
+              <P textAlign={"center"}>{EVENT.place.address}</P>
 
               <NavLink
-                to="https://www.google.com/maps/place/Gedung+Semeru+BP2KLK+Semarang+(D'ELANG)/@-7.0435184,110.4631783,17z/data=!3m1!4b1!4m6!3m5!1s0x2e708d3e64c0fd9f:0xc751ad1bae92fbf6!8m2!3d-7.0435237!4d110.4657532!16s%2Fg%2F11h53ph_8v?entry=ttu&g_ep=EgoyMDI2MDIwOC4wIKXMDSoASAFQAw%3D%3D"
+                to={EVENT.place.mapsUrl}
                 external
                 rel="noopener noreferrer"
               >
@@ -762,9 +798,58 @@ const Gift = () => {
         </P>
 
         <CContainer gap={4}>
-          <P>QRIS</P>
-          <P>BCA</P>
-          <P>Mandiri</P>
+          <CContainer gap={2}>
+            <P fontSize={"1rem"} fontWeight={"semibold"} textAlign={"center"}>
+              QRIS
+            </P>
+            <Img
+              src={`${IMAGES_PATH}/qris.jpg`}
+              fluid
+              w={"full"}
+              maxW={"240px"}
+              mx={"auto"}
+            />
+          </CContainer>
+
+          <CContainer>
+            <P fontSize={"1rem"} fontWeight={"semibold"} textAlign={"center"}>
+              BCA
+            </P>
+
+            <HStack justify={"center"}>
+              <P
+                textAlign={"center"}
+              >{`${GIFT.bca.accountNumber} (${GIFT.bca.accountHolder})`}</P>
+
+              <Clipboard.Root value={GIFT.bca.accountNumber}>
+                <Clipboard.Trigger asChild>
+                  <Btn iconButton variant="ghost" size="xs" color={"dark"}>
+                    <Clipboard.Indicator />
+                  </Btn>
+                </Clipboard.Trigger>
+              </Clipboard.Root>
+            </HStack>
+          </CContainer>
+
+          <CContainer>
+            <P fontSize={"1rem"} fontWeight={"semibold"} textAlign={"center"}>
+              Mandiri
+            </P>
+
+            <HStack justify={"center"}>
+              <P
+                textAlign={"center"}
+              >{`${GIFT.mandiri.accountNumber} (${GIFT.mandiri.accountHolder})`}</P>
+
+              <Clipboard.Root value={GIFT.mandiri.accountNumber}>
+                <Clipboard.Trigger asChild>
+                  <Btn iconButton variant="ghost" size="xs" color={"dark"}>
+                    <Clipboard.Indicator />
+                  </Btn>
+                </Clipboard.Trigger>
+              </Clipboard.Root>
+            </HStack>
+          </CContainer>
         </CContainer>
       </ContainerLayout>
     </CContainer>
@@ -825,6 +910,12 @@ const Gallery = () => {
 };
 
 const Footer = () => {
+  // Refs
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  // Hooks
+  const imgDimension = useDimension(imgRef);
+
   return (
     <CContainer pos={"relative"}>
       <PaperTexture
@@ -844,9 +935,15 @@ const Footer = () => {
           borderColor={"light"}
           pos={"relative"}
           justify={"end"}
-          mt={"70%"}
+          mt={`${imgDimension.height! / 2}px`}
         >
-          <Img src={`${IMAGES_PATH}/footer.png`} fluid w={"full"} mt={"-70%"} />
+          <Img
+            ref={imgRef}
+            src={`${IMAGES_PATH}/footer.png`}
+            fluid
+            w={"full"}
+            mt={"-70%"}
+          />
 
           <CContainer gap={4} my={12}>
             <P
@@ -879,13 +976,13 @@ export default function Page() {
 
   return (
     <CContainer>
-      <Hero />
+      <Cover />
       <Intro />
       <BrideAndGroom />
       <Story />
+      <Gallery />
       <EventDetails />
       <Gift />
-      <Gallery />
       <Footer />
     </CContainer>
   );

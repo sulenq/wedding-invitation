@@ -12,7 +12,7 @@ import {
 } from "@/constants/interfaces";
 import { FIREFOX_SCROLL_Y_CLASS_PR_PREFIX } from "@/constants/sizes";
 import { useThemeConfig } from "@/context/useThemeConfig";
-import { useContainerDimension } from "@/hooks/useContainerDimension";
+import { useDimension } from "@/hooks/useDimension";
 import { useIsSmScreenWidth } from "@/hooks/useIsSmScreenWidth";
 import { isEmptyArray } from "@/utils/array";
 import {
@@ -67,7 +67,7 @@ export const DataGrid = (props: Props) => {
   // Hooks
   const iss = useIsSmScreenWidth();
   const containerRef = useRef<HTMLDivElement>(null);
-  const { width: containerWidth } = useContainerDimension(containerRef);
+  const { width: containerWidth } = useDimension(containerRef);
 
   // States
   const gridCols = Math.max(1, Math.floor(containerWidth / ITEM_MAX_W_NUMBER));

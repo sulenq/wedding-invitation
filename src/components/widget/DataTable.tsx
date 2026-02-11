@@ -10,7 +10,7 @@ import { Interface__FormattedTableRow } from "@/constants/interfaces";
 import { Props__DataTable } from "@/constants/props";
 import { Type__SortHandler } from "@/constants/types";
 import { useThemeConfig } from "@/context/useThemeConfig";
-import { useContainerDimension } from "@/hooks/useContainerDimension";
+import { useDimension } from "@/hooks/useDimension";
 import { useIsSmScreenWidth } from "@/hooks/useIsSmScreenWidth";
 import { isEmptyArray } from "@/utils/array";
 import { hexWithOpacity } from "@/utils/color";
@@ -44,7 +44,7 @@ export const DataTable = (props: Props__DataTable) => {
 
   // Hooks
   const iss = useIsSmScreenWidth();
-  const dimensions = useContainerDimension(tableContainerRef);
+  const dimensions = useDimension(tableContainerRef);
 
   // States
   const [tableData, setTableData] = useState(rows);
@@ -264,11 +264,11 @@ export const DataTable = (props: Props__DataTable) => {
                       idx === headers.length - 1
                         ? 4
                         : (header?.wrapperProps?.justify === "center" ||
-                            header?.wrapperProps?.justifyContent ===
-                              "center") &&
-                          header.sortable
-                        ? 1
-                        : ""
+                              header?.wrapperProps?.justifyContent ===
+                                "center") &&
+                            header.sortable
+                          ? 1
+                          : ""
                     }
                     justify={header.align}
                     borderBottom={"1px solid"}

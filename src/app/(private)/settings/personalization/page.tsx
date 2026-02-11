@@ -24,7 +24,7 @@ import { BASE_ICON_BOX_SIZE } from "@/constants/sizes";
 import useADM from "@/context/useADM";
 import useLang from "@/context/useLang";
 import { useThemeConfig } from "@/context/useThemeConfig";
-import { useContainerDimension } from "@/hooks/useContainerDimension";
+import { useDimension } from "@/hooks/useDimension";
 import { getGridColumns } from "@/utils/style";
 import {
   Box,
@@ -198,7 +198,7 @@ const AccentColor = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Hooks
-  const dimensions = useContainerDimension(containerRef);
+  const dimensions = useDimension(containerRef);
 
   // States
   const cols = getGridColumns(dimensions.width, GRID_COLS_BREAKPOINTS);
@@ -280,7 +280,7 @@ const Rounded = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Hooks
-  const dimensions = useContainerDimension(containerRef);
+  const dimensions = useDimension(containerRef);
 
   // States
   const cols = getGridColumns(dimensions.width, GRID_COLS_BREAKPOINTS);

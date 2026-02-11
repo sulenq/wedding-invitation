@@ -24,7 +24,7 @@ import { MONTHS } from "@/constants/months";
 import { Type__ChartData } from "@/constants/types";
 import useLang from "@/context/useLang";
 import { useThemeConfig } from "@/context/useThemeConfig";
-import { useContainerDimension } from "@/hooks/useContainerDimension";
+import { useDimension } from "@/hooks/useDimension";
 import { formatNumber } from "@/utils/formatter";
 import { capitalizeWords } from "@/utils/string";
 import { isDimensionValid } from "@/utils/style";
@@ -152,7 +152,7 @@ const Chart1 = (props: any) => {
   const [offset, setOffset] = useState<number>(0);
   const clampedOffset = Math.max(
     0,
-    Math.min(offset, rawData.length - zoomWindow)
+    Math.min(offset, rawData.length - zoomWindow),
   );
   const visibleData = rawData.slice(clampedOffset, clampedOffset + zoomWindow);
   const highestPeriod = (() => {
@@ -175,12 +175,12 @@ const Chart1 = (props: any) => {
         if (timeFrame === "3M") {
           const slice = MONTHS[lang].slice(
             absoluteIndex * 3,
-            absoluteIndex * 3 + 3
+            absoluteIndex * 3 + 3,
           );
 
           return `${slice[0].slice(0, 3)} - ${slice[slice.length - 1].slice(
             0,
-            3
+            3,
           )}`;
         }
 
@@ -217,7 +217,7 @@ const Chart1 = (props: any) => {
   function computeZoomFromPinch(
     startZoom: number,
     startDist: number,
-    currentDist: number
+    currentDist: number,
   ) {
     const delta = startDist - currentDist;
     const steps = Math.floor(delta / ZOOM_PIXEL_THRESHOLD);
@@ -278,8 +278,8 @@ const Chart1 = (props: any) => {
       computeZoomFromPinch(
         pinchStartZoomRef.current,
         pinchStartDistanceRef.current,
-        getTouchDistance(e.touches)
-      )
+        getTouchDistance(e.touches),
+      ),
     );
   }
   function handleTouchEnd() {
@@ -355,7 +355,7 @@ const Chart1 = (props: any) => {
 
               {chart.series.map((item) => {
                 const isActive = highlights.includes(
-                  parseInt(item.name as string)
+                  parseInt(item.name as string),
                 );
 
                 return (
@@ -410,7 +410,7 @@ const Chart1 = (props: any) => {
                     setHighlights((prev) =>
                       prev.includes(year)
                         ? prev.filter((v) => v !== year)
-                        : [...prev, year]
+                        : [...prev, year],
                     )
                   }
                   size={"xs"}
@@ -434,7 +434,7 @@ export default function Page() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Hooks
-  const dimension = useContainerDimension(containerRef);
+  const dimension = useDimension(containerRef);
 
   // States
   const isValidDimension = isDimensionValid(dimension);

@@ -34,7 +34,7 @@ import { useThemeConfig } from "@/context/useThemeConfig";
 import useTimeFormat from "@/context/useTimeFormat";
 import useTimezone from "@/context/useTimezone";
 import useUOM from "@/context/useUOM";
-import { useContainerDimension } from "@/hooks/useContainerDimension";
+import { useDimension } from "@/hooks/useDimension";
 import { isEmptyArray } from "@/utils/array";
 import { formatDate, formatTime } from "@/utils/formatter";
 import { capitalizeWords, pluckString } from "@/utils/string";
@@ -114,7 +114,7 @@ const Timezone = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Hooks
-  const dimensions = useContainerDimension(containerRef);
+  const dimensions = useDimension(containerRef);
 
   // States
   const isSmContainer = dimensions?.width < 600;
@@ -129,7 +129,7 @@ const Timezone = () => {
     return timezones.filter(({ key, formattedOffset, localAbbr }) =>
       `${key} ${formattedOffset} ${localAbbr}`
         .toLowerCase()
-        .includes(searchTerm)
+        .includes(searchTerm),
     );
   }, [search, timezones]);
 
