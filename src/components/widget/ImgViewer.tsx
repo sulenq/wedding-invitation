@@ -38,10 +38,15 @@ export const ImgViewer = (props: Props) => {
 
   // Hooks
   const { open, onOpen, onClose } = useDisclosure();
-  useBackOnClose(disclosureId(id || `${src}`), open, onOpen, onClose);
 
   // States
   const [currentIndex, setCurrentIndex] = useState<number>(srcIndex);
+  useBackOnClose(
+    disclosureId(id || `${src}${currentIndex}`),
+    open,
+    onOpen,
+    onClose,
+  );
 
   return (
     <>

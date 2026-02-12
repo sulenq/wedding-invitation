@@ -385,7 +385,9 @@ const Cover = () => {
 
         {/* Chevron down */}
         <VStack className="chevron_down" zIndex={5} mt={"auto"}>
-          <P textAlign={"center"}>Scroll</P>
+          <P fontWeight={"medium"} textAlign={"center"}>
+            Scroll
+          </P>
 
           <AppIcon
             icon={ChevronDownIcon}
@@ -645,7 +647,7 @@ const BrideAndGroom = () => {
             opacity: 0,
             ease: "none",
           },
-          ">",
+          "<+0.25",
         )
         .from(
           [".groomImg", ".groomInfo"],
