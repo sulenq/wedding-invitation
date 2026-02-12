@@ -35,6 +35,7 @@ export const Img = forwardRef<HTMLImageElement, Props__Img>((props, ref) => {
 
   return (
     <CContainer
+      flexShrink={0}
       w="auto"
       h="auto"
       justify="center"

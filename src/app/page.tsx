@@ -3,11 +3,11 @@
 import { Btn } from "@/components/ui/btn";
 import { CContainer } from "@/components/ui/c-container";
 import { useColorMode } from "@/components/ui/color-mode";
-import { HelperText } from "@/components/ui/helper-text";
 import { Img } from "@/components/ui/img";
 import { NavLink } from "@/components/ui/nav-link";
 import { P } from "@/components/ui/p";
 import { AppIcon } from "@/components/widget/AppIcon";
+import { ClampText } from "@/components/widget/ClampText";
 import { CountDown } from "@/components/widget/CountDown";
 import { DividerOrnament } from "@/components/widget/DividerOrnament";
 import { ImgViewer } from "@/components/widget/ImgViewer";
@@ -15,6 +15,7 @@ import { ContainerLayout } from "@/components/widget/Page";
 import { PaperTexture } from "@/components/widget/PaperTexture";
 import { IMAGES_PATH } from "@/constants/paths";
 import { useDimension } from "@/hooks/useDimension";
+import { useIsSmScreenWidth } from "@/hooks/useIsSmScreenWidth";
 import {
   Box,
   Center,
@@ -115,6 +116,7 @@ const Cover = () => {
   // Hooks
   const searchParams = useSearchParams();
   const name = searchParams.get("to") || "Tamu Undangan";
+  const iss = useIsSmScreenWidth();
 
   // GSAP
   useGSAP(
@@ -131,25 +133,47 @@ const Cover = () => {
         },
       });
 
-      tl.fromTo(
-        ".cover_bush",
-        {
-          scale: 1.5,
-          ease: "none",
-          // duration: 2.5,
-        },
-        {
-          scale: 3,
-          ease: "none",
-          // duration: 2.5,
-        },
-      )
+      tl.to(".cover_bush_l", {
+        left: "-250%",
+        bottom: "-50%",
+        rotate: "-10deg",
+        opacity: 0,
+        ease: "none",
+        duration: 1.5,
+      })
         .to(
-          ".cover_bush_2",
+          ".cover_bush_r",
           {
-            scale: 1.8,
+            right: "-250%",
+            bottom: "-50%",
+            rotate: "5deg",
+            opacity: 0,
             ease: "none",
-            // duration: 2.5,
+            duration: 1.5,
+          },
+          "<",
+        )
+        .to(
+          ".cover_flowers_l",
+          {
+            left: "-200%",
+            bottom: "-10%",
+            rotate: "-20deg",
+            opacity: 0,
+            ease: "none",
+            duration: 1.5,
+          },
+          "<",
+        )
+        .to(
+          ".cover_flowers_r",
+          {
+            right: "-240%",
+            bottom: "-10%",
+            rotate: "40deg",
+            opacity: 0,
+            ease: "none",
+            duration: 1.5,
           },
           "<",
         )
@@ -158,7 +182,21 @@ const Cover = () => {
           {
             scale: 1.3,
             ease: "none",
-            // duration: 2.5,
+            duration: 1,
+          },
+          "<",
+        )
+        .fromTo(
+          ".cover_container",
+          {
+            opacity: 0,
+            ease: "none",
+            duration: 1.5,
+          },
+          {
+            opacity: 1,
+            ease: "none",
+            duration: 1.5,
           },
           "<",
         )
@@ -169,7 +207,7 @@ const Cover = () => {
             ease: "none",
             // duration: 2.5,
           },
-          ">",
+          ">+1.5",
         )
         .to(
           ".chevron_down",
@@ -222,6 +260,7 @@ const Cover = () => {
 
   return (
     <CContainer ref={containerRef} pos={"relative"} overflow={"clip"}>
+      {/* Contents */}
       <ContainerLayout
         minH={"100dvh"}
         align={"center"}
@@ -344,43 +383,90 @@ const Cover = () => {
           </CContainer>
         </CContainer>
 
-        {/* Bushes */}
-        <>
-          <Img
-            className="cover_bush_2"
-            src={`${IMAGES_PATH}/heroBush.png`}
-            alt="bush"
-            h={"full"}
-            w={"full"}
-            pos={"absolute"}
-            top={0}
-            pointerEvents={"none"}
-            zIndex={4}
-          />
-          <Img
-            className="cover_bush"
-            src={`${IMAGES_PATH}/heroBush.png`}
-            alt="bush"
-            h={"full"}
-            w={"full"}
-            pos={"absolute"}
-            top={0}
-            pointerEvents={"none"}
-            zIndex={5}
-          />
-        </>
-
         {/* Chevron down */}
-        <AppIcon
-          className="chevron_down"
-          icon={ChevronDownIcon}
-          boxSize={5}
-          color={"fg.muted"}
-          animation={"hero-chevron-down-bounce 2s linear infinite"}
-          zIndex={5}
-          mt={"auto"}
-        />
+        <VStack className="chevron_down" zIndex={5} mt={"auto"}>
+          <P textAlign={"center"}>Scroll</P>
+
+          <AppIcon
+            icon={ChevronDownIcon}
+            boxSize={5}
+            animation={"hero-chevron-down-bounce 2s linear infinite"}
+          />
+        </VStack>
       </ContainerLayout>
+
+      {/* Flowers */}
+      <>
+        <Img
+          key={`${iss}`}
+          className="cover_flowers_l"
+          src={
+            iss
+              ? `${IMAGES_PATH}/flowersSmall.png`
+              : `${IMAGES_PATH}/flowers.png`
+          }
+          alt="flowers"
+          h={"80%"}
+          aspectRatio={[0.8062360802, null, 1.6877637131]}
+          pos={"absolute"}
+          bottom={"20%"}
+          left={"-110%"}
+          transform={"rotate(10deg)"}
+          pointerEvents={"none"}
+          zIndex={4}
+        />
+
+        <Img
+          key={`${iss}`}
+          className="cover_flowers_r"
+          src={
+            iss
+              ? `${IMAGES_PATH}/flowersSmallR.png`
+              : `${IMAGES_PATH}/flowersR.png`
+          }
+          alt="flowers"
+          h={"80%"}
+          aspectRatio={[0.8062360802, null, 1.6877637131]}
+          pos={"absolute"}
+          bottom={"15%"}
+          right={"-110%"}
+          transform={"rotate(-5deg)"}
+          pointerEvents={"none"}
+          zIndex={4}
+        />
+      </>
+
+      {/* Bushes */}
+      <>
+        <Img
+          key={`${iss}`}
+          className="cover_bush_l"
+          src={iss ? `${IMAGES_PATH}/bushSmall.png` : `${IMAGES_PATH}/bush.png`}
+          alt="bush"
+          h={"80%"}
+          aspectRatio={[0.8710691824, null, 2.3899371069]}
+          pos={"absolute"}
+          bottom={"-20%"}
+          left={"-55%"}
+          pointerEvents={"none"}
+          zIndex={4}
+        />
+        <Img
+          key={`${iss}`}
+          className="cover_bush_r"
+          src={
+            iss ? `${IMAGES_PATH}/bushSmallR.png` : `${IMAGES_PATH}/bushR.png`
+          }
+          alt="bush"
+          h={"80%"}
+          aspectRatio={[0.8710691824, null, 2.3899371069]}
+          pos={"absolute"}
+          bottom={"-20%"}
+          right={"-55%"}
+          pointerEvents={"none"}
+          zIndex={4}
+        />
+      </>
     </CContainer>
   );
 };
@@ -397,8 +483,8 @@ const Intro = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 50%",
-          end: "+=300",
+          start: "top 25%",
+          end: "bottom 75%",
           scrub: true,
           // pin: true,
           // pinSpacing: true,
@@ -406,19 +492,46 @@ const Intro = () => {
         },
       });
 
-      tl.fromTo(
-        ".intro_line",
+      tl.from(
+        ".bride",
         {
-          height: "0px",
+          x: "-100px",
+          opacity: 0,
           ease: "none",
-          // duration: 2.5,
         },
-        {
-          height: LINE_H,
-          ease: "none",
-          // duration: 2.5,
-        },
-      );
+        "<",
+      )
+        .from(
+          ".groom",
+          {
+            x: "100px",
+            opacity: 0,
+            ease: "none",
+          },
+          "<",
+        )
+        .fromTo(
+          ".intro_line",
+          {
+            height: "0px",
+            ease: "none",
+            // duration: 2.5,
+          },
+          {
+            height: LINE_H,
+            ease: "none",
+            // duration: 2.5,
+          },
+        )
+        .from(
+          ".countdown",
+          {
+            y: "100px",
+            opacity: 0,
+            ease: "none",
+          },
+          ">",
+        );
     },
     { scope: containerRef },
   );
@@ -448,7 +561,7 @@ const Intro = () => {
         <SimpleGrid columns={2} gap={"64px"}>
           <CContainer align={"end"}>
             <P
-              className="fd"
+              className="fd bride"
               maxW={"100px"}
               fontSize={"1.25rem"}
               lineHeight={1.4}
@@ -460,7 +573,7 @@ const Intro = () => {
 
           <CContainer mt={"50px"}>
             <P
-              className="fd"
+              className="fd groom"
               maxW={"100px"}
               fontSize={"1.25rem"}
               lineHeight={1.4}
@@ -480,10 +593,13 @@ const Intro = () => {
           />
         </VStack>
 
-        <Img src={INTRO.img} fluid w={"full"} maxW={"200px"} />
-        <P textAlign={"center"}>{`We're getting married!`}</P>
+        <CContainer className="countdown" align={"center"} gap={12}>
+          <Img src={INTRO.img} fluid w={"full"} maxW={"200px"} />
 
-        <CountDown targetAt="2026-05-31T08:00:00+07:00" />
+          <P textAlign={"center"}>{`We're getting married!`}</P>
+
+          <CountDown targetAt="2026-05-31T08:00:00+07:00" />
+        </CContainer>
       </ContainerLayout>
 
       <DividerOrnament color="black" />
@@ -492,8 +608,68 @@ const Intro = () => {
 };
 
 const BrideAndGroom = () => {
+  // Refs
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // GSAP
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 25%",
+          end: "bottom 75%",
+          scrub: true,
+          // pin: true,
+          // pinSpacing: true,
+          // markers: true, // debug
+        },
+      });
+
+      tl.from(".intro", {
+        opacity: 0,
+        ease: "none",
+      })
+        .from(
+          [".brideImg", ".brideInfo"],
+          {
+            opacity: 0,
+            ease: "none",
+          },
+          ">",
+        )
+        .from(
+          ".brideLineart",
+          {
+            x: "20px",
+            opacity: 0,
+            ease: "none",
+          },
+          ">",
+        )
+        .from(
+          [".groomImg", ".groomInfo"],
+          {
+            opacity: 0,
+            ease: "none",
+          },
+          ">",
+        )
+        .from(
+          ".groomLineart",
+          {
+            x: "-20px",
+            opacity: 0,
+            ease: "none",
+          },
+          ">",
+        );
+    },
+    { scope: containerRef },
+  );
+
   return (
-    <CContainer pos={"relative"}>
+    <CContainer ref={containerRef} pos={"relative"}>
       <PaperTexture
         w={"full"}
         h={"full"}
@@ -511,38 +687,45 @@ const BrideAndGroom = () => {
       />
 
       <ContainerLayout gap={12} px={4} py={12}>
-        <P textAlign={"center"}>{BAG.intro}</P>
+        <P className="intro" textAlign={"center"}>
+          {BAG.intro}
+        </P>
 
         {/* Adelia */}
         <CContainer p={4}>
           <Center px={8} pos={"relative"}>
-            <Img src={`${IMAGES_PATH}/adel.jpeg`} fluid w={"full"} />
-            <Img
-              src={`${IMAGES_PATH}/adelLineart.jpg`}
-              fluid
-              w={"100px"}
+            <Box className="brideImg">
+              <Img src={`${IMAGES_PATH}/adel.jpeg`} fluid w={"full"} />
+            </Box>
+
+            <Box
+              className="brideLineart"
               pos={"absolute"}
               bottom={"-50px"}
               right={0}
-            />
+            >
+              <Img src={`${IMAGES_PATH}/adelLineart.jpg`} fluid w={"100px"} />
+            </Box>
           </Center>
 
-          <CContainer zIndex={2}>
-            <P
-              className="fd"
-              fontSize={"2xl"}
-              fontWeight={"semibold"}
-              textAlign={"center"}
-              my={6}
-            >
-              {BAG.bride}
-            </P>
+          <CContainer className="brideInfo" zIndex={2}>
+            <CContainer>
+              <P
+                className="fd"
+                fontSize={"2xl"}
+                fontWeight={"semibold"}
+                textAlign={"center"}
+                my={6}
+              >
+                {BAG.bride}
+              </P>
 
-            <CContainer color={"fg.muted"}>
-              <P textAlign={"center"}>{BAG.daughterOf}</P>
-              <P textAlign={"center"}>{BAG.brideParents[0]}</P>
-              <P textAlign={"center"}>dan</P>
-              <P textAlign={"center"}>{BAG.brideParents[1]}</P>
+              <CContainer color={"fg.muted"}>
+                <P textAlign={"center"}>{BAG.daughterOf}</P>
+                <P textAlign={"center"}>{BAG.brideParents[0]}</P>
+                <P textAlign={"center"}>dan</P>
+                <P textAlign={"center"}>{BAG.brideParents[1]}</P>
+              </CContainer>
             </CContainer>
           </CContainer>
         </CContainer>
@@ -550,33 +733,38 @@ const BrideAndGroom = () => {
         {/* Fatwa */}
         <CContainer p={4} mt={24}>
           <Center px={8} pos={"relative"}>
-            <Img src={`${IMAGES_PATH}/fatwa.jpeg`} fluid w={"full"} />
-            <Img
-              src={`${IMAGES_PATH}/fatwaLineart.jpg`}
-              fluid
-              w={"100px"}
+            <Box className="groomImg">
+              <Img src={`${IMAGES_PATH}/fatwa.jpeg`} fluid w={"full"} />
+            </Box>
+
+            <Box
+              className="groomLineart"
               pos={"absolute"}
               top={"-50px"}
               left={0}
-            />
+            >
+              <Img src={`${IMAGES_PATH}/fatwaLineart.jpg`} fluid w={"100px"} />
+            </Box>
           </Center>
 
-          <CContainer zIndex={2}>
-            <P
-              className="fd"
-              fontSize={"2xl"}
-              fontWeight={"semibold"}
-              textAlign={"center"}
-              my={6}
-            >
-              {BAG.groom}
-            </P>
+          <CContainer className="groomInfo" zIndex={2}>
+            <CContainer>
+              <P
+                className="fd"
+                fontSize={"2xl"}
+                fontWeight={"semibold"}
+                textAlign={"center"}
+                my={6}
+              >
+                {BAG.groom}
+              </P>
 
-            <CContainer color={"fg.muted"}>
-              <P textAlign={"center"}>{BAG.sonOf}</P>
-              <P textAlign={"center"}>{BAG.groomParents[0]}</P>
-              <P textAlign={"center"}>dan</P>
-              <P textAlign={"center"}>{BAG.groomParents[1]}</P>
+              <CContainer color={"fg.muted"}>
+                <P textAlign={"center"}>{BAG.sonOf}</P>
+                <P textAlign={"center"}>{BAG.groomParents[0]}</P>
+                <P textAlign={"center"}>dan</P>
+                <P textAlign={"center"}>{BAG.groomParents[1]}</P>
+              </CContainer>
             </CContainer>
           </CContainer>
         </CContainer>
@@ -586,8 +774,43 @@ const BrideAndGroom = () => {
 };
 
 const Story = () => {
+  // Refs
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // GSAP
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 25%",
+          end: "bottom 50%",
+          scrub: true,
+          // pin: true,
+          // pinSpacing: true,
+          // markers: true, // debug
+        },
+      });
+
+      tl.from(".title", {
+        opacity: 0,
+        ease: "none",
+      }).from(
+        ".paragraph",
+        {
+          opacity: 0,
+          ease: "none",
+          stagger: 0.25,
+          delay: 0.5,
+        },
+        ">",
+      );
+    },
+    { scope: containerRef },
+  );
+
   return (
-    <CContainer pos={"relative"}>
+    <CContainer ref={containerRef} pos={"relative"}>
       <PaperTexture
         w={"full"}
         h={"full"}
@@ -606,7 +829,7 @@ const Story = () => {
 
       <ContainerLayout p={4} py={12}>
         <P
-          className="fd"
+          className="fd title"
           fontSize={"1.5rem"}
           fontWeight={"semibold"}
           textAlign={"center"}
@@ -617,7 +840,9 @@ const Story = () => {
 
         <CContainer gap={8} p={8} border={"1px solid"} borderColor={"ibody"}>
           {STORY.map((paragraph, index) => (
-            <P key={index}>{paragraph}</P>
+            <P key={index} className="paragraph">
+              {paragraph}
+            </P>
           ))}
         </CContainer>
       </ContainerLayout>
@@ -625,9 +850,39 @@ const Story = () => {
   );
 };
 
-const EventDetails = () => {
+const Gallery = () => {
+  const GAP = 4;
+
+  // Refs
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // GSAP
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 50%",
+          end: "bottom 75%",
+          scrub: true,
+          // pin: true,
+          // pinSpacing: true,
+          // markers: true, // debug
+        },
+      });
+
+      tl.from(".img", {
+        opacity: 0,
+        scale: 0.75,
+        ease: "none",
+        stagger: 0.25,
+      });
+    },
+    { scope: containerRef },
+  );
+
   return (
-    <CContainer pos={"relative"} bg={"light"} color={"dark"}>
+    <CContainer ref={containerRef} pos={"relative"} bg={"light"} color={"dark"}>
       <PaperTexture
         w={"full"}
         h={"full"}
@@ -637,16 +892,154 @@ const EventDetails = () => {
         opacity={0.25}
       />
 
-      <Img
-        src={`${IMAGES_PATH}/brideAndGroom.gif`}
-        fluid
-        aspectRatio={16 / 10}
+      <ContainerLayout p={4} py={12}>
+        <SimpleGrid columns={[1, null, 2]} gap={GAP}>
+          <SimpleGrid columns={2} gap={GAP} h={"full"}>
+            <CContainer gap={GAP} h={"full"}>
+              <ImgViewer
+                className="img"
+                srcs={GALLERY_PHOTOS}
+                srcIndex={0}
+                h={"full"}
+              >
+                <Img
+                  className="clicky"
+                  src={GALLERY_PHOTOS[0]}
+                  fluid
+                  h={"full"}
+                />
+              </ImgViewer>
+              <ImgViewer
+                className="img"
+                srcs={GALLERY_PHOTOS}
+                srcIndex={1}
+                h={"full"}
+              >
+                <Img
+                  className="clicky"
+                  src={GALLERY_PHOTOS[1]}
+                  fluid
+                  h={"full"}
+                />
+              </ImgViewer>
+            </CContainer>
+
+            <CContainer>
+              <ImgViewer
+                className="img"
+                srcs={GALLERY_PHOTOS}
+                srcIndex={2}
+                h={"full"}
+              >
+                <Img
+                  className="clicky"
+                  src={GALLERY_PHOTOS[2]}
+                  fluid
+                  h={"full"}
+                />
+              </ImgViewer>
+            </CContainer>
+          </SimpleGrid>
+
+          <CContainer gap={GAP} h={"full"}>
+            <ImgViewer
+              className="img"
+              srcs={GALLERY_PHOTOS}
+              srcIndex={3}
+              h={"full"}
+            >
+              <Img
+                className="clicky"
+                src={GALLERY_PHOTOS[3]}
+                fluid
+                h={"full"}
+              />
+            </ImgViewer>
+
+            <SimpleGrid columns={2} gap={GAP}>
+              <ImgViewer
+                className="img"
+                srcs={GALLERY_PHOTOS}
+                srcIndex={4}
+                h={"full"}
+              >
+                <Img
+                  className="clicky"
+                  src={GALLERY_PHOTOS[4]}
+                  fluid
+                  h={"full"}
+                />
+              </ImgViewer>
+              <ImgViewer
+                className="img"
+                srcs={GALLERY_PHOTOS}
+                srcIndex={5}
+                h={"full"}
+              >
+                <Img
+                  className="clicky"
+                  src={GALLERY_PHOTOS[5]}
+                  fluid
+                  h={"full"}
+                />
+              </ImgViewer>
+            </SimpleGrid>
+          </CContainer>
+        </SimpleGrid>
+      </ContainerLayout>
+    </CContainer>
+  );
+};
+
+const EventDetails = () => {
+  // Refs
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // GSAP
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%",
+          end: "bottom 75%",
+          scrub: true,
+          // pin: true,
+          // pinSpacing: true,
+          // markers: true, // debug
+        },
+      });
+
+      tl.from(".title", {
+        opacity: 0,
+        ease: "none",
+      })
+        .from(".time", {
+          opacity: 0,
+          ease: "none",
+        })
+        .from(".place", {
+          opacity: 0,
+          ease: "none",
+        });
+    },
+    { scope: containerRef },
+  );
+
+  return (
+    <CContainer ref={containerRef} pos={"relative"} bg={"light"} color={"dark"}>
+      <PaperTexture
         w={"full"}
+        h={"full"}
+        pos={"absolute"}
+        top={0}
+        left={0}
+        opacity={0.25}
       />
 
       <ContainerLayout p={4} py={12}>
         <P
-          className="fd"
+          className="fd title"
           fontSize={"1.5rem"}
           fontWeight={"semibold"}
           textAlign={"center"}
@@ -664,7 +1057,7 @@ const EventDetails = () => {
             bg={"light"}
           >
             {/* Time */}
-            <CContainer gap={8} align={"center"}>
+            <CContainer className="time" gap={8} align={"center"}>
               <CContainer>
                 <P className="fd" fontWeight={"medium"} textAlign={"center"}>
                   {EVENT.time.day}
@@ -730,15 +1123,19 @@ const EventDetails = () => {
                   </Btn>
                 </a>
 
-                <HelperText textAlign={"center"}>
+                <ClampText
+                  fontSize={"sm"}
+                  color={"fg.muted"}
+                  textAlign={"center"}
+                >
                   Jika tidak muncul konfirmasi tambah ke kalender, silakan buka
-                  file .ics secara manual.
-                </HelperText>
+                  file .ics (download) secara manual.
+                </ClampText>
               </CContainer>
             </CContainer>
 
             {/* Place */}
-            <CContainer align={"center"} gap={6}>
+            <CContainer className="place" align={"center"} gap={6}>
               <AppIcon
                 icon={MapPinIcon}
                 boxSize={10}
@@ -776,8 +1173,46 @@ const EventDetails = () => {
 };
 
 const Gift = () => {
+  // Refs
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // GSAP
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%",
+          end: "bottom 75%",
+          scrub: true,
+          // pin: true,
+          // pinSpacing: true,
+          // markers: true, // debug
+        },
+      });
+
+      tl.from(".title", {
+        opacity: 0,
+        ease: "none",
+      })
+        .from(".qris", {
+          opacity: 0,
+          ease: "none",
+        })
+        .from(".bca", {
+          opacity: 0,
+          ease: "none",
+        })
+        .from(".mandiri", {
+          opacity: 0,
+          ease: "none",
+        });
+    },
+    { scope: containerRef },
+  );
+
   return (
-    <CContainer pos={"relative"} bg={"light"} color={"dark"}>
+    <CContainer ref={containerRef} pos={"relative"} bg={"light"} color={"dark"}>
       <PaperTexture
         w={"full"}
         h={"full"}
@@ -789,7 +1224,7 @@ const Gift = () => {
 
       <ContainerLayout p={4} py={12}>
         <P
-          className="fd"
+          className="fd title"
           fontSize={"1.5rem"}
           fontWeight={"semibold"}
           textAlign={"center"}
@@ -799,7 +1234,7 @@ const Gift = () => {
         </P>
 
         <CContainer gap={4}>
-          <CContainer gap={2}>
+          <CContainer className="qris" gap={2}>
             <P fontSize={"1rem"} fontWeight={"semibold"} textAlign={"center"}>
               QRIS
             </P>
@@ -812,7 +1247,7 @@ const Gift = () => {
             />
           </CContainer>
 
-          <CContainer>
+          <CContainer className="bca">
             <P fontSize={"1rem"} fontWeight={"semibold"} textAlign={"center"}>
               BCA
             </P>
@@ -832,7 +1267,7 @@ const Gift = () => {
             </HStack>
           </CContainer>
 
-          <CContainer>
+          <CContainer className="mandiri">
             <P fontSize={"1rem"} fontWeight={"semibold"} textAlign={"center"}>
               Mandiri
             </P>
@@ -852,59 +1287,6 @@ const Gift = () => {
             </HStack>
           </CContainer>
         </CContainer>
-      </ContainerLayout>
-    </CContainer>
-  );
-};
-
-const Gallery = () => {
-  const GAP = 4;
-
-  return (
-    <CContainer pos={"relative"} bg={"light"} color={"dark"}>
-      <PaperTexture
-        w={"full"}
-        h={"full"}
-        pos={"absolute"}
-        top={0}
-        left={0}
-        opacity={0.25}
-      />
-
-      <ContainerLayout p={4} py={12}>
-        <SimpleGrid columns={[1, null, 2]} gap={GAP}>
-          <SimpleGrid columns={2} gap={GAP}>
-            <CContainer gap={GAP}>
-              <ImgViewer srcs={GALLERY_PHOTOS} srcIndex={0}>
-                <Img src={GALLERY_PHOTOS[0]} fluid />
-              </ImgViewer>
-              <ImgViewer srcs={GALLERY_PHOTOS} srcIndex={1}>
-                <Img src={GALLERY_PHOTOS[1]} fluid />
-              </ImgViewer>
-            </CContainer>
-
-            <CContainer>
-              <ImgViewer srcs={GALLERY_PHOTOS} srcIndex={2} h={"full"}>
-                <Img src={GALLERY_PHOTOS[2]} fluid h={"full"} />
-              </ImgViewer>
-            </CContainer>
-          </SimpleGrid>
-
-          <CContainer gap={GAP} h={"full"}>
-            <ImgViewer srcs={GALLERY_PHOTOS} srcIndex={3} h={"full"}>
-              <Img src={GALLERY_PHOTOS[3]} fluid h={"full"} />
-            </ImgViewer>
-
-            <SimpleGrid columns={2} gap={GAP}>
-              <ImgViewer srcs={GALLERY_PHOTOS} srcIndex={4} h={"full"}>
-                <Img src={GALLERY_PHOTOS[4]} fluid h={"full"} />
-              </ImgViewer>
-              <ImgViewer srcs={GALLERY_PHOTOS} srcIndex={5} h={"full"}>
-                <Img src={GALLERY_PHOTOS[5]} fluid h={"full"} />
-              </ImgViewer>
-            </SimpleGrid>
-          </CContainer>
-        </SimpleGrid>
       </ContainerLayout>
     </CContainer>
   );
@@ -976,7 +1358,7 @@ export default function Page() {
   }, []);
 
   return (
-    <CContainer>
+    <CContainer overflowX={"clip"}>
       <Cover />
       <Intro />
       <BrideAndGroom />
