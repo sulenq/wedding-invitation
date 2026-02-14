@@ -268,7 +268,7 @@ const Cover = () => {
         p={8}
       >
         {/* Bg */}
-        <CContainer className="cover_bg" h={"full"} pos={"absolute"} top={0}>
+        <CContainer className="cover_bg" h={"100lvh"} pos={"absolute"} top={0}>
           <Img src={COVER.img} fluid h={"full"} w={"full"} />
 
           <PaperTexture h={"full"} w={"full"} pos={"absolute"} top={0} />
