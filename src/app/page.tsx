@@ -1007,7 +1007,7 @@ const EventDetails = () => {
           scrub: true,
           // pin: true,
           // pinSpacing: true,
-          markers: true, // debug
+          // markers: true, // debug
         },
       });
 
