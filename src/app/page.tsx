@@ -134,7 +134,7 @@ const Cover = () => {
       });
 
       tl.to(".cover_bush_l", {
-        left: "-250%",
+        left: "-100%",
         bottom: "-50%",
         rotate: "-10deg",
         opacity: 0,
@@ -144,7 +144,7 @@ const Cover = () => {
         .to(
           ".cover_bush_r",
           {
-            right: "-250%",
+            right: "-100%",
             bottom: "-50%",
             rotate: "5deg",
             opacity: 0,
@@ -168,7 +168,7 @@ const Cover = () => {
         .to(
           ".cover_flowers_r",
           {
-            right: "-240%",
+            right: "-200%",
             bottom: "-10%",
             rotate: "40deg",
             opacity: 0,
@@ -282,7 +282,7 @@ const Cover = () => {
           pos={"absolute"}
           top={0}
           left={0}
-          bg={"blackAlpha.700"}
+          backgroundColor={"blackAlpha.600"}
         >
           <CContainer
             className="cover_container"
@@ -485,11 +485,11 @@ const Intro = () => {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 25%",
-          end: "bottom bottom",
+          end: "bottom 110%",
           scrub: true,
           // pin: true,
           // pinSpacing: true,
-          // markers: true, // debug
+          markers: true, // debug
         },
       });
 
@@ -511,6 +511,14 @@ const Intro = () => {
           },
           "<",
         )
+        .to(
+          [".bride", ".groom"],
+          {
+            y: LINE_H,
+            ease: "none",
+          },
+          ">+0.125",
+        )
         .fromTo(
           ".intro_line",
           {
@@ -523,6 +531,7 @@ const Intro = () => {
             ease: "none",
             // duration: 2.5,
           },
+          "<",
         )
         .from(
           ".countdown",
@@ -1005,7 +1014,7 @@ const EventDetails = () => {
           trigger: containerRef.current,
           start: "top 50%",
           end: "bottom 75%",
-          scrub: true,
+          // scrub: true,
           // pin: true,
           // pinSpacing: true,
           // markers: true, // debug
@@ -1192,7 +1201,7 @@ const Gift = () => {
           trigger: containerRef.current,
           start: "top 50%",
           end: "bottom 75%",
-          scrub: true,
+          // scrub: true,
           // pin: true,
           // pinSpacing: true,
           // markers: true, // debug
