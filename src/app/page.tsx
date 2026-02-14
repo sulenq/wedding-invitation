@@ -269,7 +269,7 @@ const Cover = () => {
       >
         {/* Bg */}
         <CContainer className="cover_bg" h={"100lvh"} pos={"absolute"} top={0}>
-          <Img src={COVER.img} fluid h={"full"} w={"full"} />
+          <Img src={COVER.img} fluid h={"100lvh"} w={"full"} />
 
           <PaperTexture h={"full"} w={"full"} pos={"absolute"} top={0} />
         </CContainer>
@@ -485,7 +485,7 @@ const Intro = () => {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 25%",
-          end: "bottom 75%",
+          end: "bottom bottom",
           scrub: true,
           // pin: true,
           // pinSpacing: true,
@@ -1359,7 +1359,7 @@ const Footer = () => {
 
 export default function Page() {
   // Refs
-  const containerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Hooks
   const { setColorMode } = useColorMode();
