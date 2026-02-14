@@ -262,7 +262,7 @@ const Cover = () => {
     <CContainer ref={containerRef} pos={"relative"} overflow={"clip"}>
       {/* Contents */}
       <ContainerLayout
-        minH={"100dvh"}
+        minH={"100svh"}
         align={"center"}
         justify={"center"}
         p={8}
@@ -373,7 +373,6 @@ const Cover = () => {
             <Box
               className="cover_brief_line"
               bg={"light"}
-              opacity={0.5}
               w={"1.2px"}
               h={"0"}
               pos={"absolute"}
@@ -528,7 +527,6 @@ const Intro = () => {
         .from(
           ".countdown",
           {
-            y: "100px",
             opacity: 0,
             ease: "none",
           },
@@ -619,7 +617,7 @@ const BrideAndGroom = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 25%",
+          start: "top 62.5%",
           end: "bottom 75%",
           scrub: true,
           // pin: true,
@@ -647,13 +645,14 @@ const BrideAndGroom = () => {
             opacity: 0,
             ease: "none",
           },
-          "<+0.25",
+          "<+0.05",
         )
         .from(
           [".groomImg", ".groomInfo"],
           {
             opacity: 0,
             ease: "none",
+            delay: 1,
           },
           ">",
         )
@@ -664,7 +663,7 @@ const BrideAndGroom = () => {
             opacity: 0,
             ease: "none",
           },
-          ">",
+          "<+0.05",
         );
     },
     { scope: containerRef },
@@ -864,7 +863,7 @@ const Gallery = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 50%",
+          start: "top 25%",
           end: "bottom 75%",
           scrub: true,
           // pin: true,
@@ -1003,7 +1002,7 @@ const EventDetails = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 75%",
+          start: "top 50%",
           end: "bottom 75%",
           scrub: true,
           // pin: true,
@@ -1184,7 +1183,7 @@ const Gift = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 75%",
+          start: "top 50%",
           end: "bottom 75%",
           scrub: true,
           // pin: true,
