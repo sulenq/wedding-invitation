@@ -489,7 +489,7 @@ const Intro = () => {
           scrub: true,
           // pin: true,
           // pinSpacing: true,
-          markers: true, // debug
+          // markers: true, // debug
         },
       });
 
