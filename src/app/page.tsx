@@ -16,6 +16,7 @@ import { PaperTexture } from "@/components/widget/PaperTexture";
 import { IMAGES_PATH } from "@/constants/paths";
 import { useDimension } from "@/hooks/useDimension";
 import { useIsSmScreenWidth } from "@/hooks/useIsSmScreenWidth";
+import useScreen from "@/hooks/useScreen";
 import {
   Box,
   Center,
@@ -411,7 +412,7 @@ const Cover = () => {
           aspectRatio={[0.8062360802, null, 1.6877637131]}
           pos={"absolute"}
           bottom={"20%"}
-          left={"-110%"}
+          left={"-40%"}
           transform={"rotate(10deg)"}
           pointerEvents={"none"}
           zIndex={4}
@@ -430,7 +431,7 @@ const Cover = () => {
           aspectRatio={[0.8062360802, null, 1.6877637131]}
           pos={"absolute"}
           bottom={"15%"}
-          right={"-110%"}
+          right={"-40%"}
           transform={"rotate(-5deg)"}
           pointerEvents={"none"}
           zIndex={4}
@@ -448,7 +449,7 @@ const Cover = () => {
           aspectRatio={[0.8710691824, null, 2.3899371069]}
           pos={"absolute"}
           bottom={"-20%"}
-          left={"-55%"}
+          left={"-10%"}
           pointerEvents={"none"}
           zIndex={4}
         />
@@ -463,7 +464,7 @@ const Cover = () => {
           aspectRatio={[0.8710691824, null, 2.3899371069]}
           pos={"absolute"}
           bottom={"-20%"}
-          right={"-55%"}
+          right={"-10%"}
           pointerEvents={"none"}
           zIndex={4}
         />
@@ -618,7 +619,7 @@ const BrideAndGroom = () => {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 25%",
-          end: "bottom 75%",
+          end: "bottom bottom",
           scrub: true,
           // pin: true,
           // pinSpacing: true,
@@ -654,7 +655,7 @@ const BrideAndGroom = () => {
             ease: "none",
             delay: 1,
           },
-          ">",
+          "<+0.05",
         )
         .from(
           ".groomLineart",
@@ -785,7 +786,7 @@ const Story = () => {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 25%",
-          end: "bottom 50%",
+          end: "bottom 75%",
           scrub: true,
           // pin: true,
           // pinSpacing: true,
@@ -948,6 +949,7 @@ const Gallery = () => {
               srcs={GALLERY_PHOTOS}
               srcIndex={3}
               h={"full"}
+              w={"full"}
             >
               <Img
                 className="clicky"
@@ -1359,10 +1361,15 @@ const Footer = () => {
 export default function Page() {
   // Hooks
   const { setColorMode } = useColorMode();
+  const { sw } = useScreen();
 
   useEffect(() => {
     setColorMode("dark");
   }, []);
+
+  useEffect(() => {
+    ScrollTrigger.refresh();
+  }, [sw]);
 
   return (
     <CContainer overflowX={"clip"}>
