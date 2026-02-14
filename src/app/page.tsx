@@ -863,8 +863,8 @@ const Gallery = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 25%",
-          end: "bottom 75%",
+          start: "top 50%",
+          end: "bottom bottom",
           scrub: true,
           // pin: true,
           // pinSpacing: true,
