@@ -16,7 +16,6 @@ import { PaperTexture } from "@/components/widget/PaperTexture";
 import { IMAGES_PATH } from "@/constants/paths";
 import { useDimension } from "@/hooks/useDimension";
 import { useIsSmScreenWidth } from "@/hooks/useIsSmScreenWidth";
-import useScreen from "@/hooks/useScreen";
 import {
   Box,
   Center,
@@ -1359,20 +1358,30 @@ const Footer = () => {
 };
 
 export default function Page() {
+  // Refs
+  const containerRef = useRef<HTMLDivElement>(null)
+
   // Hooks
   const { setColorMode } = useColorMode();
-  const { sw } = useScreen();
 
   useEffect(() => {
     setColorMode("dark");
   }, []);
 
   useEffect(() => {
-    ScrollTrigger.refresh();
-  }, [sw]);
+    if (!containerRef.current) return;
+
+    const ro = new ResizeObserver(() => {
+      ScrollTrigger.refresh();
+    });
+
+    ro.observe(containerRef.current);
+
+    return () => ro.disconnect();
+  }, []);
 
   return (
-    <CContainer overflowX={"clip"}>
+    <CContainer ref={containerRef} overflowX={"clip"}>
       <Cover />
       <Intro />
       <BrideAndGroom />
