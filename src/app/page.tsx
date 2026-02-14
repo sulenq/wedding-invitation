@@ -617,7 +617,7 @@ const BrideAndGroom = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 62.5%",
+          start: "top 25%",
           end: "bottom 75%",
           scrub: true,
           // pin: true,
@@ -1007,7 +1007,7 @@ const EventDetails = () => {
           scrub: true,
           // pin: true,
           // pinSpacing: true,
-          // markers: true, // debug
+          markers: true, // debug
         },
       });
 
@@ -1028,7 +1028,13 @@ const EventDetails = () => {
   );
 
   return (
-    <CContainer ref={containerRef} pos={"relative"} bg={"light"} color={"dark"}>
+    <CContainer
+      // className="debug"
+      ref={containerRef}
+      pos={"relative"}
+      bg={"light"}
+      color={"dark"}
+    >
       <PaperTexture
         w={"full"}
         h={"full"}
