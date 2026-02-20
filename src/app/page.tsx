@@ -58,14 +58,14 @@ const BAG = {
     name: "Adelia Dian Pratiwi",
     childOf: "Putri terakhir dari",
     parents: ["Widodo", "Tri Wahyuningsih"],
-    img: `${IMAGES_PATH}/adel.jpeg`,
-    gif: `${IMAGES_PATH}/groom.gif`,
+    img: `${IMAGES_PATH}/bride.jpeg`,
+    gif: `${IMAGES_PATH}/bride.gif`,
   },
   groom: {
     name: "Fatwa Linovera",
     childOf: "Putra terakhir dari",
     parents: ["Muhamad Nurfuad", "Sri Rahayu"],
-    img: `${IMAGES_PATH}/fatwa.jpeg`,
+    img: `${IMAGES_PATH}/groom.jpeg`,
     gif: `${IMAGES_PATH}/groom.gif`,
   },
 };
@@ -524,7 +524,7 @@ const Intro = () => {
           {
             y: LINE_H_NUM + 180 + 50,
             ease: "none",
-            duration: 2.5,
+            duration: 2,
           },
           ">+0.125",
         )
@@ -533,7 +533,7 @@ const Intro = () => {
           {
             y: LINE_H_NUM + 180,
             ease: "none",
-            duration: 2.5,
+            duration: 2,
           },
           "<",
         )
@@ -542,12 +542,11 @@ const Intro = () => {
           {
             height: "0px",
             ease: "none",
-            // duration: 2.5,
           },
           {
             height: LINE_H_NUM,
             ease: "none",
-            // duration: 2.5,
+            duration: 1.5,
           },
           "<",
         )
@@ -584,7 +583,7 @@ const Intro = () => {
 
       <DividerOrnament color="black" />
 
-      <ContainerLayout align={"center"} gap={12}>
+      <ContainerLayout align={"center"} gap={12} zIndex={2}>
         <SimpleGrid columns={2} gap={"64px"}>
           <CContainer align={"end"}>
             <P
@@ -740,7 +739,7 @@ const BrideAndGroom = () => {
             <Box
               className="brideLineart"
               pos={"absolute"}
-              bottom={"-50px"}
+              bottom={"-30px"}
               right={"-40px"}
             >
               <Img src={BAG.bride.gif} fluid w={"120px"} />
