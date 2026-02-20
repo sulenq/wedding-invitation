@@ -603,7 +603,7 @@ const Intro = () => {
         </VStack>
 
         <CContainer className="countdown" align={"center"} gap={12}>
-          <Img src={INTRO.img} fluid w={"full"} maxW={"200px"} />
+          <Img src={INTRO.img} fluid w={"full"} maxW={"240px"} />
 
           <P textAlign={"center"}>{`We're getting married!`}</P>
 
