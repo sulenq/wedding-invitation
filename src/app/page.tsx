@@ -516,6 +516,7 @@ const Intro = () => {
           {
             y: LINE_H_NUM + 180 + 50,
             ease: "none",
+            duration: 2.5,
           },
           ">+0.125",
         )
@@ -524,6 +525,7 @@ const Intro = () => {
           {
             y: LINE_H_NUM + 180,
             ease: "none",
+            duration: 2.5,
           },
           "<",
         )
