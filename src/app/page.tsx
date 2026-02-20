@@ -512,12 +512,20 @@ const Intro = () => {
           "<",
         )
         .to(
-          [".bride", ".groom"],
+          ".bride",
+          {
+            y: LINE_H_NUM + 180 + 50,
+            ease: "none",
+          },
+          ">+0.125",
+        )
+        .to(
+          ".groom",
           {
             y: LINE_H_NUM + 180,
             ease: "none",
           },
-          ">+0.125",
+          "<",
         )
         .fromTo(
           ".intro_line",
