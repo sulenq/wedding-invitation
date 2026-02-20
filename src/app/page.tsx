@@ -262,7 +262,7 @@ const Cover = () => {
     <CContainer ref={containerRef} pos={"relative"} overflow={"clip"}>
       {/* Contents */}
       <ContainerLayout
-        minH={"100svh"}
+        minH={"100lvh"}
         align={"center"}
         justify={"center"}
         p={8}
@@ -383,7 +383,7 @@ const Cover = () => {
         </CContainer>
 
         {/* Chevron down */}
-        <VStack className="chevron_down" zIndex={5} mt={"auto"}>
+        <VStack className="chevron_down" zIndex={5} mt={"auto"} mb={"50px"}>
           <P fontWeight={"medium"} textAlign={"center"}>
             Scroll
           </P>
