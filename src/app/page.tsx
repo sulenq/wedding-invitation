@@ -54,12 +54,20 @@ const INTRO = {
 const BAG = {
   intro:
     "Dengan penuh rasa syukur, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu pada acara pernikahan kami.",
-  bride: "Adelia Dian Pratiwi",
-  daughterOf: "Putri termuda dari",
-  brideParents: ["Widodo", "Tri Wahyuningsih"],
-  groom: "Fatwa Linovera",
-  sonOf: "Putra termuda dari",
-  groomParents: ["Muhamad Nurfuad", "Sri Rahayu"],
+  bride: {
+    name: "Adelia Dian Pratiwi",
+    childOf: "Putri terakhir dari",
+    parents: ["Widodo", "Tri Wahyuningsih"],
+    img: `${IMAGES_PATH}/adel.jpeg`,
+    gif: `${IMAGES_PATH}/groom.gif`,
+  },
+  groom: {
+    name: "Fatwa Linovera",
+    childOf: "Putra terakhir dari",
+    parents: ["Muhamad Nurfuad", "Sri Rahayu"],
+    img: `${IMAGES_PATH}/fatwa.jpeg`,
+    gif: `${IMAGES_PATH}/groom.gif`,
+  },
 };
 const STORY = [
   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat porro officia exercitationem earum aut dolor. Corrupti maiores, vitae et perferendis excepturi, cumque cum facere quam, qui ea architecto officia ex?",
@@ -724,18 +732,18 @@ const BrideAndGroom = () => {
 
         {/* Adelia */}
         <CContainer p={4}>
-          <Center px={8} pos={"relative"}>
+          <Center px={8} pos={"relative"} maxW={"240px"} mx={"auto"}>
             <Box className="brideImg">
-              <Img src={`${IMAGES_PATH}/adel.jpeg`} fluid w={"full"} />
+              <Img src={BAG.bride.img} fluid w={"full"} />
             </Box>
 
             <Box
               className="brideLineart"
               pos={"absolute"}
               bottom={"-50px"}
-              right={0}
+              right={"-40px"}
             >
-              <Img src={`${IMAGES_PATH}/adelLineart.jpg`} fluid w={"100px"} />
+              <Img src={BAG.bride.gif} fluid w={"120px"} />
             </Box>
           </Center>
 
@@ -748,14 +756,14 @@ const BrideAndGroom = () => {
                 textAlign={"center"}
                 my={6}
               >
-                {BAG.bride}
+                {BAG.bride.name}
               </P>
 
               <CContainer color={"fg.muted"}>
-                <P textAlign={"center"}>{BAG.daughterOf}</P>
-                <P textAlign={"center"}>{BAG.brideParents[0]}</P>
+                <P textAlign={"center"}>{BAG.bride.childOf}</P>
+                <P textAlign={"center"}>{BAG.bride.parents[0]}</P>
                 <P textAlign={"center"}>dan</P>
-                <P textAlign={"center"}>{BAG.brideParents[1]}</P>
+                <P textAlign={"center"}>{BAG.bride.parents[1]}</P>
               </CContainer>
             </CContainer>
           </CContainer>
@@ -763,18 +771,24 @@ const BrideAndGroom = () => {
 
         {/* Fatwa */}
         <CContainer p={4} mt={24}>
-          <Center px={8} pos={"relative"}>
+          <Center
+            // className="debug"
+            maxW={"240px"}
+            px={8}
+            mx={"auto"}
+            pos={"relative"}
+          >
             <Box className="groomImg">
-              <Img src={`${IMAGES_PATH}/fatwa.jpeg`} fluid w={"full"} />
+              <Img src={BAG.groom.img} fluid w={"full"} />
             </Box>
 
             <Box
               className="groomLineart"
               pos={"absolute"}
-              top={"-50px"}
-              left={0}
+              top={"-120px"}
+              left={"-30px"}
             >
-              <Img src={`${IMAGES_PATH}/fatwaLineart.jpg`} fluid w={"100px"} />
+              <Img src={BAG.groom.gif} fluid w={"120px"} />
             </Box>
           </Center>
 
@@ -787,14 +801,14 @@ const BrideAndGroom = () => {
                 textAlign={"center"}
                 my={6}
               >
-                {BAG.groom}
+                {BAG.groom.name}
               </P>
 
               <CContainer color={"fg.muted"}>
-                <P textAlign={"center"}>{BAG.sonOf}</P>
-                <P textAlign={"center"}>{BAG.groomParents[0]}</P>
+                <P textAlign={"center"}>{BAG.groom.childOf}</P>
+                <P textAlign={"center"}>{BAG.groom.parents[0]}</P>
                 <P textAlign={"center"}>dan</P>
-                <P textAlign={"center"}>{BAG.groomParents[1]}</P>
+                <P textAlign={"center"}>{BAG.groom.parents[1]}</P>
               </CContainer>
             </CContainer>
           </CContainer>
