@@ -166,6 +166,7 @@ const Cover = () => {
           {
             opacity: 0,
             ease: "none",
+            duration: 1,
           },
           "<",
         )
@@ -223,7 +224,7 @@ const Cover = () => {
             ease: "none",
             // duration: 2.5,
           },
-          ">+1.5",
+          ">+0.5",
         )
         .to(
           ".chevron_down",
