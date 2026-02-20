@@ -49,7 +49,7 @@ const COVER = {
 const INTRO = {
   bride: "Adelia Dian Pratiwi",
   groom: "Fatwa Linovera",
-  img: `${IMAGES_PATH}/intro.jpeg`,
+  img: `${IMAGES_PATH}/intro.gif`,
 };
 const BAG = {
   intro:
