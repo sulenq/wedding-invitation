@@ -473,7 +473,7 @@ const Cover = () => {
 };
 
 const Intro = () => {
-  const LINE_H = `400px`;
+  const LINE_H_NUM = 400;
 
   // Refs
   const containerRef = useRef<HTMLDivElement>(null);
@@ -496,7 +496,7 @@ const Intro = () => {
       tl.from(
         ".bride",
         {
-          x: `-(calc(${LINE_H}/2))`,
+          x: `-50px`,
           opacity: 0,
           ease: "none",
         },
@@ -505,7 +505,7 @@ const Intro = () => {
         .from(
           ".groom",
           {
-            x: `(calc(${LINE_H}/2))`,
+            x: `50px`,
             opacity: 0,
             ease: "none",
           },
@@ -514,7 +514,7 @@ const Intro = () => {
         .to(
           [".bride", ".groom"],
           {
-            y: LINE_H,
+            y: LINE_H_NUM + 180,
             ease: "none",
           },
           ">+0.125",
@@ -527,7 +527,7 @@ const Intro = () => {
             // duration: 2.5,
           },
           {
-            height: LINE_H,
+            height: LINE_H_NUM,
             ease: "none",
             // duration: 2.5,
           },
@@ -592,7 +592,7 @@ const Intro = () => {
           </CContainer>
         </SimpleGrid>
 
-        <VStack h={LINE_H}>
+        <VStack h={`${LINE_H_NUM}px`}>
           <Box
             className="intro_line"
             bg={"dark"}
@@ -602,8 +602,19 @@ const Intro = () => {
           />
         </VStack>
 
-        <CContainer className="countdown" align={"center"} gap={12}>
-          <Img src={INTRO.img} fluid w={"full"} maxW={"240px"} />
+        <CContainer
+          className="countdown"
+          align={"center"}
+          gap={12}
+          mt={"100px"}
+        >
+          <Img
+            src={INTRO.img}
+            fluid
+            w={"full"}
+            maxW={"240px"}
+            transform={"scaleX(-1)"}
+          />
 
           <P textAlign={"center"}>{`We're getting married!`}</P>
 
