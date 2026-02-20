@@ -162,6 +162,14 @@ const Cover = () => {
           "<",
         )
         .to(
+          ".blur_filter",
+          {
+            opacity: 0,
+            ease: "none",
+          },
+          "<",
+        )
+        .to(
           ".cover_flowers_l",
           {
             left: "-200%",
@@ -476,6 +484,17 @@ const Cover = () => {
           zIndex={4}
         />
       </>
+
+      <Box
+        className="blur_filter"
+        w={"full"}
+        h={"full"}
+        backdropFilter={"blur(4px)"}
+        pos={"absolute"}
+        top={0}
+        left={0}
+        zIndex={4}
+      />
     </CContainer>
   );
 };
