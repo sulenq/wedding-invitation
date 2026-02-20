@@ -473,7 +473,7 @@ const Cover = () => {
 };
 
 const Intro = () => {
-  const LINE_H = `200px`;
+  const LINE_H = `400px`;
 
   // Refs
   const containerRef = useRef<HTMLDivElement>(null);
@@ -496,7 +496,7 @@ const Intro = () => {
       tl.from(
         ".bride",
         {
-          x: "-100px",
+          x: `-(calc(${LINE_H}/2))`,
           opacity: 0,
           ease: "none",
         },
@@ -505,7 +505,7 @@ const Intro = () => {
         .from(
           ".groom",
           {
-            x: "100px",
+            x: `(calc(${LINE_H}/2))`,
             opacity: 0,
             ease: "none",
           },
