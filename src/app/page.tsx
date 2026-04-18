@@ -760,7 +760,7 @@ const BrideAndGroom = () => {
 
         {/* Adelia */}
         <CContainer p={4}>
-          <Center px={8} pos={"relative"} maxW={"240px"} mx={"auto"}>
+          <Center px={8} pos={"relative"} maxW={"360px"} mx={"auto"}>
             <Box className="brideImg">
               <Img src={BAG.bride.img} fluid w={"full"} />
             </Box>
@@ -771,7 +771,7 @@ const BrideAndGroom = () => {
               bottom={"-30px"}
               right={"-40px"}
             >
-              <Img src={BAG.bride.gif} fluid w={"120px"} />
+              <Img src={BAG.bride.gif} fluid w={"140px"} />
             </Box>
           </Center>
 
@@ -801,7 +801,7 @@ const BrideAndGroom = () => {
         <CContainer p={4} mt={24}>
           <Center
             // className="debug"
-            maxW={"240px"}
+            maxW={"360px"}
             px={8}
             mx={"auto"}
             pos={"relative"}
@@ -816,7 +816,7 @@ const BrideAndGroom = () => {
               top={"-120px"}
               left={"-30px"}
             >
-              <Img src={BAG.groom.gif} fluid w={"120px"} />
+              <Img src={BAG.groom.gif} fluid w={"150px"} />
             </Box>
           </Center>
 
@@ -873,8 +873,8 @@ const Story = () => {
         {
           opacity: 0,
           ease: "none",
-          stagger: 0.25,
-          delay: 0.5,
+          stagger: 0.1,
+          delay: 0.1,
         },
         ">",
       );
@@ -932,12 +932,13 @@ const Gallery = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // GSAP
+  // Top Gallery
   useGSAP(
     () => {
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 50%",
+          trigger: ".topGallery",
+          start: "top bottom",
           end: "bottom bottom",
           scrub: true,
           // pin: true,
@@ -946,11 +947,36 @@ const Gallery = () => {
         },
       });
 
-      tl.from(".img", {
+      tl.from(".img1", {
         opacity: 0,
         scale: 0.75,
         ease: "none",
-        stagger: 0.25,
+        stagger: 0.1,
+      });
+    },
+    { scope: containerRef },
+  );
+
+  // Bottom Gallery
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".bottomGallery",
+          start: "top bottom",
+          end: "110% bottom",
+          scrub: true,
+          // pin: true,
+          // pinSpacing: true,
+          // markers: true, // debug
+        },
+      });
+
+      tl.from(".img2", {
+        opacity: 0,
+        scale: 0.75,
+        ease: "none",
+        stagger: 0.1,
       });
     },
     { scope: containerRef },
@@ -970,9 +996,10 @@ const Gallery = () => {
       <ContainerLayout p={4} py={12}>
         <SimpleGrid columns={[1, null, 2]} gap={GAP}>
           <SimpleGrid columns={2} gap={GAP} h={"full"}>
-            <CContainer gap={GAP} h={"full"}>
+            {/* Top */}
+            <CContainer className={"topGallery"} gap={GAP} h={"full"}>
               <ImgViewer
-                className="img"
+                className="img1"
                 srcs={GALLERY_PHOTOS}
                 srcIndex={0}
                 h={"full"}
@@ -984,8 +1011,9 @@ const Gallery = () => {
                   h={"full"}
                 />
               </ImgViewer>
+
               <ImgViewer
-                className="img"
+                className="img1"
                 srcs={GALLERY_PHOTOS}
                 srcIndex={1}
                 h={"full"}
@@ -1001,7 +1029,7 @@ const Gallery = () => {
 
             <CContainer>
               <ImgViewer
-                className="img"
+                className="img1"
                 srcs={GALLERY_PHOTOS}
                 srcIndex={2}
                 h={"full"}
@@ -1016,9 +1044,10 @@ const Gallery = () => {
             </CContainer>
           </SimpleGrid>
 
-          <CContainer gap={GAP} h={"full"}>
+          {/* Bottom */}
+          <CContainer className={"bottomGallery"} gap={GAP} h={"full"}>
             <ImgViewer
-              className="img"
+              className="img2"
               srcs={GALLERY_PHOTOS}
               srcIndex={3}
               h={"full"}
@@ -1034,7 +1063,7 @@ const Gallery = () => {
 
             <SimpleGrid columns={2} gap={GAP}>
               <ImgViewer
-                className="img"
+                className="img2"
                 srcs={GALLERY_PHOTOS}
                 srcIndex={4}
                 h={"full"}
@@ -1046,8 +1075,9 @@ const Gallery = () => {
                   h={"full"}
                 />
               </ImgViewer>
+
               <ImgViewer
-                className="img"
+                className="img2"
                 srcs={GALLERY_PHOTOS}
                 srcIndex={5}
                 h={"full"}
@@ -1316,7 +1346,7 @@ const Gift = () => {
         </P>
 
         <CContainer gap={4}>
-          <CContainer className="qris" gap={2}>
+          {/* <CContainer className="qris" gap={2}>
             <P fontSize={"1rem"} fontWeight={"semibold"} textAlign={"center"}>
               QRIS
             </P>
@@ -1327,7 +1357,7 @@ const Gift = () => {
               maxW={"240px"}
               mx={"auto"}
             />
-          </CContainer>
+          </CContainer> */}
 
           <CContainer className="bca">
             <P fontSize={"1rem"} fontWeight={"semibold"} textAlign={"center"}>
