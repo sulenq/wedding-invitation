@@ -73,7 +73,7 @@ const STORY = [
   "Kami pertama kali “bertemu” di sebuah antrean yang tidak bergerak sama sekali. Entah sistemnya yang bermasalah atau memang waktunya yang sedang tidak berpihak, kami sama-sama terjebak di situ cukup lama. Dari sekadar saling melirik karena bosan, berlanjut ke obrolan ringan yang awalnya tidak punya tujuan apa-apa.",
   "Setelah itu, kami seperti sering bertemu di tempat-tempat yang bahkan tidak kami rencanakan. Dari lokasi yang terlalu jauh untuk disebut kebetulan, sampai acara yang sebenarnya tidak terlalu ingin kami hadiri. Anehnya, setiap pertemuan terasa seolah sudah ada jalurnya sendiri, meskipun tidak pernah benar-benar kami atur.",
   "Seiring waktu, muncul berbagai momen yang terasa penting—percakapan panjang di waktu yang tidak ideal, keputusan spontan yang tiba-tiba terasa berarti, dan hal-hal kecil yang entah bagaimana jadi alasan untuk terus melangkah. Tidak selalu masuk akal, tapi cukup untuk membuat kami tetap berjalan ke arah yang sama.",
-  "Dan ya, cerita ini memang fiktif. Versi aslinya jauh lebih sederhana, mungkin juga lebih random, dan jelas tidak se-terstruktur ini. Tapi tidak apa-apa, yang penting doakan saja kami semoga selalu bahagia dunia dan akhirat.",
+  "Dan ya, cerita ini memang <b>FIKTIF</b>. Versi aslinya jauh lebih sederhana, mungkin juga lebih random, dan jelas tidak se-terstruktur ini. Tapi tidak apa-apa, yang penting doakan saja kami semoga selalu bahagia dunia dan akhirat.",
 ];
 const EVENT = {
   time: {
@@ -903,11 +903,13 @@ const Story = () => {
         </P>
 
         <CContainer gap={8} p={8} border={"1px solid"} borderColor={"ibody"}>
-          {STORY.map((paragraph, index) => (
-            <P key={index} className="paragraph">
-              {paragraph}
-            </P>
-          ))}
+          {STORY.map((paragraph, index) => {
+            return (
+              <P key={index} className="paragraph">
+                {paragraph}
+              </P>
+            );
+          })}
         </CContainer>
       </ContainerLayout>
     </CContainer>
