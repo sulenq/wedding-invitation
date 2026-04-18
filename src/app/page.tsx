@@ -41,7 +41,7 @@ gsap.registerPlugin(ScrollTrigger);
 const COVER = {
   bride: "Adelia",
   groom: "Fatwa.",
-  img: `${IMAGES_PATH}/cover.jpeg`,
+  img: `${IMAGES_PATH}/cover.jpg`,
   date: "31.05.2026",
   quote:
     "Dengan memohon ridho Allah SWT, kami melangkah ke dalam ikatan pernikahan sebagai bentuk ibadah dan ketaatan kepada-Nya.",
@@ -58,14 +58,14 @@ const BAG = {
     name: "Adelia Dian Pratiwi",
     childOf: "Putri terakhir dari",
     parents: ["Widodo", "Tri Wahyuningsih"],
-    img: `${IMAGES_PATH}/bride.jpeg`,
+    img: `${IMAGES_PATH}/bride.jpg`,
     gif: `${IMAGES_PATH}/bride.gif`,
   },
   groom: {
     name: "Fatwa Linovera",
     childOf: "Putra terakhir dari",
     parents: ["Muhamad Nurfuad", "Sri Rahayu"],
-    img: `${IMAGES_PATH}/groom.jpeg`,
+    img: `${IMAGES_PATH}/groom.jpg`,
     gif: `${IMAGES_PATH}/groom.gif`,
   },
 };
@@ -109,13 +109,16 @@ const GIFT = {
   },
 };
 const GALLERY_PHOTOS = [
-  `${IMAGES_PATH}/gallery/1.jpeg`,
-  `${IMAGES_PATH}/gallery/2.jpeg`,
-  `${IMAGES_PATH}/gallery/3.jpeg`,
-  `${IMAGES_PATH}/gallery/4.jpeg`,
-  `${IMAGES_PATH}/gallery/5.jpeg`,
-  `${IMAGES_PATH}/gallery/6.jpeg`,
+  `${IMAGES_PATH}/gallery/1.jpg`,
+  `${IMAGES_PATH}/gallery/2.jpg`,
+  `${IMAGES_PATH}/gallery/3.jpg`,
+  `${IMAGES_PATH}/gallery/4.jpg`,
+  `${IMAGES_PATH}/gallery/5.jpg`,
+  `${IMAGES_PATH}/gallery/6.jpg`,
 ];
+const FOOTER = {
+  img: `${IMAGES_PATH}/footer.jpg`,
+};
 
 const Cover = () => {
   // Refs
@@ -288,7 +291,13 @@ const Cover = () => {
         <CContainer className="cover_bg" h={"100lvh"} pos={"absolute"} top={0}>
           <Img src={COVER.img} fluid h={"100lvh"} w={"full"} />
 
-          <PaperTexture h={"full"} w={"full"} pos={"absolute"} top={0} />
+          <PaperTexture
+            h={"full"}
+            w={"full"}
+            opacity={0.5}
+            pos={"absolute"}
+            top={0}
+          />
         </CContainer>
 
         {/* Cover content */}
@@ -1393,13 +1402,7 @@ const Footer = () => {
           justify={"end"}
           mt={`${imgDimension.height! / 2}px`}
         >
-          <Img
-            ref={imgRef}
-            src={`${IMAGES_PATH}/footer.png`}
-            fluid
-            w={"full"}
-            mt={"-70%"}
-          />
+          <Img ref={imgRef} src={FOOTER.img} fluid w={"full"} mt={"-70%"} />
 
           <CContainer gap={4} my={12}>
             <P

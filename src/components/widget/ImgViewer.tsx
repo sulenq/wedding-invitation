@@ -42,7 +42,7 @@ export const ImgViewer = (props: Props) => {
   // States
   const [currentIndex, setCurrentIndex] = useState<number>(srcIndex);
   useBackOnClose(
-    disclosureId(id || `${src}${currentIndex}`),
+    disclosureId(id || `${srcs?.[currentIndex] || src}${currentIndex}`),
     open,
     onOpen,
     onClose,
