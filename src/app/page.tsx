@@ -7,7 +7,6 @@ import { Img } from "@/components/ui/img";
 import { NavLink } from "@/components/ui/nav-link";
 import { P } from "@/components/ui/p";
 import { AppIcon } from "@/components/widget/AppIcon";
-import { ClampText } from "@/components/widget/ClampText";
 import { CountDown } from "@/components/widget/CountDown";
 import { DividerOrnament } from "@/components/widget/DividerOrnament";
 import { ImgViewer } from "@/components/widget/ImgViewer";
@@ -26,6 +25,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useGSAP } from "@gsap/react";
+import { atcb_action } from "add-to-calendar-button";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
@@ -860,8 +860,8 @@ const Story = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 25%",
-          end: "bottom 75%",
+          start: "top 75%",
+          end: "bottom bottom",
           scrub: true,
           // pin: true,
           // pinSpacing: true,
@@ -904,7 +904,7 @@ const Story = () => {
         w={"full"}
       />
 
-      <ContainerLayout p={4} py={12}>
+      <ContainerLayout px={8} py={12}>
         <P
           className="fd title"
           fontSize={"1.5rem"}
@@ -1232,21 +1232,43 @@ const EventDetails = () => {
               </HStack>
 
               <CContainer align={"center"} gap={4}>
-                <a href="/assets/icss/resepsi.ics">
-                  <Btn variant={"outline"} color={"dark"}>
-                    <AppIcon icon={CalendarIcon} />
-                    Simpan ke Kalender
-                  </Btn>
-                </a>
-
-                <ClampText
-                  fontSize={"sm"}
-                  color={"fg.muted"}
-                  textAlign={"center"}
+                <Btn
+                  variant={"outline"}
+                  color={"dark"}
+                  onClick={(e) => {
+                    atcb_action(
+                      {
+                        name: "Pernikahan Fatwa & Adelia",
+                        description:
+                          "Akad Nikah: 08.00 WIB s/d Selesai\nResepsi: 11.00 WIB s/d 13.00 WIB\n\n" +
+                          EVENT.place.name +
+                          "\n" +
+                          EVENT.place.address,
+                        startDate: "2026-05-31",
+                        endDate: "2026-05-31",
+                        startTime: "08:00",
+                        endTime: "13:00",
+                        timeZone: "Asia/Jakarta",
+                        location: EVENT.place.address,
+                        options: [
+                          "Apple",
+                          "Google",
+                          "iCal",
+                          "Microsoft365",
+                          "Outlook.com",
+                          "Yahoo",
+                        ],
+                        iCalFileName: "pernikahan-fatwa-adelia",
+                        listStyle: "modal",
+                        language: "id",
+                      },
+                      e.currentTarget,
+                    );
+                  }}
                 >
-                  Jika tidak muncul konfirmasi tambah ke kalender, silakan buka
-                  file .ics (download) secara manual.
-                </ClampText>
+                  <AppIcon icon={CalendarIcon} />
+                  Simpan ke Kalender
+                </Btn>
               </CContainer>
             </CContainer>
 
