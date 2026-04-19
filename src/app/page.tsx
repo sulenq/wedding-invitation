@@ -1371,7 +1371,7 @@ const Gift = () => {
       /> */}
 
       <CContainer bg={"d1"} color={"light"}>
-        <ContainerLayout p={4} py={12} pb={"80px"} zIndex={2}>
+        <ContainerLayout p={4} py={12} zIndex={2}>
           <CContainer gap={2} mb={8}>
             <P
               className="fd title"
@@ -1662,7 +1662,7 @@ const Footer = () => {
         opacity={0.125}
       />
 
-      <ContainerLayout px={8} py={12}>
+      <ContainerLayout px={8} pt={8} pb={12} zIndex={2}>
         <CContainer
           gap={4}
           p={8}
