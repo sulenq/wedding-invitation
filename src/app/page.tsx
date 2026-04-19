@@ -1456,18 +1456,6 @@ const Gift = () => {
                 />
               </>
 
-              <Img
-                src={`${SVGS_PATH}/logo_bca.svg`}
-                alt={"BCA"}
-                fluid
-                h={"60px"}
-                w={"fit"}
-                opacity={0.05}
-                pos={"absolute"}
-                right={"-8px"}
-                bottom={"20px"}
-              />
-
               {/* Content */}
               <>
                 <Img
@@ -1499,24 +1487,6 @@ const Gift = () => {
                   <P fontSize={"sm"}>{`a.n. ${GIFT.bca.accountHolder}`}</P>
                 </CContainer>
               </>
-
-              {/* <P fontSize={"1rem"} fontWeight={"semibold"} textAlign={"center"}>
-                BCA
-              </P>
-
-              <HStack justify={"center"}>
-                <P
-                  textAlign={"center"}
-                >{`${GIFT.bca.accountNumber} (${GIFT.bca.accountHolder})`}</P>
-
-                <Clipboard.Root value={GIFT.bca.accountNumber}>
-                  <Clipboard.Trigger asChild>
-                    <Btn iconButton variant={"ghost"} size={"xs"}>
-                      <Clipboard.Indicator />
-                    </Btn>
-                  </Clipboard.Trigger>
-                </Clipboard.Root>
-              </HStack> */}
             </CContainer>
 
             <CContainer
@@ -1571,18 +1541,6 @@ const Gift = () => {
                 />
               </Box>
 
-              <Img
-                src={`${SVGS_PATH}/logo_mandiri.svg`}
-                alt={"Mandiri"}
-                fluid
-                h={"60px"}
-                w={"fit"}
-                opacity={0.05}
-                pos={"absolute"}
-                right={"-8px"}
-                bottom={"20px"}
-              />
-
               {/* Content */}
               <>
                 <Img
@@ -1617,26 +1575,6 @@ const Gift = () => {
                 </CContainer>
               </>
             </CContainer>
-
-            {/* <CContainer className="mandiri">
-              <P fontSize={"1rem"} fontWeight={"semibold"} textAlign={"center"}>
-                Mandiri
-              </P>
-
-              <HStack justify={"center"}>
-                <P
-                  textAlign={"center"}
-                >{`${GIFT.mandiri.accountNumber} (${GIFT.mandiri.accountHolder})`}</P>
-
-                <Clipboard.Root value={GIFT.mandiri.accountNumber}>
-                  <Clipboard.Trigger asChild>
-                    <Btn iconButton variant={"ghost"} size={"xs"}>
-                      <Clipboard.Indicator />
-                    </Btn>
-                  </Clipboard.Trigger>
-                </Clipboard.Root>
-              </HStack>
-            </CContainer> */}
           </CContainer>
         </ContainerLayout>
       </CContainer>
