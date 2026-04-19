@@ -35,7 +35,7 @@ import {
   MapPinIcon,
 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -706,7 +706,7 @@ const BrideAndGroom = () => {
             opacity: 0,
             ease: "none",
           },
-          ">",
+          "<+0.2",
         )
         .from(
           ".brideLineart",
@@ -1120,18 +1120,30 @@ const EventDetails = () => {
         },
       });
 
-      tl.from(".title", {
-        opacity: 0,
-        ease: "none",
-      })
-        .from(".time", {
+      tl.from(
+        ".title",
+        {
           opacity: 0,
           ease: "none",
-        })
-        .from(".place", {
-          opacity: 0,
-          ease: "none",
-        });
+        },
+        "<+0.2",
+      )
+        .from(
+          ".time",
+          {
+            opacity: 0,
+            ease: "none",
+          },
+          "<+0.2",
+        )
+        .from(
+          ".place",
+          {
+            opacity: 0,
+            ease: "none",
+          },
+          "<+0.2",
+        );
     },
     { scope: containerRef },
   );
@@ -1315,7 +1327,7 @@ const Gift = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // States
-  const [showRekening, setShowRekening] = useState<boolean>(false);
+  // const [showRekening, setShowRekening] = useState<boolean>(false);
 
   // GSAP
   useGSAP(
@@ -1325,7 +1337,7 @@ const Gift = () => {
           trigger: containerRef.current,
           start: "top 50%",
           end: "bottom 75%",
-          scrub: true,
+          // scrub: true,
           // pin: true,
           // pinSpacing: true,
           // markers: true, // debug
@@ -1336,18 +1348,38 @@ const Gift = () => {
         opacity: 0,
         ease: "none",
       })
-        .from(".qris", {
-          opacity: 0,
-          ease: "none",
-        })
-        .from(".bca", {
-          opacity: 0,
-          ease: "none",
-        })
-        .from(".mandiri", {
-          opacity: 0,
-          ease: "none",
-        });
+        .from(
+          ".subTitle",
+          {
+            opacity: 0,
+            ease: "none",
+          },
+          "<+0.2",
+        )
+        .from(
+          ".rekeningToggleButton",
+          {
+            opacity: 0,
+            ease: "none",
+          },
+          "<+0.2",
+        )
+        .from(
+          ".bca",
+          {
+            opacity: 0,
+            ease: "none",
+          },
+          "<+0.2",
+        )
+        .from(
+          ".mandiri",
+          {
+            opacity: 0,
+            ease: "none",
+          },
+          "<+0.2",
+        );
     },
     { scope: containerRef },
   );
@@ -1372,7 +1404,7 @@ const Gift = () => {
 
       <CContainer bg={"d1"} color={"light"}>
         <ContainerLayout p={4} py={12} zIndex={2}>
-          <CContainer gap={2} mb={8}>
+          <CContainer gap={2} mb={4}>
             <P
               className="fd title"
               fontSize={"1.5rem"}
@@ -1382,35 +1414,36 @@ const Gift = () => {
               Hadiah Pernikahan
             </P>
 
-            <P textAlign={"center"} color={"fg.muted"}>
-              Tanpa mengurangi rasa hormat, bagi ibuj saudara/i yang ingin
-              memberikan tanda in memberikan kasih untuk kami, dapat melalui:
+            <P className={"subTitle"} textAlign={"center"} color={"fg.muted"}>
+              Tanpa mengurangi rasa hormat, bagi Bapak/Ibu/Saudara/i yang ingin
+              memberikan tanda kasih untuk kami, dapat melalui:
             </P>
           </CContainer>
 
-          <Btn
-            w={"fit"}
-            mx={"auto"}
-            rounded={0}
-            onClick={() => {
-              setShowRekening((ps) => !ps);
-            }}
-          >
-            {showRekening ? "Sembunyikan" : "Kirim Hadiah"}
-          </Btn>
+          {/* <Center className={"rekeningToggleButton"}>
+            <Btn
+              w={"fit"}
+              mx={"auto"}
+              rounded={0}
+              onClick={() => {
+                setShowRekening((ps) => !ps);
+              }}
+            >
+              {showRekening ? "Sembunyikan" : "Kirim Hadiah"}
+            </Btn>
+          </Center> */}
 
           <CContainer
             gap={4}
             maxW={"400px"}
             p={4}
             mx={"auto"}
-            mt={8}
-            display={showRekening ? "flex" : "none"}
-            opacity={showRekening ? 1 : 0}
+            // display={showRekening ? "flex" : "none"}
+            // opacity={showRekening ? 1 : 0}
             transition={"200ms"}
           >
             <CContainer
-              // className={"bca"}
+              className={"bca"}
               aspectRatio={3 / 2}
               justify={"space-between"}
               p={4}
@@ -1490,11 +1523,11 @@ const Gift = () => {
             </CContainer>
 
             <CContainer
-              // className={"mandiri"}
+              className={"mandiri"}
               aspectRatio={3 / 2}
               justify={"space-between"}
               p={4}
-              bg={"#003771"}
+              bg={"#228ecdff"}
               rounded={"24px"}
               color={"white"}
               overflow={"clip"}
