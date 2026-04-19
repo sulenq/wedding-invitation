@@ -20,7 +20,6 @@ import { useIsSmScreenWidth } from "@/hooks/useIsSmScreenWidth";
 import {
   Box,
   Center,
-  Circle,
   Clipboard,
   HStack,
   SimpleGrid,
@@ -112,7 +111,7 @@ const GIFT = {
 };
 const GALLERY_PHOTOS = [
   `${IMAGES_PATH}/gallery/1.jpg`,
-  `${IMAGES_PATH}/gallery/2.jpg`,
+  `${IMAGES_PATH}/gallery/15.jpg`,
   `${IMAGES_PATH}/gallery/3.jpg`,
   `${IMAGES_PATH}/gallery/4.jpg`,
   `${IMAGES_PATH}/gallery/5.jpg`,
@@ -1340,16 +1339,16 @@ const Gift = () => {
       color={"dark"}
       pos={"relative"}
     >
-      <PaperTexture
+      {/* <PaperTexture
         w={"full"}
         h={"full"}
         pos={"absolute"}
         top={0}
         left={0}
         opacity={0.25}
-      />
+      /> */}
 
-      <CContainer bg={"blackAlpha.500"} color={"light"}>
+      <CContainer bg={"d1"} color={"light"}>
         <ContainerLayout p={4} py={12} pb={"80px"} zIndex={2}>
           <CContainer gap={2} mb={8}>
             <P
@@ -1378,9 +1377,18 @@ const Gift = () => {
             {showRekening ? "Sembunyikan" : "Kirim Hadiah"}
           </Btn>
 
-          <CContainer gap={4} maxW={"400px"} p={4} mx={"auto"} mt={8}>
+          <CContainer
+            gap={4}
+            maxW={"400px"}
+            p={4}
+            mx={"auto"}
+            mt={8}
+            display={showRekening ? "flex" : "none"}
+            opacity={showRekening ? 1 : 0}
+            transition={"200ms"}
+          >
             <CContainer
-              className={"bca"}
+              // className={"bca"}
               aspectRatio={3 / 2}
               justify={"space-between"}
               p={4}
@@ -1393,34 +1401,36 @@ const Gift = () => {
               {/* Pattern */}
               <>
                 <Box
-                  w={"300px"}
-                  h={"300px"}
+                  w={"320px"}
+                  h={"320px"}
                   bg={"whiteAlpha.100"}
                   rounded={"lg"}
                   pos={"absolute"}
-                  right={"-150px"}
-                  top={"100px"}
+                  right={"-180px"}
+                  top={"-100px"}
                   transform={"rotate(20deg)"}
                 />
 
                 <Box
-                  w={"200px"}
-                  h={"200px"}
+                  w={"360px"}
+                  h={"360px"}
                   bg={"whiteAlpha.100"}
                   rounded={"lg"}
                   pos={"absolute"}
-                  right={"-130px"}
+                  right={"-260px"}
                   top={"-100px"}
+                  transform={"rotate(17deg)"}
                 />
 
                 <Box
-                  w={"200px"}
-                  h={"200px"}
+                  w={"350px"}
+                  h={"350px"}
                   bg={"whiteAlpha.100"}
                   rounded={"lg"}
                   pos={"absolute"}
-                  right={"-110px"}
+                  right={"-280px"}
                   top={"-100px"}
+                  transform={"rotate(8deg)"}
                 />
               </>
 
@@ -1487,7 +1497,106 @@ const Gift = () => {
               </HStack> */}
             </CContainer>
 
-            <CContainer className="mandiri">
+            <CContainer
+              // className={"mandiri"}
+              aspectRatio={3 / 2}
+              justify={"space-between"}
+              p={4}
+              bg={"#003771"}
+              rounded={"24px"}
+              color={"white"}
+              overflow={"clip"}
+              pos={"relative"}
+            >
+              {/* Pattern */}
+              <Box
+                pos={"absolute"}
+                top={0}
+                left={0}
+                w={"full"}
+                h={"full"}
+                pointerEvents={"none"}
+              >
+                <Box
+                  w={"300px"}
+                  h={"300px"}
+                  bg={"whiteAlpha.100"}
+                  rounded={"full"}
+                  pos={"absolute"}
+                  right={"-120px"}
+                  bottom={"-150px"}
+                />
+                <Box
+                  w={"200px"}
+                  h={"200px"}
+                  bg={"whiteAlpha.200"}
+                  rounded={"full"}
+                  pos={"absolute"}
+                  right={"-50px"}
+                  bottom={"-100px"}
+                />
+                {/* Yellow Accent */}
+                <Box
+                  w={"350px"}
+                  h={"350px"}
+                  border={"2px solid"}
+                  borderColor={"#ffb800"}
+                  opacity={0.8}
+                  rounded={"full"}
+                  pos={"absolute"}
+                  right={"-250px"}
+                  bottom={"-200px"}
+                />
+              </Box>
+
+              <Img
+                src={`${SVGS_PATH}/logo_mandiri.svg`}
+                alt={"Mandiri"}
+                fluid
+                h={"60px"}
+                w={"fit"}
+                opacity={0.05}
+                pos={"absolute"}
+                right={"-8px"}
+                bottom={"20px"}
+              />
+
+              {/* Content */}
+              <>
+                <Img
+                  src={`${SVGS_PATH}/logo_mandiri.svg`}
+                  alt={"Mandiri"}
+                  fluid
+                  h={"18px"}
+                  w={"fit"}
+                />
+
+                <CContainer gap={1}>
+                  <HStack>
+                    <P
+                      fontWeight={"semibold"}
+                    >{`${GIFT.mandiri.accountNumber}`}</P>
+
+                    <Clipboard.Root value={GIFT.mandiri.accountNumber}>
+                      <Clipboard.Trigger asChild>
+                        <Btn
+                          iconButton
+                          variant={"ghost"}
+                          size={"2xs"}
+                          color={"white"}
+                        >
+                          <Clipboard.Indicator />
+                        </Btn>
+                      </Clipboard.Trigger>
+                    </Clipboard.Root>
+                  </HStack>
+
+                  <P fontSize={"sm"}>{`a.n. ${GIFT.mandiri.accountHolder}`}</P>
+                </CContainer>
+              </>
+            </CContainer>
+
+            {/* <CContainer className="mandiri">
               <P fontSize={"1rem"} fontWeight={"semibold"} textAlign={"center"}>
                 Mandiri
               </P>
@@ -1505,7 +1614,7 @@ const Gift = () => {
                   </Clipboard.Trigger>
                 </Clipboard.Root>
               </HStack>
-            </CContainer>
+            </CContainer> */}
           </CContainer>
         </ContainerLayout>
       </CContainer>
@@ -1589,12 +1698,12 @@ export default function Page() {
 
   return (
     <CContainer ref={containerRef} overflowX={"clip"}>
-      {/* <Cover />
+      <Cover />
       <Intro />
       <BrideAndGroom />
       <Story />
       <Gallery />
-      <EventDetails /> */}
+      <EventDetails />
       <Gift />
       <Footer />
     </CContainer>
