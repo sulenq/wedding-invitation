@@ -2,14 +2,12 @@
 
 import { useColorMode } from "@/components/ui/color-mode";
 import { LoadingBar } from "@/components/widget/LoadingBar";
-import { APP } from "@/constants/_meta";
-import { SVGS_PATH } from "@/constants/paths";
+import { Logo } from "@/components/widget/Logo";
 import useADM from "@/context/useADM";
 import { useFirefoxPaddingY } from "@/hooks/useFirefoxPaddingY";
 import useOfflineAlert from "@/hooks/useOfflineAlert";
 import { Center } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { Img } from "../ui/img";
 import GlobalDisclosure from "./GlobalDisclosure";
 
 interface Props {
@@ -20,16 +18,19 @@ interface Props {
 const DefaultFallback = () => {
   return (
     <Center w={"100w"} minH={"100dvh"} color={"fg.subtle"}>
-      <Img
+      {/* <Img
+        fluid
         alt={`${APP.name} Logo`}
         src={`${SVGS_PATH}/logo_gray.svg`}
-        width={"48px"}
+        width={"170px"}
         height={"fit"}
-        fluid
+        ml={"40px"}
         imageProps={{
           priority: true,
         }}
-      />
+      /> */}
+
+      <Logo size={200} ml={"40px"} color={"white"} />
     </Center>
   );
 };
