@@ -11,6 +11,7 @@ import { ClampText } from "@/components/widget/ClampText";
 import { CountDown } from "@/components/widget/CountDown";
 import { DividerOrnament } from "@/components/widget/DividerOrnament";
 import { ImgViewer } from "@/components/widget/ImgViewer";
+import { Logo } from "@/components/widget/Logo";
 import { ContainerLayout } from "@/components/widget/Page";
 import { PaperTexture } from "@/components/widget/PaperTexture";
 import { IMAGES_PATH } from "@/constants/paths";
@@ -40,7 +41,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const COVER = {
   bride: "Adelia",
-  groom: "Fatwa.",
+  groom: "Fatwa",
   img: `${IMAGES_PATH}/cover.jpg`,
   date: "31.05.2026",
   quote:
@@ -325,16 +326,7 @@ const Cover = () => {
               THE WEDDING OF
             </P>
 
-            <CContainer w={"fit"}>
-              <P
-                className="fd"
-                fontSize={"3rem"}
-                fontWeight={"bold"}
-                // textAlign={"center"}
-                lineHeight={1}
-              >
-                {COVER.bride}
-              </P>
+            <CContainer w={"fit"} align={"center"}>
               <P
                 className="fd"
                 fontSize={"3rem"}
@@ -343,6 +335,16 @@ const Cover = () => {
                 lineHeight={1}
               >
                 {COVER.groom}
+              </P>
+
+              <P
+                className="fd"
+                fontSize={"3rem"}
+                fontWeight={"bold"}
+                // textAlign={"center"}
+                lineHeight={1}
+              >
+                {COVER.bride}
               </P>
             </CContainer>
 
@@ -495,7 +497,7 @@ const Cover = () => {
         />
       </>
 
-      <Box
+      <Center
         className="blur_filter"
         w={"full"}
         h={"full"}
@@ -504,7 +506,9 @@ const Cover = () => {
         top={0}
         left={0}
         zIndex={4}
-      />
+      >
+        <Logo size={200} ml={"40px"} />
+      </Center>
     </CContainer>
   );
 };
@@ -1296,7 +1300,7 @@ const Gift = () => {
           trigger: containerRef.current,
           start: "top 50%",
           end: "bottom 75%",
-          // scrub: true,
+          scrub: true,
           // pin: true,
           // pinSpacing: true,
           // markers: true, // debug
@@ -1324,7 +1328,14 @@ const Gift = () => {
   );
 
   return (
-    <CContainer ref={containerRef} pos={"relative"} bg={"light"} color={"dark"}>
+    <CContainer
+      ref={containerRef}
+      // bgImage={`url(${IMAGES_PATH}/gallery/11.jpg)`}
+      bgSize={"cover"}
+      bgPos={"center"}
+      color={"dark"}
+      pos={"relative"}
+    >
       <PaperTexture
         w={"full"}
         h={"full"}
@@ -1334,72 +1345,71 @@ const Gift = () => {
         opacity={0.25}
       />
 
-      <ContainerLayout p={4} py={12}>
-        <P
-          className="fd title"
-          fontSize={"1.5rem"}
-          fontWeight={"semibold"}
-          textAlign={"center"}
-          mb={8}
-        >
-          Hadiah Pernikahan
-        </P>
+      <CContainer bg={"blackAlpha.500"}>
+        <ContainerLayout p={4} py={12} pb={"80px"} zIndex={2}>
+          <P
+            className="fd title"
+            fontSize={"1.5rem"}
+            fontWeight={"semibold"}
+            textAlign={"center"}
+            color={"light"}
+            mb={8}
+          >
+            Hadiah Pernikahan
+          </P>
 
-        <CContainer gap={4}>
-          {/* <CContainer className="qris" gap={2}>
-            <P fontSize={"1rem"} fontWeight={"semibold"} textAlign={"center"}>
-              QRIS
-            </P>
-            <Img
-              src={`${IMAGES_PATH}/qris.jpg`}
-              fluid
-              w={"full"}
-              maxW={"240px"}
-              mx={"auto"}
-            />
-          </CContainer> */}
+          <CContainer
+            gap={4}
+            maxW={"400px"}
+            p={4}
+            // bg={"blackAlpha.700"}
+            color={"light"}
+            border={"1px solid"}
+            borderColor={"light"}
+            mx={"auto"}
+          >
+            <CContainer className="bca">
+              <P fontSize={"1rem"} fontWeight={"semibold"} textAlign={"center"}>
+                BCA
+              </P>
 
-          <CContainer className="bca">
-            <P fontSize={"1rem"} fontWeight={"semibold"} textAlign={"center"}>
-              BCA
-            </P>
+              <HStack justify={"center"}>
+                <P
+                  textAlign={"center"}
+                >{`${GIFT.bca.accountNumber} (${GIFT.bca.accountHolder})`}</P>
 
-            <HStack justify={"center"}>
-              <P
-                textAlign={"center"}
-              >{`${GIFT.bca.accountNumber} (${GIFT.bca.accountHolder})`}</P>
+                <Clipboard.Root value={GIFT.bca.accountNumber}>
+                  <Clipboard.Trigger asChild>
+                    <Btn iconButton variant={"ghost"} size={"xs"}>
+                      <Clipboard.Indicator />
+                    </Btn>
+                  </Clipboard.Trigger>
+                </Clipboard.Root>
+              </HStack>
+            </CContainer>
 
-              <Clipboard.Root value={GIFT.bca.accountNumber}>
-                <Clipboard.Trigger asChild>
-                  <Btn iconButton variant="ghost" size="xs" color={"dark"}>
-                    <Clipboard.Indicator />
-                  </Btn>
-                </Clipboard.Trigger>
-              </Clipboard.Root>
-            </HStack>
+            <CContainer className="mandiri">
+              <P fontSize={"1rem"} fontWeight={"semibold"} textAlign={"center"}>
+                Mandiri
+              </P>
+
+              <HStack justify={"center"}>
+                <P
+                  textAlign={"center"}
+                >{`${GIFT.mandiri.accountNumber} (${GIFT.mandiri.accountHolder})`}</P>
+
+                <Clipboard.Root value={GIFT.mandiri.accountNumber}>
+                  <Clipboard.Trigger asChild>
+                    <Btn iconButton variant={"ghost"} size={"xs"}>
+                      <Clipboard.Indicator />
+                    </Btn>
+                  </Clipboard.Trigger>
+                </Clipboard.Root>
+              </HStack>
+            </CContainer>
           </CContainer>
-
-          <CContainer className="mandiri">
-            <P fontSize={"1rem"} fontWeight={"semibold"} textAlign={"center"}>
-              Mandiri
-            </P>
-
-            <HStack justify={"center"}>
-              <P
-                textAlign={"center"}
-              >{`${GIFT.mandiri.accountNumber} (${GIFT.mandiri.accountHolder})`}</P>
-
-              <Clipboard.Root value={GIFT.mandiri.accountNumber}>
-                <Clipboard.Trigger asChild>
-                  <Btn iconButton variant="ghost" size="xs" color={"dark"}>
-                    <Clipboard.Indicator />
-                  </Btn>
-                </Clipboard.Trigger>
-              </Clipboard.Root>
-            </HStack>
-          </CContainer>
-        </CContainer>
-      </ContainerLayout>
+        </ContainerLayout>
+      </CContainer>
     </CContainer>
   );
 };

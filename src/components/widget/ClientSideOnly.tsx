@@ -24,7 +24,8 @@ const DefaultFallback = () => {
         alt={`${APP.name} Logo`}
         src={`${SVGS_PATH}/logo_gray.svg`}
         width={"48px"}
-        height={"48px"}
+        height={"fit"}
+        fluid
         imageProps={{
           priority: true,
         }}
