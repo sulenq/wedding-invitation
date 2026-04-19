@@ -1358,16 +1358,7 @@ const Gift = () => {
             Hadiah Pernikahan
           </P>
 
-          <CContainer
-            gap={4}
-            maxW={"400px"}
-            p={4}
-            // bg={"blackAlpha.700"}
-            color={"light"}
-            border={"1px solid"}
-            borderColor={"light"}
-            mx={"auto"}
-          >
+          <CContainer gap={4} maxW={"400px"} p={4} color={"light"} mx={"auto"}>
             <CContainer className="bca">
               <P fontSize={"1rem"} fontWeight={"semibold"} textAlign={"center"}>
                 BCA

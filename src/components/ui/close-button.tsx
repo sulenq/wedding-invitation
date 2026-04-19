@@ -28,5 +28,5 @@ export const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>(
         </Icon>
       </ChakraIconButton>
     );
-  }
+  },
 );

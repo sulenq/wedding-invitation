@@ -1,17 +1,14 @@
 "use client";
 
-import { Btn } from "@/components/ui/btn";
 import { CContainer } from "@/components/ui/c-container";
 import { CloseButton } from "@/components/ui/close-button";
 import { DialogBody, DialogContent, DialogRoot } from "@/components/ui/dialog";
 import { Img } from "@/components/ui/img";
-import { AppIcon } from "@/components/widget/AppIcon";
 import { SVGS_PATH } from "@/constants/paths";
 import useBackOnClose from "@/hooks/useBackOnClose";
 import { back } from "@/utils/client";
 import { disclosureId } from "@/utils/disclosure";
-import { HStack, StackProps, useDisclosure } from "@chakra-ui/react";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import { StackProps, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
 
 interface Props extends StackProps {
@@ -40,9 +37,12 @@ export const ImgViewer = (props: Props) => {
   const { open, onOpen, onClose } = useDisclosure();
 
   // States
-  const [currentIndex, setCurrentIndex] = useState<number>(srcIndex);
+  const [
+    currentIndex,
+    // setCurrentIndex
+  ] = useState<number>(srcIndex);
   useBackOnClose(
-    disclosureId(id || `${srcs?.[currentIndex] || src}${currentIndex}`),
+    disclosureId(id || `photo-${currentIndex}`),
     open,
     onOpen,
     onClose,
@@ -72,7 +72,8 @@ export const ImgViewer = (props: Props) => {
             <CContainer flex={1} h={"full"} justify={"center"}>
               <CloseButton
                 colorPalette={"light"}
-                w={"fit"}
+                minW={"20px"}
+                h={"20px"}
                 onClick={(e) => {
                   e.stopPropagation();
                   back();
@@ -100,7 +101,7 @@ export const ImgViewer = (props: Props) => {
                 />
               </CContainer>
 
-              <HStack mx={"auto"}>
+              {/* <HStack mx={"auto"}>
                 <Btn
                   iconButton
                   variant={"ghost"}
@@ -128,7 +129,7 @@ export const ImgViewer = (props: Props) => {
                 >
                   <AppIcon icon={ChevronRightIcon} />
                 </Btn>
-              </HStack>
+              </HStack> */}
               {/* 
               <NavLink to={src} w={"fit"} external mx={"auto"}>
                 <Btn
