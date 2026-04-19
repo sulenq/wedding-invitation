@@ -1262,6 +1262,7 @@ const EventDetails = () => {
                         endTime: "13:00",
                         timeZone: "Asia/Jakarta",
                         location: EVENT.place.address,
+                        // Desktop: all options
                         options: [
                           "Apple",
                           "Google",
@@ -1270,6 +1271,14 @@ const EventDetails = () => {
                           "Outlook.com",
                           "Yahoo",
                         ],
+                        // Android: Google + iCal (iCal = download .ics → opens with default calendar app)
+                        optionsMobile: ["Google", "iCal"],
+                        // iOS: Apple Calendar + Google
+                        optionsIOS: ["Apple", "Google", "iCal"],
+                        // Rename iCal to something clearer
+                        customLabels: {
+                          "btn-ical": "Kalender Bawaan / Download ICS",
+                        },
                         iCalFileName: "pernikahan-fatwa-adelia",
                         listStyle: "modal",
                         language: "id",
