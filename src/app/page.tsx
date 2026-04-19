@@ -14,12 +14,13 @@ import { ImgViewer } from "@/components/widget/ImgViewer";
 import { Logo } from "@/components/widget/Logo";
 import { ContainerLayout } from "@/components/widget/Page";
 import { PaperTexture } from "@/components/widget/PaperTexture";
-import { IMAGES_PATH } from "@/constants/paths";
+import { IMAGES_PATH, SVGS_PATH } from "@/constants/paths";
 import { useDimension } from "@/hooks/useDimension";
 import { useIsSmScreenWidth } from "@/hooks/useIsSmScreenWidth";
 import {
   Box,
   Center,
+  Circle,
   Clipboard,
   HStack,
   SimpleGrid,
@@ -35,7 +36,7 @@ import {
   MapPinIcon,
 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -101,7 +102,7 @@ const EVENT = {
 const GIFT = {
   qris: `${IMAGES_PATH}/qris.jpg`,
   bca: {
-    accountNumber: "1234567890",
+    accountNumber: "8915347271",
     accountHolder: "ADELIA DIAN PRATIWI",
   },
   mandiri: {
@@ -1292,6 +1293,9 @@ const Gift = () => {
   // Refs
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // States
+  const [showRekening, setShowRekening] = useState<boolean>(false);
+
   // GSAP
   useGSAP(
     () => {
@@ -1345,22 +1349,126 @@ const Gift = () => {
         opacity={0.25}
       />
 
-      <CContainer bg={"blackAlpha.500"}>
+      <CContainer bg={"blackAlpha.500"} color={"light"}>
         <ContainerLayout p={4} py={12} pb={"80px"} zIndex={2}>
-          <P
-            className="fd title"
-            fontSize={"1.5rem"}
-            fontWeight={"semibold"}
-            textAlign={"center"}
-            color={"light"}
-            mb={8}
-          >
-            Hadiah Pernikahan
-          </P>
+          <CContainer gap={2} mb={8}>
+            <P
+              className="fd title"
+              fontSize={"1.5rem"}
+              fontWeight={"semibold"}
+              textAlign={"center"}
+            >
+              Hadiah Pernikahan
+            </P>
 
-          <CContainer gap={4} maxW={"400px"} p={4} color={"light"} mx={"auto"}>
-            <CContainer className="bca">
-              <P fontSize={"1rem"} fontWeight={"semibold"} textAlign={"center"}>
+            <P textAlign={"center"} color={"fg.muted"}>
+              Tanpa mengurangi rasa hormat, bagi ibuj saudara/i yang ingin
+              memberikan tanda in memberikan kasih untuk kami, dapat melalui:
+            </P>
+          </CContainer>
+
+          <Btn
+            w={"fit"}
+            mx={"auto"}
+            rounded={0}
+            onClick={() => {
+              setShowRekening((ps) => !ps);
+            }}
+          >
+            {showRekening ? "Sembunyikan" : "Kirim Hadiah"}
+          </Btn>
+
+          <CContainer gap={4} maxW={"400px"} p={4} mx={"auto"} mt={8}>
+            <CContainer
+              className={"bca"}
+              aspectRatio={3 / 2}
+              justify={"space-between"}
+              p={4}
+              bg={"#0060af"}
+              rounded={"24px"}
+              color={"white"}
+              overflow={"clip"}
+              pos={"relative"}
+            >
+              {/* Pattern */}
+              <>
+                <Box
+                  w={"300px"}
+                  h={"300px"}
+                  bg={"whiteAlpha.100"}
+                  rounded={"lg"}
+                  pos={"absolute"}
+                  right={"-150px"}
+                  top={"100px"}
+                  transform={"rotate(20deg)"}
+                />
+
+                <Box
+                  w={"200px"}
+                  h={"200px"}
+                  bg={"whiteAlpha.100"}
+                  rounded={"lg"}
+                  pos={"absolute"}
+                  right={"-130px"}
+                  top={"-100px"}
+                />
+
+                <Box
+                  w={"200px"}
+                  h={"200px"}
+                  bg={"whiteAlpha.100"}
+                  rounded={"lg"}
+                  pos={"absolute"}
+                  right={"-110px"}
+                  top={"-100px"}
+                />
+              </>
+
+              <Img
+                src={`${SVGS_PATH}/logo_bca.svg`}
+                alt={"BCA"}
+                fluid
+                h={"60px"}
+                w={"fit"}
+                opacity={0.05}
+                pos={"absolute"}
+                right={"-8px"}
+                bottom={"20px"}
+              />
+
+              {/* Content */}
+              <>
+                <Img
+                  src={`${SVGS_PATH}/logo_bca.svg`}
+                  alt={"BCA"}
+                  fluid
+                  h={"18px"}
+                  w={"fit"}
+                />
+
+                <CContainer gap={1}>
+                  <HStack>
+                    <P fontWeight={"semibold"}>{`${GIFT.bca.accountNumber}`}</P>
+
+                    <Clipboard.Root value={GIFT.bca.accountNumber}>
+                      <Clipboard.Trigger asChild>
+                        <Btn
+                          iconButton
+                          variant={"ghost"}
+                          size={"2xs"}
+                          color={"white"}
+                        >
+                          <Clipboard.Indicator />
+                        </Btn>
+                      </Clipboard.Trigger>
+                    </Clipboard.Root>
+                  </HStack>
+
+                  <P fontSize={"sm"}>{`a.n. ${GIFT.bca.accountHolder}`}</P>
+                </CContainer>
+              </>
+
+              {/* <P fontSize={"1rem"} fontWeight={"semibold"} textAlign={"center"}>
                 BCA
               </P>
 
@@ -1376,7 +1484,7 @@ const Gift = () => {
                     </Btn>
                   </Clipboard.Trigger>
                 </Clipboard.Root>
-              </HStack>
+              </HStack> */}
             </CContainer>
 
             <CContainer className="mandiri">
@@ -1481,12 +1589,12 @@ export default function Page() {
 
   return (
     <CContainer ref={containerRef} overflowX={"clip"}>
-      <Cover />
+      {/* <Cover />
       <Intro />
       <BrideAndGroom />
       <Story />
       <Gallery />
-      <EventDetails />
+      <EventDetails /> */}
       <Gift />
       <Footer />
     </CContainer>
