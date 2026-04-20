@@ -81,12 +81,16 @@ export const BgMusic = (props: BgMusicProps) => {
       >
         <Circle
           p={"8px"}
-          aspectRatio={1}
+          w={"36px"}
+          h={"36px"}
           bg={"bg.muted"}
           color={"light"}
           animation={isPlaying ? "rotate360 10s linear infinite" : ""}
         >
-          <AppIcon icon={isPlaying ? MusicIcon : PlayIcon} mr={"2px"} />
+          <AppIcon
+            icon={isPlaying ? MusicIcon : PlayIcon}
+            mr={isPlaying ? "2px" : ""}
+          />
         </Circle>
       </DraggableBtn>
 
