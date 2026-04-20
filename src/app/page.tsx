@@ -120,10 +120,10 @@ const FOOTER = {
 
 const Cover = ({
   isOpened,
-  onOpen,
+  // onOpen,
 }: {
   isOpened: boolean;
-  onOpen: () => void;
+  // onOpen: () => void;
 }) => {
   // Refs
   const containerRef = useRef<HTMLDivElement>(null);
@@ -296,7 +296,7 @@ const Cover = ({
       {/* Contents */}
       <ContainerLayout h={"100lvh"} align={"center"} justify={"center"} p={8}>
         {/* Bg */}
-        <CContainer className="cover_bg" h={"100lvh"} pos={"absolute"} top={0}>
+        <CContainer className={"cover_bg"} h={"100vh"} pos={"absolute"} top={0}>
           <Image src={COVER.img} h={"100lvh"} w={"full"} />
 
           {/* <PaperTexture
@@ -425,7 +425,7 @@ const Cover = ({
           zIndex={11}
           mt={"auto"}
           mb={"50px"}
-          visibility={isOpened ? "visible" : "hidden"}
+          // visibility={isOpened ? "visible" : "hidden"}
         >
           <P fontWeight={"medium"} textAlign={"center"}>
             Scroll
@@ -532,7 +532,7 @@ const Cover = ({
       >
         <Logo size={200} ml={"40px"} my={"auto"} className={"blur_filter"} />
 
-        <Btn
+        {/* <Btn
           size={"sm"}
           variant={"solid"}
           colorPalette={"white"}
@@ -544,7 +544,7 @@ const Cover = ({
           zIndex={9999}
         >
           Buka Undangan
-        </Btn>
+        </Btn> */}
       </CContainer>
     </CContainer>
   );
@@ -1702,14 +1702,24 @@ export default function Page() {
     setColorMode("dark");
   }, []);
 
+  // Handle scroll to open
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10 && !isOpened) {
+        setIsOpened(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isOpened]);
+
   useEffect(() => {
     if (!containerRef.current) return;
 
     if (!isOpened) document.body.scrollTo(0, 0);
 
     if (isOpened) {
-      document.body.style.overflow = "auto";
-
       ScrollTrigger.refresh();
       const ro = new ResizeObserver(() => {
         ScrollTrigger.refresh();
@@ -1730,22 +1740,21 @@ export default function Page() {
     <CContainer
       ref={containerRef}
       overflowX={"clip"}
-      h={isOpened ? "auto" : "100lvh"}
+      maxH={isOpened ? "auto" : "100lvh"}
       // overflowY={isOpened ? "visible" : "hidden"}
     >
       <BgMusic isOpened={isOpened} />
-      <Cover isOpened={isOpened} onOpen={() => setIsOpened(true)} />
+      <Cover
+        isOpened={isOpened}
+        // onOpen={() => setIsOpened(true)}
+      />
       <Intro />
-      {isOpened && (
-        <>
-          <BrideAndGroom />
-          <Story />
-          <Gallery />
-          <EventDetails />
-          <Gift />
-          <Footer />
-        </>
-      )}
+      <BrideAndGroom />
+      <Story />
+      <Gallery />
+      <EventDetails />
+      <Gift />
+      <Footer />
     </CContainer>
   );
 }

@@ -8,7 +8,7 @@ nextjs-portal {
   display: none !important;
 }
 .debug {
-  border: 2px solid red !important;
+  border: 20px solid red !important;
 }
 
 :root {
@@ -31,9 +31,6 @@ nextjs-portal {
 }
 *::selection {
   background: var(--d3);
-}
-body {
-  overflow: hidden;
 }
 
 .fd {
