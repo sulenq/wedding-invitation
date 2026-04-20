@@ -71,7 +71,6 @@ export const BgMusic = (props: BgMusicProps) => {
       <DraggableBtn
         // className={"debug"}
         iconButton
-        spacing={8}
         rounded={"full"}
         bg={"d3"}
         visibility={isOpened ? "visible" : "hidden"}

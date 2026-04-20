@@ -319,6 +319,7 @@ const Cover = ({
           h={"full"}
           align={"center"}
           gap={8}
+          pb={"100px"}
           pos={"absolute"}
           top={0}
           left={0}
