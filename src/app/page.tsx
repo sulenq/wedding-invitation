@@ -424,19 +424,23 @@ const Cover = ({
         </CContainer>
 
         {/* Chevron down */}
-        {isOpened && (
-          <VStack className="chevron_down" zIndex={11} mt={"auto"} mb={"50px"}>
-            <P fontWeight={"medium"} textAlign={"center"}>
-              Scroll
-            </P>
+        <VStack
+          className="chevron_down"
+          zIndex={11}
+          mt={"auto"}
+          mb={"50px"}
+          visibility={isOpened ? "visible" : "hidden"}
+        >
+          <P fontWeight={"medium"} textAlign={"center"}>
+            Scroll
+          </P>
 
-            <AppIcon
-              icon={ChevronDownIcon}
-              boxSize={5}
-              animation={"hero-chevron-down-bounce 2s linear infinite"}
-            />
-          </VStack>
-        )}
+          <AppIcon
+            icon={ChevronDownIcon}
+            boxSize={5}
+            animation={"hero-chevron-down-bounce 2s linear infinite"}
+          />
+        </VStack>
       </ContainerLayout>
 
       {/* Flowers */}
@@ -514,7 +518,7 @@ const Cover = ({
 
       {/* Blur overlay */}
       <CContainer
-        className="blur_filter"
+        className={"blur_filter"}
         align={"center"}
         justify={"center"}
         gap={8}
@@ -1706,14 +1710,22 @@ export default function Page() {
     if (!containerRef.current) return;
 
     if (isOpened) {
+      document.body.style.overflow = "auto";
+
       ScrollTrigger.refresh();
       const ro = new ResizeObserver(() => {
         ScrollTrigger.refresh();
       });
 
       ro.observe(containerRef.current);
-      return () => ro.disconnect();
+
+      return () => {
+        document.body.style.overflow = "";
+        ro.disconnect();
+      };
     }
+
+    document.body.style.overflow = "";
   }, [isOpened]);
 
   return (
@@ -1721,7 +1733,7 @@ export default function Page() {
       ref={containerRef}
       overflowX={"clip"}
       h={isOpened ? "auto" : "100lvh"}
-      overflowY={isOpened ? "visible" : "hidden"}
+      // overflowY={isOpened ? "visible" : "hidden"}
     >
       <BgMusic isOpened={isOpened} />
       <Cover isOpened={isOpened} onOpen={() => setIsOpened(true)} />
