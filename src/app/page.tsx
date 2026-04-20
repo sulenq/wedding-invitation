@@ -519,12 +519,12 @@ const Cover = ({
 
       {/* Blur overlay */}
       <CContainer
-        className={"blur_filter"}
+        className={"blur_filter debug"}
         align={"center"}
         justify={"center"}
         gap={8}
         w={"full"}
-        h={"100vh"}
+        h={"100svh"}
         p={8}
         backdropFilter={"blur(4px)"}
         pos={"absolute"}
