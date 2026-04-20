@@ -42,6 +42,10 @@ export const Img = forwardRef<HTMLImageElement, Props__Img>((props, ref) => {
       align="center"
       pos="relative"
       overflow={restProps.rounded ? "clip" : ""}
+      // Fix iOS stretch bug: when w="fit", we must break the parent's align="stretch"
+      alignSelf={
+        restProps.w === "fit" || restProps.width === "fit" ? "start" : undefined
+      }
       {...restProps}
     >
       <Image
@@ -52,12 +56,17 @@ export const Img = forwardRef<HTMLImageElement, Props__Img>((props, ref) => {
         style={{
           objectFit: (objectFit as any) ?? "cover",
           objectPosition: objectPos ?? "center",
-          width: "100%",
+          // Fix iOS stretch bug: use width auto when fitting to content
+          width:
+            restProps.w === "fit" || restProps.width === "fit"
+              ? "auto"
+              : "100%",
           height: "100%",
+          maxWidth: "100%",
         }}
         fill={!fluid}
-        width={fluid ? 0 : undefined}
-        height={fluid ? 0 : undefined}
+        width={fluid ? 100 : undefined}
+        height={fluid ? 100 : undefined}
         quality={100}
         sizes={
           imageProps?.sizes ??

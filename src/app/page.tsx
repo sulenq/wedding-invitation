@@ -1406,7 +1406,7 @@ const Gift = () => {
           </Center> */}
 
           <CContainer
-            gap={4}
+            gap={8}
             maxW={"400px"}
             p={4}
             mx={"auto"}
