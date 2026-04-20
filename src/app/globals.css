@@ -8,7 +8,7 @@ nextjs-portal {
   display: none !important;
 }
 .debug {
-  border: 20px solid red !important;
+  border: 2px solid red !important;
 }
 
 :root {

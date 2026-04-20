@@ -3,7 +3,6 @@
 import { Btn } from "@/components/ui/btn";
 import { CContainer } from "@/components/ui/c-container";
 import { useColorMode } from "@/components/ui/color-mode";
-import { HelperText } from "@/components/ui/helper-text";
 import { Img } from "@/components/ui/img";
 import { NavLink } from "@/components/ui/nav-link";
 import { P } from "@/components/ui/p";
@@ -130,8 +129,7 @@ const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Hooks
-  const searchParams = useSearchParams();
-  const name = searchParams.get("to") || "Tamu Undangan";
+  const guestName = useSearchParams().get("to") || "Tamu Undangan";
   const iss = useIsSmScreenWidth();
   const {
     invitation: { isOpened },
@@ -311,7 +309,7 @@ const Hero = () => {
         p={8}
         zIndex={1}
       >
-        {/* Bg */}
+        {/* Photo as Bg */}
         <CContainer
           className={"cover_bg"}
           h={"100lvh"}
@@ -319,19 +317,11 @@ const Hero = () => {
           top={0}
         >
           <Image src={COVER.img} h={"100lvh"} w={"full"} />
-
-          {/* <PaperTexture
-            h={"full"}
-            w={"full"}
-            opacity={0.25}
-            pos={"absolute"}
-            top={0}
-          /> */}
         </CContainer>
 
-        {/* Cover content */}
+        {/* Main content */}
         <CContainer
-          className={"cover_content"}
+          className={"cover_content debug"}
           h={"full"}
           align={"center"}
           gap={8}
@@ -339,7 +329,7 @@ const Hero = () => {
           pos={"absolute"}
           top={0}
           left={0}
-          backgroundColor={"blackAlpha.600"}
+          // backgroundColor={"blackAlpha.600"}
         >
           <CContainer
             className="cover_container"
@@ -402,7 +392,7 @@ const Hero = () => {
               </P>
 
               <P className="fd" fontSize={"1.5rem"} fontWeight={"bold"} my={4}>
-                {name}
+                {guestName}
               </P>
             </CContainer>
           </CContainer>
@@ -1710,6 +1700,9 @@ const CoverOverlay = () => {
     setInvitation,
   } = useInvitationContext();
 
+  // Constants
+  const guestName = useSearchParams().get("to") || "Tamu Undangan";
+
   return (
     <CContainer
       align={"center"}
@@ -1776,16 +1769,51 @@ const CoverOverlay = () => {
         />
       </>
 
-      {/* Border */}
+      {/* Main content */}
       <Box w={"full"} h={"full"} p={4} pos={"absolute"} top={0} left={0}>
-        <Box
+        <CContainer
+          justify={"space-between"}
           w={"full"}
           h={"full"}
+          p={4}
           border={"2px solid"}
           borderColor={"border.muted"}
-        />
+        >
+          <CContainer gap={2}>
+            <P
+              className="fd"
+              opacity={0.8}
+              color={"fg.muted"}
+              textAlign={"center"}
+            >
+              Kepada Yth. Bpk/Ibu/Saudara/i
+            </P>
+
+            <P
+              className={"fd"}
+              fontSize={"xl"}
+              fontWeight={"bold"}
+              textAlign={"center"}
+            >
+              {guestName}
+            </P>
+          </CContainer>
+
+          <VStack color={"fg.subtle"}>
+            <AppIcon
+              icon={ChevronUpIcon}
+              boxSize={5}
+              animation={"hero-chevron-down-bounce 2s linear infinite"}
+            />
+
+            <P color={"fg.subtle"} textAlign={"center"}>
+              Klik logo di atas untuk buka undangan
+            </P>
+          </VStack>
+        </CContainer>
       </Box>
 
+      {/* Open trigger */}
       <Box
         w={"240px"}
         h={"240px"}
@@ -1795,18 +1823,6 @@ const CoverOverlay = () => {
         cursor={"pointer"}
         onClick={() => setInvitation({ isOpened: true })}
       />
-
-      <VStack color={"fg.subtle"} mt={"auto"} mb={"80px"} zIndex={2}>
-        <AppIcon
-          icon={ChevronUpIcon}
-          boxSize={5}
-          animation={"hero-chevron-down-bounce 2s linear infinite"}
-        />
-
-        <HelperText textAlign={"center"}>
-          Klik logo di atas untuk buka undangan
-        </HelperText>
-      </VStack>
 
       {/* <Btn
         rounded={0}
