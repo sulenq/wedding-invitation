@@ -423,25 +423,6 @@ const Cover = ({
             />
           </CContainer>
         </CContainer>
-
-        {/* Chevron down */}
-        <VStack
-          className="chevron_down"
-          zIndex={11}
-          mt={"auto"}
-          mb={"50px"}
-          // visibility={isOpened ? "visible" : "hidden"}
-        >
-          <P fontWeight={"medium"} textAlign={"center"}>
-            Scroll
-          </P>
-
-          <AppIcon
-            icon={ChevronDownIcon}
-            boxSize={5}
-            animation={"hero-chevron-down-bounce 2s linear infinite"}
-          />
-        </VStack>
       </ContainerLayout>
 
       {/* Flowers */}
@@ -519,12 +500,12 @@ const Cover = ({
 
       {/* Blur overlay */}
       <CContainer
-        className={"blur_filter debug"}
+        className={"blur_filter"}
         align={"center"}
         justify={"center"}
         gap={8}
         w={"full"}
-        h={"100svh"}
+        h={"100vh"}
         p={8}
         backdropFilter={"blur(4px)"}
         pos={"absolute"}
@@ -551,6 +532,28 @@ const Cover = ({
           Buka Undangan
         </Btn> */}
       </CContainer>
+
+      {/* Chevron down */}
+      <VStack
+        className={"chevron_down"}
+        zIndex={11}
+        mt={"auto"}
+        pos={"absolute"}
+        left={"50%"}
+        bottom={"50px"}
+        transform={"translateX(-50%)"}
+        // visibility={isOpened ? "visible" : "hidden"}
+      >
+        <P fontWeight={"medium"} textAlign={"center"}>
+          Scroll
+        </P>
+
+        <AppIcon
+          icon={ChevronDownIcon}
+          boxSize={5}
+          animation={"hero-chevron-down-bounce 2s linear infinite"}
+        />
+      </VStack>
     </CContainer>
   );
 };

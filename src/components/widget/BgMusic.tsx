@@ -18,36 +18,41 @@ export const BgMusic = (props: BgMusicProps) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    const handleOpen = () => {
-      if (audioRef.current && !isPlaying) {
-        audioRef.current
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handlePlay = () => {
+      if (isOpened && !isPlaying) {
+        audio
           .play()
           .then(() => {
             setIsPlaying(true);
           })
           .catch(() => {
-            // Play failed (likely missing file or auto-play restriction)
+            // Still blocked or failed
             setIsPlaying(false);
           });
       }
     };
 
-    if (isOpened) {
-      handleOpen();
+    if (isOpened && !isPlaying) {
+      // Initial attempt
+      handlePlay();
 
-      // Mobile auto-play fallback
-      const interactions = ["touchstart", "click", "scroll"];
-      const onInteraction = () => {
-        handleOpen();
+      // Mobile Gesture Fallback:
+      // iOS/Android require a valid gesture like 'touchend' or 'click' to unlock audio.
+      const gestures = ["touchend", "click", "mousedown", "touchstart"];
+      const onGesture = () => {
+        handlePlay();
       };
 
-      interactions.forEach((event) => {
-        window.addEventListener(event, onInteraction, { once: true });
+      gestures.forEach((event) => {
+        window.addEventListener(event, onGesture, { once: true });
       });
 
       return () => {
-        interactions.forEach((event) => {
-          window.removeEventListener(event, onInteraction);
+        gestures.forEach((event) => {
+          window.removeEventListener(event, onGesture);
         });
       };
     }
