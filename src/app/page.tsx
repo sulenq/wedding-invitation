@@ -7,6 +7,7 @@ import { Img } from "@/components/ui/img";
 import { NavLink } from "@/components/ui/nav-link";
 import { P } from "@/components/ui/p";
 import { AppIcon } from "@/components/widget/AppIcon";
+import { BgMusic } from "@/components/widget/BgMusic";
 import { CountDown } from "@/components/widget/CountDown";
 import { DividerOrnament } from "@/components/widget/DividerOrnament";
 import { ImgViewer } from "@/components/widget/ImgViewer";
@@ -14,8 +15,8 @@ import { Logo } from "@/components/widget/Logo";
 import { ContainerLayout } from "@/components/widget/Page";
 import { PaperTexture } from "@/components/widget/PaperTexture";
 import { SaveToCalendarDisclosure } from "@/components/widget/SaveToCalendarDisclosure";
-import { BgMusic } from "@/components/widget/BgMusic";
 import { IMAGES_PATH, SVGS_PATH } from "@/constants/paths";
+import { useInvitationContext } from "@/context/useInvitationContext";
 import { useDimension } from "@/hooks/useDimension";
 import { useIsSmScreenWidth } from "@/hooks/useIsSmScreenWidth";
 import {
@@ -32,7 +33,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowUpRightIcon, ChevronDownIcon, MapPinIcon } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -118,13 +119,7 @@ const FOOTER = {
   img: `${IMAGES_PATH}/footer.jpg`,
 };
 
-const Cover = ({
-  isOpened,
-  // onOpen,
-}: {
-  isOpened: boolean;
-  // onOpen: () => void;
-}) => {
+const Cover = () => {
   // Refs
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -132,6 +127,9 @@ const Cover = ({
   const searchParams = useSearchParams();
   const name = searchParams.get("to") || "Tamu Undangan";
   const iss = useIsSmScreenWidth();
+  const {
+    state: { isOpened },
+  } = useInvitationContext();
 
   // GSAP
   useGSAP(
@@ -1703,7 +1701,10 @@ const Footer = () => {
 
 export default function Page() {
   // States
-  const [isOpened, setIsOpened] = useState(false);
+  const {
+    state: { isOpened },
+    set,
+  } = useInvitationContext();
 
   // Refs
   const containerRef = useRef<HTMLDivElement>(null);
@@ -1720,7 +1721,7 @@ export default function Page() {
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10 && !isOpened) {
-        setIsOpened(true);
+        set({ isOpened: true });
       }
     };
 
@@ -1757,11 +1758,8 @@ export default function Page() {
       maxH={isOpened ? "auto" : "100lvh"}
       // overflowY={isOpened ? "visible" : "hidden"}
     >
-      <BgMusic isOpened={isOpened} />
-      <Cover
-        isOpened={isOpened}
-        // onOpen={() => setIsOpened(true)}
-      />
+      <BgMusic />
+      <Cover />
       <Intro />
       <BrideAndGroom />
       <Story />

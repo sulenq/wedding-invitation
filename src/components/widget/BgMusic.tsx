@@ -4,14 +4,14 @@ import { AppIcon } from "@/components/widget/AppIcon";
 import { DraggableBtn } from "@/components/widget/DraggableBtn";
 import { Circle } from "@chakra-ui/react";
 import { MusicIcon, PlayIcon } from "lucide-react";
+import { useInvitationContext } from "@/context/useInvitationContext";
 import { useEffect, useRef, useState } from "react";
 
-interface BgMusicProps {
-  isOpened: boolean;
-}
-export const BgMusic = (props: BgMusicProps) => {
+export const BgMusic = () => {
   // Props
-  const { isOpened, ...restProps } = props;
+  const {
+    state: { isOpened },
+  } = useInvitationContext();
 
   // States
   const [isPlaying, setIsPlaying] = useState(false);
@@ -91,13 +91,13 @@ export const BgMusic = (props: BgMusicProps) => {
       <DraggableBtn
         // className={"debug"}
         iconButton
+        defaultPos={"top-left"}
         rounded={"full"}
         bg={"d3"}
         visibility={isOpened ? "visible" : "hidden"}
         opacity={isOpened ? 1 : 0}
         transition={"300ms"}
         onClick={togglePlay}
-        {...restProps}
       >
         <Circle
           p={"8px"}
