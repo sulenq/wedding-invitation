@@ -73,7 +73,7 @@ export const SaveToCalendarDisclosure = ({
       sublabel: isIOS
         ? "Buka langsung di Apple Calendar"
         : isAndroid
-          ? "Buka dengan kalender default Android"
+          ? "Download dan buka file dengan kalender default/pilih aplikasi kalender"
           : "File .ics untuk semua aplikasi kalender",
       href: icsUrl,
       // No download attr on iOS — let Safari handle .ics natively (no warning)
