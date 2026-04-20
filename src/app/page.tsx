@@ -1710,6 +1710,8 @@ export default function Page() {
   useEffect(() => {
     if (!containerRef.current) return;
 
+    if (!isOpened) document.body.scrollTo(0, 0);
+
     if (isOpened) {
       document.body.style.overflow = "auto";
 
