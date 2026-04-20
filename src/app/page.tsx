@@ -294,12 +294,7 @@ const Cover = ({
   return (
     <CContainer ref={containerRef} pos={"relative"} overflow={"clip"}>
       {/* Contents */}
-      <ContainerLayout
-        minH={"100lvh"}
-        align={"center"}
-        justify={"center"}
-        p={8}
-      >
+      <ContainerLayout h={"100lvh"} align={"center"} justify={"center"} p={8}>
         {/* Bg */}
         <CContainer className="cover_bg" h={"100lvh"} pos={"absolute"} top={0}>
           <Image src={COVER.img} h={"100lvh"} w={"full"} />
@@ -535,7 +530,7 @@ const Cover = ({
         opacity={isOpened ? 0 : 1}
         pointerEvents={isOpened ? "none" : "auto"}
       >
-        <Logo size={200} ml={"40px"} my={"auto"} />
+        <Logo size={200} ml={"40px"} my={"auto"} className={"blur_filter"} />
 
         <Btn
           size={"sm"}
@@ -1741,12 +1736,16 @@ export default function Page() {
       <BgMusic isOpened={isOpened} />
       <Cover isOpened={isOpened} onOpen={() => setIsOpened(true)} />
       <Intro />
-      <BrideAndGroom />
-      <Story />
-      <Gallery />
-      <EventDetails />
-      <Gift />
-      <Footer />
+      {isOpened && (
+        <>
+          <BrideAndGroom />
+          <Story />
+          <Gallery />
+          <EventDetails />
+          <Gift />
+          <Footer />
+        </>
+      )}
     </CContainer>
   );
 }
