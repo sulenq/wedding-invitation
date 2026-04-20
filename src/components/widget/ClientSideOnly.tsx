@@ -30,7 +30,7 @@ const DefaultFallback = () => {
         }}
       /> */}
 
-      <Logo size={200} ml={"40px"} color={"white"} />
+      <Logo size={200} color={"white"} ml={"40px"} mb={"115px"} />
     </Center>
   );
 };
@@ -93,6 +93,7 @@ export default function ClientSideOnly(props: Props) {
       <GlobalDisclosure />
 
       {children}
+      {/* <DefaultFallback /> */}
     </>
   );
 }

@@ -14,6 +14,7 @@ import { Logo } from "@/components/widget/Logo";
 import { ContainerLayout } from "@/components/widget/Page";
 import { PaperTexture } from "@/components/widget/PaperTexture";
 import { SaveToCalendarDisclosure } from "@/components/widget/SaveToCalendarDisclosure";
+import { BgMusic } from "@/components/widget/BgMusic";
 import { IMAGES_PATH, SVGS_PATH } from "@/constants/paths";
 import { useDimension } from "@/hooks/useDimension";
 import { useIsSmScreenWidth } from "@/hooks/useIsSmScreenWidth";
@@ -30,7 +31,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowUpRightIcon, ChevronDownIcon, MapPinIcon } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -116,7 +117,13 @@ const FOOTER = {
   img: `${IMAGES_PATH}/footer.jpg`,
 };
 
-const Cover = () => {
+const Cover = ({
+  isOpened,
+  onOpen,
+}: {
+  isOpened: boolean;
+  onOpen: () => void;
+}) => {
   // Refs
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -406,23 +413,25 @@ const Cover = () => {
         </CContainer>
 
         {/* Chevron down */}
-        <VStack className="chevron_down" zIndex={5} mt={"auto"} mb={"50px"}>
-          <P fontWeight={"medium"} textAlign={"center"}>
-            Scroll
-          </P>
+        {isOpened && (
+          <VStack className="chevron_down" zIndex={11} mt={"auto"} mb={"50px"}>
+            <P fontWeight={"medium"} textAlign={"center"}>
+              Scroll
+            </P>
 
-          <AppIcon
-            icon={ChevronDownIcon}
-            boxSize={5}
-            animation={"hero-chevron-down-bounce 2s linear infinite"}
-          />
-        </VStack>
+            <AppIcon
+              icon={ChevronDownIcon}
+              boxSize={5}
+              animation={"hero-chevron-down-bounce 2s linear infinite"}
+            />
+          </VStack>
+        )}
       </ContainerLayout>
 
       {/* Flowers */}
       <>
         <Img
-          key={`${iss}`}
+          key={`flowers-l-${iss}`}
           className="cover_flowers_l"
           src={
             iss
@@ -441,7 +450,7 @@ const Cover = () => {
         />
 
         <Img
-          key={`${iss}`}
+          key={`flowers-r-${iss}`}
           className="cover_flowers_r"
           src={
             iss
@@ -463,7 +472,7 @@ const Cover = () => {
       {/* Bushes */}
       <>
         <Img
-          key={`${iss}`}
+          key={`bush-l-${iss}`}
           className="cover_bush_l"
           src={iss ? `${IMAGES_PATH}/bushSmall.png` : `${IMAGES_PATH}/bush.png`}
           alt="bush"
@@ -476,7 +485,7 @@ const Cover = () => {
           zIndex={4}
         />
         <Img
-          key={`${iss}`}
+          key={`bush-r-${iss}`}
           className="cover_bush_r"
           src={
             iss ? `${IMAGES_PATH}/bushSmallR.png` : `${IMAGES_PATH}/bushR.png`
@@ -492,18 +501,39 @@ const Cover = () => {
         />
       </>
 
-      <Center
+      <CContainer
         className="blur_filter"
+        align={"center"}
+        justify={"center"}
+        gap={8}
         w={"full"}
         h={"full"}
+        p={8}
         backdropFilter={"blur(4px)"}
         pos={"absolute"}
         top={0}
         left={0}
-        zIndex={4}
+        zIndex={10}
+        transition={"all 0.5s ease"}
+        opacity={isOpened ? 0 : 1}
+        pointerEvents={isOpened ? "none" : "auto"}
       >
-        <Logo size={200} ml={"40px"} />
-      </Center>
+        <Logo size={200} ml={"40px"} my={"auto"} />
+
+        <Btn
+          size={"sm"}
+          variant={"solid"}
+          colorPalette={"white"}
+          px={8}
+          rounded={"full"}
+          visibility={isOpened ? "hidden" : "visible"}
+          mb={12}
+          onClick={onOpen}
+          zIndex={9999}
+        >
+          Buka Undangan
+        </Btn>
+      </CContainer>
     </CContainer>
   );
 };
@@ -1615,7 +1645,14 @@ const Footer = () => {
           justify={"end"}
           mt={`${imgDimension.height! / 2}px`}
         >
-          <Img ref={imgRef} src={FOOTER.img} fluid w={"full"} mt={"-70%"} />
+          <Img
+            ref={imgRef}
+            src={FOOTER.img}
+            fluid
+            w={"full"}
+            mt={"-70%"}
+            filter={"grayscale(1)"}
+          />
 
           <CContainer gap={4} my={12}>
             <P
@@ -1639,6 +1676,9 @@ const Footer = () => {
 };
 
 export default function Page() {
+  // States
+  const [isOpened, setIsOpened] = useState(false);
+
   // Refs
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -1653,18 +1693,26 @@ export default function Page() {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const ro = new ResizeObserver(() => {
+    if (isOpened) {
       ScrollTrigger.refresh();
-    });
+      const ro = new ResizeObserver(() => {
+        ScrollTrigger.refresh();
+      });
 
-    ro.observe(containerRef.current);
-
-    return () => ro.disconnect();
-  }, []);
+      ro.observe(containerRef.current);
+      return () => ro.disconnect();
+    }
+  }, [isOpened]);
 
   return (
-    <CContainer ref={containerRef} overflowX={"clip"}>
-      <Cover />
+    <CContainer
+      ref={containerRef}
+      overflowX={"clip"}
+      h={isOpened ? "auto" : "100vh"}
+      overflowY={isOpened ? "visible" : "hidden"}
+    >
+      <BgMusic isOpened={isOpened} />
+      <Cover isOpened={isOpened} onOpen={() => setIsOpened(true)} />
       <Intro />
       <BrideAndGroom />
       <Story />
