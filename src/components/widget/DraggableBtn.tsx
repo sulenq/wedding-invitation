@@ -10,6 +10,7 @@ export interface DraggableBtnProps extends BtnProps {
   children: React.ReactNode;
   defaultPos?: DefaultPos;
   allowedSnap?: AllowedSnap;
+  spacing?: number; // in px
 }
 
 export const DraggableBtn = (props: DraggableBtnProps) => {
@@ -17,6 +18,7 @@ export const DraggableBtn = (props: DraggableBtnProps) => {
     children,
     defaultPos = "bottom-left",
     allowedSnap = ["left", "right"],
+    spacing = 16,
     onClick,
     ...restProps
   } = props;
@@ -37,10 +39,13 @@ export const DraggableBtn = (props: DraggableBtnProps) => {
       const vh = window.innerHeight;
 
       const positions = {
-        "top-left": { x: 16, y: 16 },
-        "top-right": { x: vw - offsetWidth - 16, y: 16 },
-        "bottom-left": { x: 16, y: vh - offsetHeight - 16 },
-        "bottom-right": { x: vw - offsetWidth - 16, y: vh - offsetHeight - 16 },
+        "top-left": { x: spacing, y: spacing },
+        "top-right": { x: vw - offsetWidth - spacing, y: spacing },
+        "bottom-left": { x: spacing, y: vh - offsetHeight - spacing },
+        "bottom-right": {
+          x: vw - offsetWidth - spacing,
+          y: vh - offsetHeight - spacing,
+        },
       };
 
       setPos(positions[defaultPos]);

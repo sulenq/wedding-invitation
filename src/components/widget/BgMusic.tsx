@@ -71,8 +71,9 @@ export const BgMusic = (props: BgMusicProps) => {
       <DraggableBtn
         // className={"debug"}
         iconButton
+        spacing={8}
         rounded={"full"}
-        bg={"gray.700"}
+        bg={"d3"}
         visibility={isOpened ? "visible" : "hidden"}
         opacity={isOpened ? 1 : 0}
         transition={"300ms"}
@@ -83,7 +84,7 @@ export const BgMusic = (props: BgMusicProps) => {
           p={"8px"}
           w={"36px"}
           h={"36px"}
-          bg={"bg.muted"}
+          bg={"d4"}
           color={"light"}
           animation={isPlaying ? "rotate360 10s linear infinite" : ""}
         >
