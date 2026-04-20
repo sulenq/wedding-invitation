@@ -35,6 +35,7 @@ import {
   ArrowUpRightIcon,
   ChevronDownIcon,
   ChevronUpIcon,
+  CircleIcon,
   MapPinIcon,
 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
@@ -42,7 +43,7 @@ import { useEffect, useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const COVER = {
+const HERO = {
   bride: "Adelia",
   groom: "Fatwa",
   img: `${IMAGES_PATH}/cover.jpg`,
@@ -129,7 +130,6 @@ const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Hooks
-  const guestName = useSearchParams().get("to") || "Tamu Undangan";
   const iss = useIsSmScreenWidth();
   const {
     invitation: { isOpened },
@@ -213,36 +213,31 @@ const Hero = () => {
           "<",
         )
         .from(
-          ".cover_content",
+          ".hero",
           {
             opacity: 0,
-            ease: "none",
-            duration: 1,
-          },
-          ">+1",
-        )
-        .fromTo(
-          ".cover_container",
-          {
-            opacity: 0,
-            ease: "none",
-            duration: 1.5,
-          },
-          {
-            opacity: 1,
             ease: "none",
             duration: 1.5,
           },
           "<",
         )
         .to(
-          ".cover_container",
+          ".hero_contents",
           {
             opacity: 0,
             ease: "none",
             // duration: 2.5,
           },
           ">+0.5",
+        )
+        .to(
+          ".hero",
+          {
+            h: "100vh",
+            ease: "none",
+            // duration: 2.5,
+          },
+          "<",
         )
         .to(
           ".chevron_down",
@@ -316,12 +311,11 @@ const Hero = () => {
           pos={"absolute"}
           top={0}
         >
-          <Image src={COVER.img} h={"100lvh"} w={"full"} />
+          <Image src={HERO.img} h={"100lvh"} w={"full"} />
         </CContainer>
 
         {/* Main content */}
         <CContainer
-          className={"cover_content debug"}
           h={"full"}
           align={"center"}
           gap={8}
@@ -332,43 +326,56 @@ const Hero = () => {
           // backgroundColor={"blackAlpha.600"}
         >
           <CContainer
-            className="cover_container"
+            className={"hero"}
             align={"center"}
-            gap={12}
-            my={"auto"}
+            gap={4}
+            py={"100px"}
+            h={"50vh"}
+            bgGradient={"to-b"}
+            gradientFrom={"blackAlpha.700"}
+            gradientTo={"transparent"}
           >
-            <P
-              className="fd"
-              fontSize={"1.25rem"}
-              textAlign={"center"}
-              letterSpacing={4}
-            >
-              THE WEDDING OF
-            </P>
-
-            <CContainer w={"fit"} align={"center"}>
+            <CContainer className={"hero_contents"}>
               <P
                 className="fd"
-                fontSize={"3rem"}
-                fontWeight={"bold"}
-                // textAlign={"center"}
-                lineHeight={1}
+                fontSize={"1rem"}
+                textAlign={"center"}
+                letterSpacing={4}
+                mb={4}
               >
-                {COVER.groom}
+                THE WEDDING OF
               </P>
 
-              <P
-                className="fd"
-                fontSize={"3rem"}
-                fontWeight={"bold"}
-                // textAlign={"center"}
-                lineHeight={1}
-              >
-                {COVER.bride}
-              </P>
-            </CContainer>
+              <HStack justify={"center"}>
+                <P
+                  className="fd"
+                  fontSize={"2.75rem"}
+                  fontWeight={"bold"}
+                  textAlign={"center"}
+                  lineHeight={1}
+                >
+                  {HERO.groom}
+                </P>
 
-            <CContainer>
+                <AppIcon
+                  boxSize={1.5}
+                  icon={CircleIcon}
+                  fill={"white"}
+                  mx={2}
+                  mb={"-4px"}
+                />
+
+                <P
+                  className="fd"
+                  fontSize={"2.75rem"}
+                  fontWeight={"bold"}
+                  textAlign={"center"}
+                  lineHeight={1}
+                >
+                  {HERO.bride}
+                </P>
+              </HStack>
+
               <DividerOrnament />
 
               <P
@@ -377,22 +384,7 @@ const Hero = () => {
                 textAlign={"center"}
                 letterSpacing={4}
               >
-                {COVER.date}
-              </P>
-            </CContainer>
-
-            <CContainer
-              maxW={"300px"}
-              align={"center"}
-              p={4}
-              bg={"whiteAlpha.200"}
-            >
-              <P className="fd" fontSize={"1rem"} opacity={0.8}>
-                Kepada Yth. Bpk / Ibu / Saudara/i
-              </P>
-
-              <P className="fd" fontSize={"1.5rem"} fontWeight={"bold"} my={4}>
-                {guestName}
+                {HERO.date}
               </P>
             </CContainer>
           </CContainer>
@@ -401,21 +393,22 @@ const Hero = () => {
         {/* Quote */}
         <CContainer h={"full"} position={"absolute"} top={0} zIndex={6}>
           <CContainer
-            className="cover_brief_container"
-            h={"full"}
+            className={"cover_brief_container"}
             align={"center"}
+            // justify={"center"}
+            h={"full"}
             p={8}
             opacity={0}
             pos={"relative"}
-            justify={"center"}
           >
             <P
               className="cover_brief_content"
               fontSize={["1rem", null, "1.25rem"]}
               textAlign={"center"}
               maxW={"600px"}
+              mt={"100px"}
             >
-              {COVER.quote}
+              {HERO.quote}
             </P>
 
             <Box
@@ -1249,14 +1242,20 @@ const EventDetails = () => {
               </CContainer>
 
               <HStack w={"full"} align={"stretch"}>
-                <CContainer gap={8} align={"center"} py={4}>
+                <CContainer
+                  align={"center"}
+                  justify={"space-between"}
+                  gap={8}
+                  py={4}
+                >
                   <P
-                    className="fd"
-                    fontSize={"1.25rem"}
+                    className={"fd"}
+                    fontSize={"1.2rem"}
                     fontWeight={"semibold"}
+                    lineHeight={1.4}
                     textAlign={"center"}
                   >
-                    Akad
+                    Akad Pernikahan
                   </P>
 
                   <CContainer align={"center"}>
@@ -1266,16 +1265,22 @@ const EventDetails = () => {
                   </CContainer>
                 </CContainer>
 
-                <Box flexShrink={0} w={"1.2px"} bg={"dark"} />
+                <Box flexShrink={0} w={"1.2px"} bg={"dark"} mx={2} />
 
-                <CContainer gap={8} align={"center"} py={4}>
+                <CContainer
+                  align={"center"}
+                  justify={"space-between"}
+                  gap={8}
+                  py={4}
+                >
                   <P
-                    className="fd"
-                    fontSize={"1.25rem"}
+                    className={"fd"}
+                    fontSize={"1.2rem"}
                     fontWeight={"semibold"}
+                    lineHeight={1.4}
                     textAlign={"center"}
                   >
-                    Resepsi
+                    Resepsi & Ngunduh Mantu
                   </P>
 
                   <CContainer align={"center"}>
