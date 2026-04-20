@@ -23,6 +23,7 @@ import {
   Center,
   Clipboard,
   HStack,
+  Image,
   SimpleGrid,
   VStack,
 } from "@chakra-ui/react";
@@ -209,6 +210,15 @@ const Cover = ({
           },
           "<",
         )
+        .from(
+          ".cover_content",
+          {
+            opacity: 0,
+            ease: "none",
+            duration: 1,
+          },
+          ">+1",
+        )
         .fromTo(
           ".cover_container",
           {
@@ -292,12 +302,12 @@ const Cover = ({
       >
         {/* Bg */}
         <CContainer className="cover_bg" h={"100lvh"} pos={"absolute"} top={0}>
-          <Img src={COVER.img} fluid h={"100lvh"} w={"full"} />
+          <Image src={COVER.img} h={"100lvh"} w={"full"} />
 
           <PaperTexture
             h={"full"}
             w={"full"}
-            opacity={0.5}
+            opacity={0.25}
             pos={"absolute"}
             top={0}
           />
@@ -305,6 +315,7 @@ const Cover = ({
 
         {/* Cover content */}
         <CContainer
+          className={"cover_content"}
           h={"full"}
           align={"center"}
           gap={8}
@@ -501,6 +512,7 @@ const Cover = ({
         />
       </>
 
+      {/* Blur overlay */}
       <CContainer
         className="blur_filter"
         align={"center"}
@@ -1708,7 +1720,7 @@ export default function Page() {
     <CContainer
       ref={containerRef}
       overflowX={"clip"}
-      h={isOpened ? "auto" : "100vh"}
+      h={isOpened ? "auto" : "100lvh"}
       overflowY={isOpened ? "visible" : "hidden"}
     >
       <BgMusic isOpened={isOpened} />
