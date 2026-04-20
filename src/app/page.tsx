@@ -329,13 +329,12 @@ const Hero = () => {
             className={"hero"}
             align={"center"}
             gap={4}
-            py={"100px"}
             h={"50vh"}
             bgGradient={"to-b"}
             gradientFrom={"blackAlpha.700"}
             gradientTo={"transparent"}
           >
-            <CContainer className={"hero_contents"}>
+            <CContainer className={"hero_contents"} mt={"120px"}>
               <P
                 className="fd"
                 fontSize={"1rem"}
