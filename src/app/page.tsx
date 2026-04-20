@@ -304,13 +304,13 @@ const Cover = ({
         <CContainer className="cover_bg" h={"100lvh"} pos={"absolute"} top={0}>
           <Image src={COVER.img} h={"100lvh"} w={"full"} />
 
-          <PaperTexture
+          {/* <PaperTexture
             h={"full"}
             w={"full"}
             opacity={0.25}
             pos={"absolute"}
             top={0}
-          />
+          /> */}
         </CContainer>
 
         {/* Cover content */}
