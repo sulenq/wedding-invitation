@@ -17,46 +17,47 @@ export const BgMusic = (props: BgMusicProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
+  // Handle audio unlocking (Essential for Mobile)
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
-    const handlePlay = () => {
-      if (isOpened && !isPlaying) {
-        audio
-          .play()
-          .then(() => {
-            setIsPlaying(true);
-          })
-          .catch(() => {
-            // Still blocked or failed
-            setIsPlaying(false);
-          });
-      }
+    const unlock = () => {
+      // Play and immediately pause to "unlock" the element for the browser session
+      audio
+        .play()
+        .then(() => {
+          audio.pause();
+          window.removeEventListener("touchstart", unlock);
+          window.removeEventListener("click", unlock);
+        })
+        .catch(() => {});
     };
 
-    if (isOpened && !isPlaying) {
-      // Initial attempt
-      handlePlay();
+    window.addEventListener("touchstart", unlock);
+    window.addEventListener("click", unlock);
 
-      // Mobile Gesture Fallback:
-      // iOS/Android require a valid gesture like 'touchend' or 'click' to unlock audio.
-      const gestures = ["touchend", "click", "mousedown", "touchstart"];
-      const onGesture = () => {
-        handlePlay();
-      };
+    return () => {
+      window.removeEventListener("touchstart", unlock);
+      window.removeEventListener("click", unlock);
+    };
+  }, []);
 
-      gestures.forEach((event) => {
-        window.addEventListener(event, onGesture, { once: true });
-      });
+  function handlePlay() {
+    if (!audioRef.current) return;
 
-      return () => {
-        gestures.forEach((event) => {
-          window.removeEventListener(event, onGesture);
-        });
-      };
-    }
-  }, [isOpened, isPlaying]);
+    audioRef.current
+      .play()
+      .then(() => {
+        setIsPlaying(true);
+      })
+      .catch(() => {});
+  }
+
+  // Handle playing state
+  useEffect(() => {
+    if (isOpened) handlePlay();
+  }, [isOpened]);
 
   const togglePlay = () => {
     if (!audioRef.current) return;

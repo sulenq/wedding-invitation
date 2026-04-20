@@ -292,7 +292,13 @@ const Cover = ({
   );
 
   return (
-    <CContainer ref={containerRef} pos={"relative"} overflow={"clip"}>
+    <CContainer
+      ref={containerRef}
+      // className={"debug"}
+      h={"100svh"}
+      pos={"relative"}
+      overflow={"clip"}
+    >
       {/* Contents */}
       <ContainerLayout h={"100lvh"} align={"center"} justify={"center"} p={8}>
         {/* Bg */}
