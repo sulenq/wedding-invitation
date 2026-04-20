@@ -101,7 +101,7 @@ export const SaveToCalendarDisclosure = ({
             <DisclosureHeaderContent title={"Simpan ke Kalender"} />
           </DisclosureHeader>
 
-          <DisclosureBody>
+          <DisclosureBody pb={8}>
             <CContainer gap={2} py={2}>
               {options.map((opt) => (
                 <a
