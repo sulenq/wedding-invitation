@@ -19,25 +19,39 @@ export const BgMusic = (props: BgMusicProps) => {
 
   useEffect(() => {
     const handleOpen = () => {
-      if (audioRef.current) {
-        const audio = audioRef.current;
-        const playPromise = audio.play();
-
-        if (playPromise !== undefined) {
-          playPromise
-            .then(() => {
-              setIsPlaying(true);
-            })
-            .catch(() => {
-              // Play failed (likely missing file or auto-play restriction)
-              setIsPlaying(false);
-            });
-        }
+      if (audioRef.current && !isPlaying) {
+        audioRef.current
+          .play()
+          .then(() => {
+            setIsPlaying(true);
+          })
+          .catch(() => {
+            // Play failed (likely missing file or auto-play restriction)
+            setIsPlaying(false);
+          });
       }
     };
 
-    if (isOpened) handleOpen();
-  }, [isOpened]);
+    if (isOpened) {
+      handleOpen();
+
+      // Mobile auto-play fallback
+      const interactions = ["touchstart", "click", "scroll"];
+      const onInteraction = () => {
+        handleOpen();
+      };
+
+      interactions.forEach((event) => {
+        window.addEventListener(event, onInteraction, { once: true });
+      });
+
+      return () => {
+        interactions.forEach((event) => {
+          window.removeEventListener(event, onInteraction);
+        });
+      };
+    }
+  }, [isOpened, isPlaying]);
 
   const togglePlay = () => {
     if (!audioRef.current) return;

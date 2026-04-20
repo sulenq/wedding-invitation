@@ -30,7 +30,12 @@ const DefaultFallback = () => {
         }}
       /> */}
 
-      <Logo size={200} color={"white"} ml={"40px"} mb={"115px"} />
+      <Logo
+        size={200}
+        color={"white"}
+        ml={"40px"}
+        // mb={"115px"}
+      />
     </Center>
   );
 };

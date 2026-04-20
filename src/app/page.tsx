@@ -296,7 +296,12 @@ const Cover = ({
       {/* Contents */}
       <ContainerLayout h={"100lvh"} align={"center"} justify={"center"} p={8}>
         {/* Bg */}
-        <CContainer className={"cover_bg"} h={"100vh"} pos={"absolute"} top={0}>
+        <CContainer
+          className={"cover_bg"}
+          h={"100lvh"}
+          pos={"absolute"}
+          top={0}
+        >
           <Image src={COVER.img} h={"100lvh"} w={"full"} />
 
           {/* <PaperTexture
@@ -519,7 +524,7 @@ const Cover = ({
         justify={"center"}
         gap={8}
         w={"full"}
-        h={"full"}
+        h={"100vh"}
         p={8}
         backdropFilter={"blur(4px)"}
         pos={"absolute"}
