@@ -3,6 +3,7 @@
 import { Btn } from "@/components/ui/btn";
 import { CContainer } from "@/components/ui/c-container";
 import { useColorMode } from "@/components/ui/color-mode";
+import { HelperText } from "@/components/ui/helper-text";
 import { Img } from "@/components/ui/img";
 import { NavLink } from "@/components/ui/nav-link";
 import { P } from "@/components/ui/p";
@@ -31,7 +32,12 @@ import {
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowUpRightIcon, ChevronDownIcon, MapPinIcon } from "lucide-react";
+import {
+  ArrowUpRightIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+  MapPinIcon,
+} from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 
@@ -119,7 +125,7 @@ const FOOTER = {
   img: `${IMAGES_PATH}/footer.jpg`,
 };
 
-const Cover = () => {
+const Hero = () => {
   // Refs
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -129,7 +135,6 @@ const Cover = () => {
   const iss = useIsSmScreenWidth();
   const {
     invitation: { isOpened },
-    setInvitation,
   } = useInvitationContext();
 
   // GSAP
@@ -529,25 +534,11 @@ const Cover = () => {
       >
         <Logo
           className={"blur_filter"}
-          size={200}
-          ml={"40px"}
+          size={150}
+          ml={"8%"}
           my={"auto"}
-          transform={"translateY(50px)"}
+          transition={"300ms"}
         />
-
-        <Btn
-          size={"sm"}
-          variant={"solid"}
-          colorPalette={"white"}
-          px={8}
-          rounded={"full"}
-          visibility={isOpened ? "hidden" : "visible"}
-          mb={12}
-          onClick={() => setInvitation({ isOpened: true })}
-          zIndex={9999}
-        >
-          Buka Undangan
-        </Btn>
       </CContainer>
 
       {/* Chevron down */}
@@ -1712,11 +1703,128 @@ const Footer = () => {
   );
 };
 
+const CoverOverlay = () => {
+  // Contexts
+  const {
+    invitation: { isOpened },
+    setInvitation,
+  } = useInvitationContext();
+
+  return (
+    <CContainer
+      align={"center"}
+      justify={"center"}
+      gap={"40px"}
+      w={"full"}
+      h={"full"}
+      // bg={"dark"}
+      pos={"fixed"}
+      inset={"0"}
+      visibility={isOpened ? "hidden" : "visible"}
+      opacity={isOpened ? 0 : 1}
+      transform={isOpened ? "scale(5)" : ""}
+      transition={"1s"}
+      zIndex={99999}
+    >
+      {/* Top part */}
+      <>
+        <Box
+          w={"200%"}
+          h={"200%"}
+          bg={"dark"}
+          pos={"absolute"}
+          bottom={"65px"}
+          right={"65px"}
+          transform={"rotate(-320deg)"}
+          // shadow={"xs"}
+        />
+
+        <Box
+          w={"200%"}
+          h={"200%"}
+          bg={"dark"}
+          pos={"absolute"}
+          bottom={"65px"}
+          left={"65px"}
+          transform={"rotate(320deg)"}
+          // shadow={"xs"}
+        />
+      </>
+
+      {/* Bottom part */}
+      <>
+        <Box
+          w={"200%"}
+          h={"200%"}
+          bg={"dark"}
+          pos={"absolute"}
+          top={"65px"}
+          left={"65px"}
+          transform={"rotate(40deg)"}
+          // shadow={"xs"}
+        />
+
+        <Box
+          w={"200%"}
+          h={"200%"}
+          bg={"dark"}
+          pos={"absolute"}
+          top={"65px"}
+          right={"65px"}
+          transform={"rotate(-40deg)"}
+          // shadow={"xs"}
+        />
+      </>
+
+      {/* Border */}
+      <Box w={"full"} h={"full"} p={4} pos={"absolute"} top={0} left={0}>
+        <Box
+          w={"full"}
+          h={"full"}
+          border={"2px solid"}
+          borderColor={"border.muted"}
+        />
+      </Box>
+
+      <Box
+        w={"240px"}
+        h={"240px"}
+        // bg={"red"}
+        pos={"absolute"}
+        transform={"rotate(45deg)"}
+        cursor={"pointer"}
+        onClick={() => setInvitation({ isOpened: true })}
+      />
+
+      <VStack color={"fg.subtle"} mt={"auto"} mb={"80px"} zIndex={2}>
+        <AppIcon
+          icon={ChevronUpIcon}
+          boxSize={5}
+          animation={"hero-chevron-down-bounce 2s linear infinite"}
+        />
+
+        <HelperText textAlign={"center"}>
+          Klik logo di atas untuk buka undangan
+        </HelperText>
+      </VStack>
+
+      {/* <Btn
+        rounded={0}
+        variant={"ghost"}
+        mt={"auto"}
+        mb={"80px"}
+        onClick={() => setInvitation({ isOpened: true })}
+      >
+        Buka Undangan <AppIcon icon={ChevronsRightIcon} />
+      </Btn> */}
+    </CContainer>
+  );
+};
+
 export default function Page() {
   // States
   const {
     invitation: { isOpened },
-    setInvitation,
   } = useInvitationContext();
 
   // Refs
@@ -1772,36 +1880,11 @@ export default function Page() {
       overflowX={"clip"}
       maxH={isOpened ? "auto" : "100lvh"}
       pos={"relative"}
-      // overflowY={isOpened ? "visible" : "hidden"}
     >
-      {/* Overlay */}
-      <CContainer
-        align={"center"}
-        justify={"center"}
-        gap={"40px"}
-        w={"full"}
-        h={"full"}
-        bg={"dark"}
-        pos={"fixed"}
-        inset={"0"}
-        zIndex={99999}
-        visibility={isOpened ? "hidden" : "visible"}
-        opacity={isOpened ? 0 : 1}
-      >
-        <Logo
-          size={200}
-          color={"white"}
-          ml={"40px"}
-          // mb={"115px"}
-        />
-
-        <Btn rounded={"0"} onClick={() => setInvitation({ isOpened: true })}>
-          Buka Undangan
-        </Btn>
-      </CContainer>
+      <CoverOverlay />
 
       <BgMusic />
-      <Cover />
+      <Hero />
       <Intro />
       <BrideAndGroom />
       <Story />
