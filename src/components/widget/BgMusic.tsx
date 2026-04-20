@@ -10,54 +10,58 @@ import { useEffect, useRef, useState } from "react";
 export const BgMusic = () => {
   // Props
   const {
-    state: { isOpened },
+    invitation: { isOpened },
   } = useInvitationContext();
 
   // States
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Handle audio unlocking (Essential for Mobile)
+  // Handle playing state
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
-    const unlock = () => {
-      // Play and immediately pause to "unlock" the element for the browser session
-      audio
-        .play()
-        .then(() => {
-          audio.pause();
-          window.removeEventListener("touchstart", unlock);
-          window.removeEventListener("click", unlock);
-        })
-        .catch(() => {});
+    const handlePlay = (isOpenedValue: boolean) => {
+      if (isOpenedValue && !isPlaying) {
+        audio
+          .play()
+          .then(() => {
+            setIsPlaying(true);
+          })
+          .catch(() => {
+            setIsPlaying(false);
+          });
+      }
     };
 
-    window.addEventListener("touchstart", unlock);
-    window.addEventListener("click", unlock);
+    if (isOpened && !isPlaying) {
+      // Initial attempt (works on permissive browsers/laptops)
+      handlePlay(isOpened);
+    }
+
+    // Capture the click event that opened the invitation
+    // This is crucial for mobile devices to play music immediately
+    const onGlobalClick = () => {
+      // Access store state directly to avoid stale closures
+      const currentIsOpened = useInvitationContext.getState().invitation.isOpened;
+      
+      // We try to play immediately. If isOpened is about to be true but not yet,
+      // the gesture context will still be valid for a few ms.
+      // But ideally, the setInvitation has already started.
+      handlePlay(currentIsOpened || true); // Passing true here as a fallback since the click IS opening it
+    };
+
+    if (!isPlaying) {
+      window.addEventListener("click", onGlobalClick);
+      window.addEventListener("touchstart", onGlobalClick);
+    }
 
     return () => {
-      window.removeEventListener("touchstart", unlock);
-      window.removeEventListener("click", unlock);
+      window.removeEventListener("click", onGlobalClick);
+      window.removeEventListener("touchstart", onGlobalClick);
     };
-  }, []);
-
-  function handlePlay() {
-    if (!audioRef.current) return;
-
-    audioRef.current
-      .play()
-      .then(() => {
-        setIsPlaying(true);
-      })
-      .catch(() => {});
-  }
-
-  // Handle playing state
-  useEffect(() => {
-    if (isOpened) handlePlay();
-  }, [isOpened]);
+  }, [isOpened, isPlaying]);
 
   const togglePlay = () => {
     if (!audioRef.current) return;

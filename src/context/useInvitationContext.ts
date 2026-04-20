@@ -5,18 +5,18 @@ interface State {
 }
 
 interface Store {
-  state: State;
-  set: (newState: Partial<State>) => void;
+  invitation: State;
+  setInvitation: (newState: Partial<State>) => void;
 }
 
 export const useInvitationContext = create<Store>((set) => ({
-  state: {
+  invitation: {
     isOpened: false,
   },
-  set: (newState) =>
+  setInvitation: (newState) =>
     set((s) => ({
-      state: {
-        ...s.state,
+      invitation: {
+        ...s.invitation,
         ...newState,
       },
     })),

@@ -1,8 +1,11 @@
 "use client";
 
 import { useColorMode } from "@/components/ui/color-mode";
+import { Img } from "@/components/ui/img";
+import Spinner from "@/components/ui/spinner";
 import { LoadingBar } from "@/components/widget/LoadingBar";
-import { Logo } from "@/components/widget/Logo";
+import { APP } from "@/constants/_meta";
+import { SVGS_PATH } from "@/constants/paths";
 import useADM from "@/context/useADM";
 import { useFirefoxPaddingY } from "@/hooks/useFirefoxPaddingY";
 import useOfflineAlert from "@/hooks/useOfflineAlert";
@@ -17,25 +20,20 @@ interface Props {
 
 const DefaultFallback = () => {
   return (
-    <Center w={"100w"} minH={"100dvh"} color={"fg.subtle"}>
-      {/* <Img
+    <Center w={"100w"} minH={"100dvh"} color={"fg.subtle"} pos={"relative"}>
+      <Img
         fluid
         alt={`${APP.name} Logo`}
         src={`${SVGS_PATH}/logo_gray.svg`}
-        width={"170px"}
+        width={"40px"}
         height={"fit"}
-        ml={"40px"}
+        ml={"16px"}
         imageProps={{
           priority: true,
         }}
-      /> */}
-
-      <Logo
-        size={200}
-        color={"white"}
-        ml={"40px"}
-        // mb={"115px"}
       />
+
+      <Spinner boxSize={"100px"} pos={"absolute"} />
     </Center>
   );
 };

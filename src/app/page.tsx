@@ -128,7 +128,8 @@ const Cover = () => {
   const name = searchParams.get("to") || "Tamu Undangan";
   const iss = useIsSmScreenWidth();
   const {
-    state: { isOpened },
+    invitation: { isOpened },
+    setInvitation,
   } = useInvitationContext();
 
   // GSAP
@@ -522,7 +523,7 @@ const Cover = () => {
       >
         <Logo size={200} ml={"40px"} my={"auto"} className={"blur_filter"} />
 
-        {/* <Btn
+        <Btn
           size={"sm"}
           variant={"solid"}
           colorPalette={"white"}
@@ -530,11 +531,11 @@ const Cover = () => {
           rounded={"full"}
           visibility={isOpened ? "hidden" : "visible"}
           mb={12}
-          onClick={onOpen}
+          onClick={() => setInvitation({ isOpened: true })}
           zIndex={9999}
         >
           Buka Undangan
-        </Btn> */}
+        </Btn>
       </CContainer>
 
       {/* Chevron down */}
@@ -1702,8 +1703,8 @@ const Footer = () => {
 export default function Page() {
   // States
   const {
-    state: { isOpened },
-    set,
+    invitation: { isOpened },
+    setInvitation,
   } = useInvitationContext();
 
   // Refs
@@ -1717,17 +1718,17 @@ export default function Page() {
     setColorMode("dark");
   }, []);
 
-  // Handle scroll to open
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10 && !isOpened) {
-        set({ isOpened: true });
-      }
-    };
+  // Handle scroll to trigger music
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (window.scrollY > 10 && !isOpened) {
+  //       setInvitation({ isOpened: true });
+  //     }
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isOpened]);
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, [isOpened]);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -1756,8 +1757,35 @@ export default function Page() {
       ref={containerRef}
       overflowX={"clip"}
       maxH={isOpened ? "auto" : "100lvh"}
+      pos={"relative"}
       // overflowY={isOpened ? "visible" : "hidden"}
     >
+      {/* Overlay */}
+      <CContainer
+        align={"center"}
+        justify={"center"}
+        gap={"40px"}
+        w={"full"}
+        h={"full"}
+        bg={"dark"}
+        pos={"absolute"}
+        inset={"0"}
+        zIndex={99999}
+        visibility={isOpened ? "hidden" : "visible"}
+        opacity={isOpened ? 0 : 1}
+      >
+        <Logo
+          size={200}
+          color={"white"}
+          ml={"40px"}
+          // mb={"115px"}
+        />
+
+        <Btn rounded={"0"} onClick={() => setInvitation({ isOpened: true })}>
+          Buka Undangan
+        </Btn>
+      </CContainer>
+
       <BgMusic />
       <Cover />
       <Intro />
