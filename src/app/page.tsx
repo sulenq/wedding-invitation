@@ -203,7 +203,7 @@ const Cover = () => {
         .to(
           ".cover_bg",
           {
-            scale: 1.3,
+            scale: 1.1,
             ease: "none",
             duration: 1,
           },
@@ -299,7 +299,13 @@ const Cover = () => {
       overflow={"clip"}
     >
       {/* Contents */}
-      <ContainerLayout h={"100lvh"} align={"center"} justify={"center"} p={8}>
+      <ContainerLayout
+        h={"100lvh"}
+        align={"center"}
+        justify={"center"}
+        p={8}
+        zIndex={1}
+      >
         {/* Bg */}
         <CContainer
           className={"cover_bg"}
@@ -510,18 +516,24 @@ const Cover = () => {
         justify={"center"}
         gap={8}
         w={"full"}
-        h={"100vh"}
+        h={"100lvh"}
         p={8}
         backdropFilter={"blur(4px)"}
         pos={"absolute"}
         top={0}
         left={0}
-        zIndex={10}
         transition={"all 0.5s ease"}
         opacity={isOpened ? 0 : 1}
         pointerEvents={isOpened ? "none" : "auto"}
+        zIndex={10}
       >
-        <Logo size={200} ml={"40px"} my={"auto"} className={"blur_filter"} />
+        <Logo
+          className={"blur_filter"}
+          size={200}
+          ml={"40px"}
+          my={"auto"}
+          transform={"translateY(50px)"}
+        />
 
         <Btn
           size={"sm"}
