@@ -1736,6 +1736,8 @@ export default function Page() {
     if (!isOpened) document.body.scrollTo(0, 0);
 
     if (isOpened) {
+      document.body.style.overflow = "auto";
+
       ScrollTrigger.refresh();
       const ro = new ResizeObserver(() => {
         ScrollTrigger.refresh();
@@ -1768,7 +1770,7 @@ export default function Page() {
         w={"full"}
         h={"full"}
         bg={"dark"}
-        pos={"absolute"}
+        pos={"fixed"}
         inset={"0"}
         zIndex={99999}
         visibility={isOpened ? "hidden" : "visible"}
