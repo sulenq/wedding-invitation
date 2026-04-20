@@ -25,7 +25,7 @@ export const DraggableBtn = (props: DraggableBtnProps) => {
 
   const btnRef = useRef<HTMLButtonElement>(null);
 
-  const [pos, setPos] = useState({ x: 16, y: 16 });
+  const [pos, setPos] = useState({ x: spacing, y: spacing });
   const [dragging, setDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [moved, setMoved] = useState(false); // track if actually dragged
@@ -85,14 +85,17 @@ export const DraggableBtn = (props: DraggableBtnProps) => {
 
       // horizontal snap
       if (allowedSnap.includes("left") && allowedSnap.includes("right")) {
-        snapX = rect.left < vw / 2 ? 16 : vw - rect.width - 16;
+        snapX = rect.left < vw / 2 ? spacing : vw - rect.width - spacing;
       } else if (allowedSnap.includes("left")) {
-        snapX = 16;
+        snapX = spacing;
       } else if (allowedSnap.includes("right")) {
-        snapX = vw - rect.width - 16;
+        snapX = vw - rect.width - spacing;
       }
 
-      const snapY = Math.min(Math.max(16, rect.top), vh - rect.height - 16);
+      const snapY = Math.min(
+        Math.max(spacing, rect.top),
+        vh - rect.height - spacing,
+      );
 
       setPos({ x: snapX, y: snapY });
     };
