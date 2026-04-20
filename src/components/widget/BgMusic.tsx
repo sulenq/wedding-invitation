@@ -3,7 +3,7 @@
 import { AppIcon } from "@/components/widget/AppIcon";
 import { DraggableBtn } from "@/components/widget/DraggableBtn";
 import { Circle } from "@chakra-ui/react";
-import { MusicIcon } from "lucide-react";
+import { MusicIcon, PlayIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 interface BgMusicProps {
@@ -86,7 +86,7 @@ export const BgMusic = (props: BgMusicProps) => {
           color={"light"}
           animation={isPlaying ? "rotate360 10s linear infinite" : ""}
         >
-          <AppIcon icon={MusicIcon} mr={"2px"} />
+          <AppIcon icon={isPlaying ? MusicIcon : PlayIcon} mr={"2px"} />
         </Circle>
       </DraggableBtn>
 
