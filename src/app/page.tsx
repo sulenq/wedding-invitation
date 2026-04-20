@@ -13,6 +13,7 @@ import { ImgViewer } from "@/components/widget/ImgViewer";
 import { Logo } from "@/components/widget/Logo";
 import { ContainerLayout } from "@/components/widget/Page";
 import { PaperTexture } from "@/components/widget/PaperTexture";
+import { SaveToCalendarDisclosure } from "@/components/widget/SaveToCalendarDisclosure";
 import { IMAGES_PATH, SVGS_PATH } from "@/constants/paths";
 import { useDimension } from "@/hooks/useDimension";
 import { useIsSmScreenWidth } from "@/hooks/useIsSmScreenWidth";
@@ -25,15 +26,9 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useGSAP } from "@gsap/react";
-import { atcb_action } from "add-to-calendar-button";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  ArrowUpRightIcon,
-  CalendarIcon,
-  ChevronDownIcon,
-  MapPinIcon,
-} from "lucide-react";
+import { ArrowUpRightIcon, ChevronDownIcon, MapPinIcon } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 
@@ -105,7 +100,7 @@ const GIFT = {
     accountHolder: "ADELIA DIAN PRATIWI",
   },
   mandiri: {
-    accountNumber: "0987654321",
+    accountNumber: "1360019337945",
     accountHolder: "FATWA LINOVERA",
   },
 };
@@ -115,7 +110,7 @@ const GALLERY_PHOTOS = [
   `${IMAGES_PATH}/gallery/3.jpg`,
   `${IMAGES_PATH}/gallery/4.jpg`,
   `${IMAGES_PATH}/gallery/5.jpg`,
-  `${IMAGES_PATH}/gallery/6.jpg`,
+  `${IMAGES_PATH}/gallery/13.jpg`,
 ];
 const FOOTER = {
   img: `${IMAGES_PATH}/footer.jpg`,
@@ -898,7 +893,7 @@ const Story = () => {
       />
 
       <Img
-        src={`${IMAGES_PATH}/brideAndGroom.gif`}
+        src={`${IMAGES_PATH}/brideAndGroom2.gif`}
         fluid
         aspectRatio={16 / 10}
         w={"full"}
@@ -1244,52 +1239,20 @@ const EventDetails = () => {
               </HStack>
 
               <CContainer align={"center"} gap={4}>
-                <Btn
-                  variant={"outline"}
-                  color={"dark"}
-                  onClick={(e) => {
-                    atcb_action(
-                      {
-                        name: "Pernikahan Fatwa & Adelia",
-                        description:
-                          "Akad Nikah: 08.00 WIB s/d Selesai\nResepsi: 11.00 WIB s/d 13.00 WIB\n\n" +
-                          EVENT.place.name +
-                          "\n" +
-                          EVENT.place.address,
-                        startDate: "2026-05-31",
-                        endDate: "2026-05-31",
-                        startTime: "08:00",
-                        endTime: "13:00",
-                        timeZone: "Asia/Jakarta",
-                        location: EVENT.place.address,
-                        // Desktop: all options
-                        options: [
-                          "Apple",
-                          "Google",
-                          "iCal",
-                          "Microsoft365",
-                          "Outlook.com",
-                          "Yahoo",
-                        ],
-                        // Android: Google + iCal (iCal = download .ics → opens with default calendar app)
-                        optionsMobile: ["Google", "iCal"],
-                        // iOS: Apple Calendar + Google
-                        optionsIOS: ["Apple", "Google", "iCal"],
-                        // Rename iCal to something clearer
-                        customLabels: {
-                          "btn-ical": "Kalender Bawaan / Download ICS",
-                        },
-                        iCalFileName: "pernikahan-fatwa-adelia",
-                        listStyle: "modal",
-                        language: "id",
-                      },
-                      e.currentTarget,
-                    );
-                  }}
-                >
-                  <AppIcon icon={CalendarIcon} />
-                  Simpan ke Kalender
-                </Btn>
+                <SaveToCalendarDisclosure
+                  eventTitle={"Pernikahan Fatwa & Adelia"}
+                  eventDescription={
+                    `Akad Nikah: 08.00 WIB s/d Selesai\n` +
+                    `Resepsi: 11.00 WIB s/d 13.00 WIB\n\n` +
+                    EVENT.place.name +
+                    `\n` +
+                    EVENT.place.address
+                  }
+                  eventLocation={EVENT.place.address}
+                  icsPath={"/assets/icss/resepsi.ics"}
+                  startUTC={"20260531T010000Z"}
+                  endUTC={"20260531T060000Z"}
+                />
               </CContainer>
             </CContainer>
 
@@ -1411,7 +1374,7 @@ const Gift = () => {
         opacity={0.25}
       /> */}
 
-      <CContainer bg={"d1"} color={"light"}>
+      <CContainer bg={"d2"} color={"light"}>
         <ContainerLayout p={4} py={12} zIndex={2}>
           <CContainer gap={2} mb={4}>
             <P
@@ -1682,6 +1645,7 @@ export default function Page() {
   // Hooks
   const { setColorMode } = useColorMode();
 
+  // Force dark mode
   useEffect(() => {
     setColorMode("dark");
   }, []);
