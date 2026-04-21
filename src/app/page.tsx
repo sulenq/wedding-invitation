@@ -509,8 +509,8 @@ const Hero = () => {
           alt={"logo"}
           pos={"fixed"}
           fluid
-          w={"140px"}
-          ml={"8%"}
+          w={"120px"}
+          ml={"24px"}
         />
       </CContainer>
 
@@ -1717,9 +1717,9 @@ const CoverOverlay = () => {
     >
       {/* Cover part (dark) with diamond hole */}
       <Box
-        w={"calc(240px + 6000px)"}
-        h={"calc(240px + 6000px)"}
-        border={"3000px solid"}
+        w={"calc(240px + 10000px)"}
+        h={"calc(240px + 10000px)"}
+        border={"5000px solid"}
         borderColor={"dark"}
         transform={"rotate(45deg)"}
         pointerEvents={"none"}
