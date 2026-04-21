@@ -11,7 +11,6 @@ import { BgMusic } from "@/components/widget/BgMusic";
 import { CountDown } from "@/components/widget/CountDown";
 import { DividerOrnament } from "@/components/widget/DividerOrnament";
 import { ImgViewer } from "@/components/widget/ImgViewer";
-import { Logo } from "@/components/widget/Logo";
 import { ContainerLayout } from "@/components/widget/Page";
 import { PaperTexture } from "@/components/widget/PaperTexture";
 import { SaveToCalendarDisclosure } from "@/components/widget/SaveToCalendarDisclosure";
@@ -267,22 +266,13 @@ const Hero = () => {
           ">",
         )
         .to(
-          ".cover_brief_content",
+          [".cover_brief_content", ".cover_brief_line"],
           {
             opacity: 0,
             ease: "none",
             // duration: 1.5,
           },
           ">",
-        )
-        .to(
-          ".cover_brief_line",
-          {
-            opacity: 0,
-            ease: "none",
-            // duration: 1.5,
-          },
-          "<",
         );
     },
     { scope: containerRef },
@@ -291,12 +281,11 @@ const Hero = () => {
   return (
     <CContainer
       ref={containerRef}
-      // className={"debug"}
-      h={"100svh"}
+      h={"100lvh"}
       pos={"relative"}
       overflow={"clip"}
     >
-      {/* Contents */}
+      {/* Main contents */}
       <ContainerLayout
         h={"100lvh"}
         align={"center"}
@@ -514,12 +503,14 @@ const Hero = () => {
         pointerEvents={isOpened ? "none" : "auto"}
         zIndex={10}
       >
-        <Logo
-          className={"blur_filter"}
-          size={150}
+        {/* <Logo size={150} ml={"8%"} my={"auto"} transition={"300ms"} /> */}
+        <Img
+          src={`${SVGS_PATH}/logo_light.svg`}
+          alt={"logo"}
+          pos={"fixed"}
+          fluid
+          w={"140px"}
           ml={"8%"}
-          my={"auto"}
-          transition={"300ms"}
         />
       </CContainer>
 
@@ -528,9 +519,9 @@ const Hero = () => {
         className={"chevron_down"}
         zIndex={11}
         mt={"auto"}
-        pos={"absolute"}
+        pos={"fixed"}
         left={"50%"}
-        bottom={"50px"}
+        bottom={"100px"}
         transform={"translateX(-50%)"}
         // visibility={isOpened ? "visible" : "hidden"}
       >
@@ -570,7 +561,7 @@ const Intro = () => {
       });
 
       tl.from(
-        ".bride",
+        ".brideName",
         {
           x: `-50px`,
           opacity: 0,
@@ -579,7 +570,7 @@ const Intro = () => {
         "<",
       )
         .from(
-          ".groom",
+          ".groomName",
           {
             x: `50px`,
             opacity: 0,
@@ -588,19 +579,19 @@ const Intro = () => {
           "<",
         )
         .to(
-          ".bride",
+          ".brideName",
           {
-            y: LINE_H_NUM + 180 + 50,
-            ease: "linear",
+            height: LINE_H_NUM + 180,
+            ease: "none",
             duration: 2,
           },
           ">+0.125",
         )
         .to(
-          ".groom",
+          ".groomName",
           {
-            y: LINE_H_NUM + 180,
-            ease: "linear",
+            height: LINE_H_NUM + 180,
+            ease: "none",
             duration: 2,
           },
           "<",
@@ -653,9 +644,9 @@ const Intro = () => {
 
       <ContainerLayout align={"center"} gap={12} zIndex={2}>
         <SimpleGrid columns={2} gap={"64px"}>
-          <CContainer align={"end"}>
+          <CContainer className={"brideName debug"} justify={"end"} h={"60px"}>
             <P
-              className="fd bride"
+              className={"fd"}
               maxW={"100px"}
               fontSize={"1.25rem"}
               lineHeight={1.4}
@@ -665,9 +656,9 @@ const Intro = () => {
             </P>
           </CContainer>
 
-          <CContainer mt={"50px"}>
+          <CContainer className={"groomName debug"} justify={"end"} h={"60px"}>
             <P
-              className="fd groom"
+              className={"fd"}
               maxW={"100px"}
               fontSize={"1.25rem"}
               lineHeight={1.4}
@@ -1773,16 +1764,56 @@ const CoverOverlay = () => {
         />
       </>
 
-      {/* Main content */}
-      <Box w={"full"} h={"full"} p={4} pos={"absolute"} top={0} left={0}>
-        <CContainer
-          justify={"space-between"}
-          w={"full"}
-          h={"full"}
-          p={4}
-          border={"2px solid"}
+      {/* Border accents */}
+      <>
+        <Box
+          w={"80px"}
+          h={"80px"}
+          borderLeft={"2px solid"}
+          borderTop={"2px solid"}
           borderColor={"border.muted"}
-        >
+          pos={"absolute"}
+          left={4}
+          top={4}
+        />
+
+        <Box
+          w={"80px"}
+          h={"80px"}
+          borderLeft={"2px solid"}
+          borderBottom={"2px solid"}
+          borderColor={"border.muted"}
+          pos={"absolute"}
+          left={4}
+          bottom={4}
+        />
+
+        <Box
+          w={"80px"}
+          h={"80px"}
+          borderRight={"2px solid"}
+          borderTop={"2px solid"}
+          borderColor={"border.muted"}
+          pos={"absolute"}
+          right={4}
+          top={4}
+        />
+
+        <Box
+          w={"80px"}
+          h={"80px"}
+          borderRight={"2px solid"}
+          borderBottom={"2px solid"}
+          borderColor={"border.muted"}
+          pos={"absolute"}
+          right={4}
+          bottom={4}
+        />
+      </>
+
+      {/* Main content */}
+      <Box w={"full"} h={"full"} p={8} pos={"absolute"} top={0} left={0}>
+        <CContainer justify={"space-between"} w={"full"} h={"full"} p={4}>
           <CContainer gap={2}>
             <P
               className="fd"
@@ -1803,6 +1834,7 @@ const CoverOverlay = () => {
             </P>
           </CContainer>
 
+          {/* Helper text */}
           <VStack color={"fg.subtle"}>
             <AppIcon
               icon={ChevronUpIcon}
@@ -1827,16 +1859,6 @@ const CoverOverlay = () => {
         cursor={"pointer"}
         onClick={() => setInvitation({ isOpened: true })}
       />
-
-      {/* <Btn
-        rounded={0}
-        variant={"ghost"}
-        mt={"auto"}
-        mb={"80px"}
-        onClick={() => setInvitation({ isOpened: true })}
-      >
-        Buka Undangan <AppIcon icon={ChevronsRightIcon} />
-      </Btn> */}
     </CContainer>
   );
 };

@@ -16,6 +16,7 @@ export const BgMusic = () => {
   // States
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const userPausedRef = useRef(false);
 
   // Handle playing state
   useEffect(() => {
@@ -23,6 +24,8 @@ export const BgMusic = () => {
     if (!audio) return;
 
     const handlePlay = (isOpenedValue: boolean) => {
+      if (userPausedRef.current) return;
+
       if (isOpenedValue && !isPlaying) {
         audio
           .play()
@@ -43,16 +46,18 @@ export const BgMusic = () => {
     // Capture the click event that opened the invitation
     // This is crucial for mobile devices to play music immediately
     const onGlobalClick = () => {
+      if (userPausedRef.current) return;
       // Access store state directly to avoid stale closures
-      const currentIsOpened = useInvitationContext.getState().invitation.isOpened;
-      
+      const currentIsOpened =
+        useInvitationContext.getState().invitation.isOpened;
+
       // We try to play immediately. If isOpened is about to be true but not yet,
       // the gesture context will still be valid for a few ms.
       // But ideally, the setInvitation has already started.
       handlePlay(currentIsOpened || true); // Passing true here as a fallback since the click IS opening it
     };
 
-    if (!isPlaying) {
+    if (!isPlaying && !userPausedRef.current) {
       window.addEventListener("click", onGlobalClick);
       window.addEventListener("touchstart", onGlobalClick);
     }
@@ -69,11 +74,13 @@ export const BgMusic = () => {
     if (isPlaying) {
       audioRef.current.pause();
       setIsPlaying(false);
+      userPausedRef.current = true;
     } else {
       audioRef.current
         .play()
         .then(() => {
           setIsPlaying(true);
+          userPausedRef.current = false;
         })
         .catch(() => {});
     }
