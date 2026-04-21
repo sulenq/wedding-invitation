@@ -581,7 +581,7 @@ const Intro = () => {
         .to(
           ".brideName",
           {
-            height: LINE_H_NUM + 180,
+            y: LINE_H_NUM + 180,
             ease: "none",
             duration: 2,
           },
@@ -590,7 +590,7 @@ const Intro = () => {
         .to(
           ".groomName",
           {
-            height: LINE_H_NUM + 180,
+            y: LINE_H_NUM + 180,
             ease: "none",
             duration: 2,
           },
@@ -644,7 +644,7 @@ const Intro = () => {
 
       <ContainerLayout align={"center"} gap={12} zIndex={2}>
         <SimpleGrid columns={2} gap={"64px"}>
-          <CContainer className={"brideName debug"} justify={"end"} h={"60px"}>
+          <CContainer className={"brideName"} justify={"end"} h={"60px"}>
             <P
               className={"fd"}
               maxW={"100px"}
@@ -656,7 +656,7 @@ const Intro = () => {
             </P>
           </CContainer>
 
-          <CContainer className={"groomName debug"} justify={"end"} h={"60px"}>
+          <CContainer className={"groomName"} justify={"end"} h={"60px"}>
             <P
               className={"fd"}
               maxW={"100px"}
@@ -1708,108 +1708,32 @@ const CoverOverlay = () => {
       // bg={"dark"}
       pos={"fixed"}
       inset={"0"}
+      overflow={"hidden"}
       visibility={isOpened ? "hidden" : "visible"}
       opacity={isOpened ? 0 : 1}
       transform={isOpened ? "scale(5)" : ""}
       transition={"1s"}
       zIndex={99999}
     >
-      {/* Top part */}
-      <>
-        <Box
-          w={"200%"}
-          h={"200%"}
-          bg={"dark"}
-          pos={"absolute"}
-          bottom={"65px"}
-          right={"65px"}
-          transform={"rotate(-320deg)"}
-          // shadow={"xs"}
-        />
-
-        <Box
-          w={"200%"}
-          h={"200%"}
-          bg={"dark"}
-          pos={"absolute"}
-          bottom={"65px"}
-          left={"65px"}
-          transform={"rotate(320deg)"}
-          // shadow={"xs"}
-        />
-      </>
-
-      {/* Bottom part */}
-      <>
-        <Box
-          w={"200%"}
-          h={"200%"}
-          bg={"dark"}
-          pos={"absolute"}
-          top={"65px"}
-          left={"65px"}
-          transform={"rotate(40deg)"}
-          // shadow={"xs"}
-        />
-
-        <Box
-          w={"200%"}
-          h={"200%"}
-          bg={"dark"}
-          pos={"absolute"}
-          top={"65px"}
-          right={"65px"}
-          transform={"rotate(-40deg)"}
-          // shadow={"xs"}
-        />
-      </>
-
-      {/* Border accents */}
-      <>
-        <Box
-          w={"80px"}
-          h={"80px"}
-          borderLeft={"2px solid"}
-          borderTop={"2px solid"}
-          borderColor={"border.muted"}
-          pos={"absolute"}
-          left={4}
-          top={4}
-        />
-
-        <Box
-          w={"80px"}
-          h={"80px"}
-          borderLeft={"2px solid"}
-          borderBottom={"2px solid"}
-          borderColor={"border.muted"}
-          pos={"absolute"}
-          left={4}
-          bottom={4}
-        />
-
-        <Box
-          w={"80px"}
-          h={"80px"}
-          borderRight={"2px solid"}
-          borderTop={"2px solid"}
-          borderColor={"border.muted"}
-          pos={"absolute"}
-          right={4}
-          top={4}
-        />
-
-        <Box
-          w={"80px"}
-          h={"80px"}
-          borderRight={"2px solid"}
-          borderBottom={"2px solid"}
-          borderColor={"border.muted"}
-          pos={"absolute"}
-          right={4}
-          bottom={4}
-        />
-      </>
+      {/* Cover part (dark) with diamond hole */}
+      <Box
+        w={"calc(240px + 6000px)"}
+        h={"calc(240px + 6000px)"}
+        border={"3000px solid"}
+        borderColor={"dark"}
+        transform={"rotate(45deg)"}
+        pointerEvents={"none"}
+        pos={"fixed"}
+      />
+      <Box
+        w={"270px"}
+        h={"270px"}
+        border={"1px dashed"}
+        borderColor={"d2"}
+        transform={"rotate(45deg)"}
+        shadow={"xs"}
+        pos={"fixed"}
+      />
 
       {/* Main content */}
       <Box w={"full"} h={"full"} p={8} pos={"absolute"} top={0} left={0}>
