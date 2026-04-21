@@ -51,22 +51,28 @@ const HERO = {
     "Dengan memohon ridho Allah SWT, kami melangkah ke dalam ikatan pernikahan sebagai bentuk ibadah dan ketaatan kepada-Nya.",
 };
 const INTRO = {
-  bride: "Adelia Dian Pratiwi",
-  groom: "Fatwa Linovera",
+  bride: {
+    firstName: "Adelia",
+    lastName: "Dian Pratiwi",
+  },
+  groom: {
+    firstName: "Fatwa",
+    lastName: "Linovera",
+  },
   img: `${IMAGES_PATH}/intro.gif`,
 };
 const BAG = {
   intro:
     "Dengan penuh rasa syukur, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu pada acara pernikahan kami.",
   bride: {
-    name: "Adelia Dian Pratiwi",
+    name: `${INTRO.bride.firstName} ${INTRO.bride.lastName}`,
     childOf: "Putri dari",
     parents: ["Bapak Widodo", "Ibu Tri Wahyuningsih"],
     img: `${IMAGES_PATH}/bride.jpg`,
     gif: `${IMAGES_PATH}/bride.gif`,
   },
   groom: {
-    name: "Fatwa Linovera",
+    name: `${INTRO.groom.firstName} ${INTRO.groom.lastName}`,
     childOf: "Putra dari",
     parents: ["Bapak Muhamad Nurfuad", "Ibu Sri Rahayu"],
     img: `${IMAGES_PATH}/groom.jpg`,
@@ -636,23 +642,30 @@ const Intro = () => {
           <CContainer className={"brideName"} justify={"end"} h={"60px"}>
             <P
               className={"fd"}
-              maxW={"100px"}
               fontSize={"1.25rem"}
               lineHeight={1.4}
               textAlign={"right"}
             >
-              {INTRO.bride}
+              {INTRO.bride.firstName}
+            </P>
+
+            <P
+              className={"fd"}
+              fontSize={"1.25rem"}
+              lineHeight={1.4}
+              textAlign={"right"}
+            >
+              {INTRO.bride.lastName}
             </P>
           </CContainer>
 
           <CContainer className={"groomName"} justify={"end"} h={"60px"}>
-            <P
-              className={"fd"}
-              maxW={"100px"}
-              fontSize={"1.25rem"}
-              lineHeight={1.4}
-            >
-              {INTRO.groom}
+            <P className={"fd"} fontSize={"1.25rem"} lineHeight={1.4}>
+              {INTRO.groom.firstName}
+            </P>
+
+            <P className={"fd"} fontSize={"1.25rem"} lineHeight={1.4}>
+              {INTRO.groom.lastName}
             </P>
           </CContainer>
         </SimpleGrid>
