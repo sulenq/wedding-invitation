@@ -130,9 +130,6 @@ const Hero = () => {
 
   // Hooks
   const iss = useIsSmScreenWidth();
-  const {
-    invitation: { isOpened },
-  } = useInvitationContext();
 
   // GSAP
   useGSAP(
@@ -149,16 +146,25 @@ const Hero = () => {
         },
       });
 
-      tl.to(".cover_bush_l", {
-        left: "-100%",
-        bottom: "-50%",
-        rotate: "-10deg",
+      tl.to(".blur_filter", {
         opacity: 0,
         ease: "none",
-        duration: 1.5,
+        duration: 0.5,
       })
         .to(
-          ".cover_bush_r",
+          ".hero_bush_l",
+          {
+            left: "-100%",
+            bottom: "-50%",
+            rotate: "-10deg",
+            opacity: 0,
+            ease: "none",
+            duration: 1.5,
+          },
+          "<",
+        )
+        .to(
+          ".hero_bush_r",
           {
             right: "-100%",
             bottom: "-50%",
@@ -170,16 +176,7 @@ const Hero = () => {
           "<",
         )
         .to(
-          ".blur_filter",
-          {
-            opacity: 0,
-            ease: "none",
-            duration: 1,
-          },
-          "<",
-        )
-        .to(
-          ".cover_flowers_l",
+          ".hero_flowers_l",
           {
             left: "-200%",
             bottom: "-10%",
@@ -191,7 +188,7 @@ const Hero = () => {
           "<",
         )
         .to(
-          ".cover_flowers_r",
+          ".hero_flowers_r",
           {
             right: "-200%",
             bottom: "-10%",
@@ -203,7 +200,7 @@ const Hero = () => {
           "<",
         )
         .to(
-          ".cover_bg",
+          ".hero_bg",
           {
             scale: 1.1,
             ease: "none",
@@ -248,7 +245,7 @@ const Hero = () => {
           "<",
         )
         .to(
-          ".cover_brief_container",
+          ".hero_brief_container",
           {
             opacity: 1,
             ease: "none",
@@ -257,7 +254,7 @@ const Hero = () => {
           ">",
         )
         .to(
-          ".cover_brief_line",
+          ".hero_brief_line",
           {
             height: "100px",
             ease: "none",
@@ -266,7 +263,7 @@ const Hero = () => {
           ">",
         )
         .to(
-          [".cover_brief_content", ".cover_brief_line"],
+          [".hero_brief_content", ".hero_brief_line"],
           {
             opacity: 0,
             ease: "none",
@@ -294,16 +291,11 @@ const Hero = () => {
         zIndex={1}
       >
         {/* Photo as Bg */}
-        <CContainer
-          className={"cover_bg"}
-          h={"100lvh"}
-          pos={"absolute"}
-          top={0}
-        >
+        <CContainer className={"hero_bg"} h={"100lvh"} pos={"absolute"} top={0}>
           <Image src={HERO.img} h={"100lvh"} w={"full"} />
         </CContainer>
 
-        {/* Main content */}
+        {/* Wedding info */}
         <CContainer
           h={"full"}
           align={"center"}
@@ -381,7 +373,7 @@ const Hero = () => {
         {/* Quote */}
         <CContainer h={"full"} position={"absolute"} top={0} zIndex={6}>
           <CContainer
-            className={"cover_brief_container"}
+            className={"hero_brief_container"}
             align={"center"}
             // justify={"center"}
             h={"full"}
@@ -390,7 +382,7 @@ const Hero = () => {
             pos={"relative"}
           >
             <P
-              className="cover_brief_content"
+              className="hero_brief_content"
               fontSize={["1rem", null, "1.25rem"]}
               textAlign={"center"}
               maxW={"600px"}
@@ -400,7 +392,7 @@ const Hero = () => {
             </P>
 
             <Box
-              className="cover_brief_line"
+              className="hero_brief_line"
               bg={"light"}
               w={"1.2px"}
               h={"0"}
@@ -416,7 +408,7 @@ const Hero = () => {
       <>
         <Img
           key={`flowers-l-${iss}`}
-          className="cover_flowers_l"
+          className="hero_flowers_l"
           src={
             iss
               ? `${IMAGES_PATH}/flowersSmall.png`
@@ -435,7 +427,7 @@ const Hero = () => {
 
         <Img
           key={`flowers-r-${iss}`}
-          className="cover_flowers_r"
+          className="hero_flowers_r"
           src={
             iss
               ? `${IMAGES_PATH}/flowersSmallR.png`
@@ -457,7 +449,7 @@ const Hero = () => {
       <>
         <Img
           key={`bush-l-${iss}`}
-          className="cover_bush_l"
+          className="hero_bush_l"
           src={iss ? `${IMAGES_PATH}/bushSmall.png` : `${IMAGES_PATH}/bush.png`}
           alt="bush"
           h={"80%"}
@@ -470,7 +462,7 @@ const Hero = () => {
         />
         <Img
           key={`bush-r-${iss}`}
-          className="cover_bush_r"
+          className="hero_bush_r"
           src={
             iss ? `${IMAGES_PATH}/bushSmallR.png` : `${IMAGES_PATH}/bushR.png`
           }
@@ -498,9 +490,6 @@ const Hero = () => {
         pos={"absolute"}
         top={0}
         left={0}
-        transition={"all 0.5s ease"}
-        opacity={isOpened ? 0 : 1}
-        pointerEvents={isOpened ? "none" : "auto"}
         zIndex={10}
       >
         <Center w={"100vw"} h={"100svh"} pos={"absolute"} inset={0}>
@@ -1815,18 +1804,7 @@ export default function Page() {
     setColorMode("dark");
   }, []);
 
-  // Handle scroll to trigger music
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (window.scrollY > 10 && !isOpened) {
-  //       setInvitation({ isOpened: true });
-  //     }
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, [isOpened]);
-
+  // Handle scroll
   useEffect(() => {
     if (!containerRef.current) return;
 
