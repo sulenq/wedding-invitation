@@ -1720,8 +1720,8 @@ const CoverOverlay = () => {
       {/* Cover part (dark) with diamond hole */}
       <>
         <Center
-          w={"calc(240px + 10000px)"}
-          h={"calc(240px + 10000px)"}
+          w={"calc(220px + 10000px)"}
+          h={"calc(220px + 10000px)"}
           // bg={"white"}
           border={"5000px solid"}
           borderColor={"dark"}
@@ -1740,21 +1740,18 @@ const CoverOverlay = () => {
           transform={"rotate(-45deg)"}
         /> */}
         </Center>
-
-        <Box
-          w={"270px"}
-          h={"270px"}
-          border={"1px dashed"}
-          borderColor={"d2"}
-          transform={"rotate(45deg)"}
-          shadow={"xs"}
-          pos={"fixed"}
-        />
       </>
 
       {/* Main content */}
-      <Box w={"full"} h={"full"} p={8} pos={"absolute"} top={0} left={0}>
-        <CContainer justify={"space-between"} w={"full"} h={"full"} p={4}>
+      <Box w={"full"} h={"full"} p={4} pos={"absolute"} top={0} left={0}>
+        <CContainer
+          justify={"space-between"}
+          w={"full"}
+          h={"full"}
+          p={6}
+          border={"1px solid"}
+          borderColor={"d2"}
+        >
           <CContainer gap={2}>
             <P
               className="fd"
