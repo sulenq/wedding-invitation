@@ -1830,11 +1830,23 @@ export default function Page() {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    if (!isOpened) document.body.scrollTo(0, 0);
+    if (!isOpened) {
+      // Force scroll to top
+      window.scrollTo(0, 0);
+
+      // Robust iOS absolute scroll lock
+      const lockScroll = (e: Event) => e.preventDefault();
+      document.addEventListener("touchmove", lockScroll, { passive: false });
+      document.addEventListener("wheel", lockScroll, { passive: false });
+
+      // Clean up the scroll lock when opened
+      return () => {
+        document.removeEventListener("touchmove", lockScroll);
+        document.removeEventListener("wheel", lockScroll);
+      };
+    }
 
     if (isOpened) {
-      document.body.style.overflow = "auto";
-
       ScrollTrigger.refresh();
       const ro = new ResizeObserver(() => {
         ScrollTrigger.refresh();
@@ -1843,12 +1855,9 @@ export default function Page() {
       ro.observe(containerRef.current);
 
       return () => {
-        document.body.style.overflow = "";
         ro.disconnect();
       };
     }
-
-    document.body.style.overflow = "";
   }, [isOpened]);
 
   return (
@@ -1856,6 +1865,8 @@ export default function Page() {
       ref={containerRef}
       overflowX={"clip"}
       maxH={isOpened ? "auto" : "100lvh"}
+      h={isOpened ? "auto" : "100lvh"}
+      overflowY={isOpened ? "visible" : "hidden"}
       pos={"relative"}
     >
       <CoverOverlay />
