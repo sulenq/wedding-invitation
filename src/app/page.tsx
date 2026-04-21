@@ -1825,34 +1825,37 @@ export default function Page() {
   useEffect(() => {
     if (!containerRef.current) return;
 
+    const html = document.documentElement;
+
     if (!isOpened) {
-      // Force scroll to top
       window.scrollTo(0, 0);
 
-      // Robust iOS absolute scroll lock
+      html.classList.add("noScroll");
+
       const lockScroll = (e: Event) => e.preventDefault();
       document.addEventListener("touchmove", lockScroll, { passive: false });
       document.addEventListener("wheel", lockScroll, { passive: false });
 
-      // Clean up the scroll lock when opened
       return () => {
+        html.classList.remove("noScroll");
+
         document.removeEventListener("touchmove", lockScroll);
         document.removeEventListener("wheel", lockScroll);
       };
     }
 
-    if (isOpened) {
+    html.classList.remove("noScroll");
+
+    ScrollTrigger.refresh();
+    const ro = new ResizeObserver(() => {
       ScrollTrigger.refresh();
-      const ro = new ResizeObserver(() => {
-        ScrollTrigger.refresh();
-      });
+    });
 
-      ro.observe(containerRef.current);
+    ro.observe(containerRef.current);
 
-      return () => {
-        ro.disconnect();
-      };
-    }
+    return () => {
+      ro.disconnect();
+    };
   }, [isOpened]);
 
   return (
