@@ -1856,14 +1856,7 @@ export default function Page() {
   }, [isOpened]);
 
   return (
-    <CContainer
-      ref={containerRef}
-      overflowX={"clip"}
-      maxH={isOpened ? "auto" : "100lvh"}
-      h={isOpened ? "auto" : "100lvh"}
-      overflowY={isOpened ? "visible" : "hidden"}
-      pos={"relative"}
-    >
+    <CContainer ref={containerRef} overflowX={"clip"} pos={"relative"}>
       <CoverOverlay />
 
       <BgMusic />
