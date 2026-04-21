@@ -43,29 +43,29 @@ export const BgMusic = () => {
       handlePlay(isOpened);
     }
 
-    // Capture the click event that opened the invitation
-    // This is crucial for mobile devices to play music immediately
-    const onGlobalClick = () => {
-      if (userPausedRef.current) return;
-      // Access store state directly to avoid stale closures
-      const currentIsOpened =
-        useInvitationContext.getState().invitation.isOpened;
+    // // Capture the click event that opened the invitation
+    // // This is crucial for mobile devices to play music immediately
+    // const onGlobalClick = () => {
+    //   if (userPausedRef.current) return;
+    //   // Access store state directly to avoid stale closures
+    //   const currentIsOpened =
+    //     useInvitationContext.getState().invitation.isOpened;
 
-      // We try to play immediately. If isOpened is about to be true but not yet,
-      // the gesture context will still be valid for a few ms.
-      // But ideally, the setInvitation has already started.
-      handlePlay(currentIsOpened || true); // Passing true here as a fallback since the click IS opening it
-    };
+    //   // We try to play immediately. If isOpened is about to be true but not yet,
+    //   // the gesture context will still be valid for a few ms.
+    //   // But ideally, the setInvitation has already started.
+    //   handlePlay(currentIsOpened || true); // Passing true here as a fallback since the click IS opening it
+    // };
 
-    if (!isPlaying && !userPausedRef.current) {
-      window.addEventListener("click", onGlobalClick);
-      window.addEventListener("touchstart", onGlobalClick);
-    }
+    // if (!isPlaying && !userPausedRef.current) {
+    //   window.addEventListener("click", onGlobalClick);
+    //   window.addEventListener("touchstart", onGlobalClick);
+    // }
 
-    return () => {
-      window.removeEventListener("click", onGlobalClick);
-      window.removeEventListener("touchstart", onGlobalClick);
-    };
+    // return () => {
+    //   window.removeEventListener("click", onGlobalClick);
+    //   window.removeEventListener("touchstart", onGlobalClick);
+    // };
   }, [isOpened, isPlaying]);
 
   const togglePlay = () => {

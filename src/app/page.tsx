@@ -503,7 +503,7 @@ const Hero = () => {
         pointerEvents={isOpened ? "none" : "auto"}
         zIndex={10}
       >
-        <Center w={"full"} h={"100svh"}>
+        <Center className={"debug"} w={"full"} h={"100svh"}>
           <Img
             src={`${SVGS_PATH}/logo_light.svg`}
             alt={"logo"}
