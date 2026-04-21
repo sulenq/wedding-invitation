@@ -503,15 +503,15 @@ const Hero = () => {
         pointerEvents={isOpened ? "none" : "auto"}
         zIndex={10}
       >
-        {/* <Logo size={150} ml={"8%"} my={"auto"} transition={"300ms"} /> */}
-        <Img
-          src={`${SVGS_PATH}/logo_light.svg`}
-          alt={"logo"}
-          pos={"fixed"}
-          fluid
-          w={"120px"}
-          ml={"24px"}
-        />
+        <Center w={"full"} h={"100svh"}>
+          <Img
+            src={`${SVGS_PATH}/logo_light.svg`}
+            alt={"logo"}
+            fluid
+            w={"120px"}
+            ml={"24px"}
+          />
+        </Center>
       </CContainer>
 
       {/* Chevron down */}

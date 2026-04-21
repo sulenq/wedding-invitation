@@ -32,9 +32,6 @@ nextjs-portal {
 *::selection {
   background: var(--d3);
 }
-body {
-  overflow: hidden;
-}
 
 .fd {
   font-family: "Philosopher", sans-serif !important;
