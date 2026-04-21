@@ -4,6 +4,7 @@ import ClientSideOnly from "@/components/widget/ClientSideOnly";
 import { APP } from "@/constants/_meta";
 import { Metadata, Viewport } from "next";
 import "./globals.css";
+import { Plus_Jakarta_Sans } from "next/font/google";
 
 interface Props {
   children: React.ReactNode;
@@ -54,6 +55,11 @@ export const viewport: Viewport = {
   userScalable: false,
 };
 
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  display: "swap",
+});
+
 const RootLayout = (props: Props) => {
   // Props
   const { children } = props;
@@ -64,7 +70,7 @@ const RootLayout = (props: Props) => {
         <link rel="manifest" href="/manifest.json" />
       </head>
 
-      <body>
+      <body style={plusJakartaSans.style}>
         <Provider>
           <Toaster />
           <ClientSideOnly>{children}</ClientSideOnly>

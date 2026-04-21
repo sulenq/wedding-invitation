@@ -1718,17 +1718,19 @@ const CoverOverlay = () => {
       zIndex={99999}
     >
       {/* Cover part (dark) with diamond hole */}
-      <Center
-        w={"calc(240px + 10000px)"}
-        h={"calc(240px + 10000px)"}
-        // bg={"white"}
-        border={"5000px solid"}
-        borderColor={"dark"}
-        transform={"rotate(45deg)"}
-        pointerEvents={"none"}
-        pos={"fixed"}
-      >
-        {/* <Img
+      <>
+        <Center
+          w={"calc(240px + 10000px)"}
+          h={"calc(240px + 10000px)"}
+          // bg={"white"}
+          border={"5000px solid"}
+          borderColor={"dark"}
+          transform={"rotate(45deg)"}
+          pointerEvents={"none"}
+          pos={"fixed"}
+          translate={"scale(2)"}
+        >
+          {/* <Img
           src={`${SVGS_PATH}/logo_dark.svg`}
           alt={"logo"}
           fluid
@@ -1737,16 +1739,18 @@ const CoverOverlay = () => {
           mb={"16px"}
           transform={"rotate(-45deg)"}
         /> */}
-      </Center>
-      <Box
-        w={"270px"}
-        h={"270px"}
-        border={"1px dashed"}
-        borderColor={"d2"}
-        transform={"rotate(45deg)"}
-        shadow={"xs"}
-        pos={"fixed"}
-      />
+        </Center>
+
+        <Box
+          w={"270px"}
+          h={"270px"}
+          border={"1px dashed"}
+          borderColor={"d2"}
+          transform={"rotate(45deg)"}
+          shadow={"xs"}
+          pos={"fixed"}
+        />
+      </>
 
       {/* Main content */}
       <Box w={"full"} h={"full"} p={8} pos={"absolute"} top={0} left={0}>
