@@ -578,7 +578,7 @@ const Intro = () => {
           {
             y: LINE_H_NUM + 180,
             ease: "none",
-            duration: 2,
+            duration: 1.8,
           },
           ">+0.125",
         )
@@ -587,7 +587,7 @@ const Intro = () => {
           {
             y: LINE_H_NUM + 180,
             ease: "none",
-            duration: 2,
+            duration: 1.8,
           },
           "<",
         )
@@ -1025,7 +1025,7 @@ const Gallery = () => {
         opacity={0.25}
       />
 
-      <ContainerLayout p={4} py={12}>
+      <ContainerLayout px={8} py={12}>
         <SimpleGrid columns={[1, null, 2]} gap={GAP}>
           <SimpleGrid columns={2} gap={GAP} h={"full"}>
             {/* Top */}
