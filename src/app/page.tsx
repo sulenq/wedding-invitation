@@ -1749,6 +1749,7 @@ const CoverOverlay = () => {
           w={"full"}
           h={"full"}
           p={6}
+          pb={7}
           border={"1px solid"}
           borderColor={"d2"}
         >
