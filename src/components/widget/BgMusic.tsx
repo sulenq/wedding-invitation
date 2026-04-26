@@ -6,6 +6,7 @@ import { Circle } from "@chakra-ui/react";
 import { MusicIcon, PlayIcon } from "lucide-react";
 import { useInvitationContext } from "@/context/useInvitationContext";
 import { useEffect, useRef, useState } from "react";
+import { getStorage } from "@/utils/client";
 
 export const BgMusic = () => {
   // Props
@@ -17,6 +18,34 @@ export const BgMusic = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const userPausedRef = useRef(false);
+  const [musicPath, setMusicPath] = useState("/assets/music/bgMusic.mp3");
+
+  // Read initial path and listen for changes
+  useEffect(() => {
+    const savedPath = getStorage("bgMusicPath");
+    if (savedPath) {
+      setMusicPath(savedPath);
+    }
+
+    const handleMusicChange = () => {
+      const newPath = getStorage("bgMusicPath");
+      if (newPath && newPath !== musicPath) {
+        setMusicPath(newPath);
+      }
+    };
+
+    window.addEventListener("musicChange", handleMusicChange);
+    return () => window.removeEventListener("musicChange", handleMusicChange);
+  }, [musicPath]);
+
+  // Handle playing state change when source changes
+  useEffect(() => {
+    if (isPlaying && audioRef.current) {
+      audioRef.current.play().catch(() => {
+        setIsPlaying(false);
+      });
+    }
+  }, [musicPath]);
 
   // Handle playing state
   useEffect(() => {
@@ -90,7 +119,7 @@ export const BgMusic = () => {
     <>
       <audio
         ref={audioRef}
-        src={"/assets/music/bgMusic.mp3"}
+        src={musicPath}
         loop
         preload={"auto"}
         onError={() => {

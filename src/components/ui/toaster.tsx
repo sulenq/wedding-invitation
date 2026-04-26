@@ -182,6 +182,7 @@ const ToastComponent = (props: any) => {
             gap={1}
             align={"start"}
             ml={1}
+            pr={12}
           >
             {toast.title && (
               <Toast.Title
