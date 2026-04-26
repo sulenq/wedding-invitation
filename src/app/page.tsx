@@ -1669,7 +1669,7 @@ const Footer = () => {
             filter={"grayscale(1)"}
           />
 
-          <CContainer gap={4} my={12}>
+          <CContainer align={"center"} gap={4} my={12}>
             <P
               className="fd"
               fontSize={"2rem"}
