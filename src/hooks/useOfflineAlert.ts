@@ -8,17 +8,15 @@ interface Props {
 }
 
 export default function useOfflineAlert(props: Props) {
-  // Props
   const { mounted } = props;
 
-  // Contexts
   const { l } = useLang();
   const { setOffline } = useOffline();
 
-  // Refs
-  const lastStatus = useRef(navigator.onLine);
+  const lastStatus = useRef(
+    typeof navigator !== "undefined" ? navigator.onLine : true,
+  );
 
-  // Utils
   function handleOnline() {
     setOffline(false);
     toaster.success({
@@ -27,23 +25,27 @@ export default function useOfflineAlert(props: Props) {
       description: l.success_online.description,
     });
   }
+
   function handleOffline() {
     setOffline(true);
   }
 
-  // Handler
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     window.addEventListener("online", handleOnline);
     window.addEventListener("offline", handleOffline);
 
     const interval = setInterval(() => {
       const online = navigator.onLine;
+
       if (online !== lastStatus.current) {
         lastStatus.current = online;
+
         if (online) handleOnline();
         else handleOffline();
       }
-    }, 1);
+    }, 1000);
 
     return () => {
       window.removeEventListener("online", handleOnline);

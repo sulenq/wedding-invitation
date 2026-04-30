@@ -1723,7 +1723,7 @@ const CoverOverlay = () => {
   const changeMusic = (index: number) => {
     setStorage("bgMusicPath", music[index].path);
     window.dispatchEvent(new Event("musicChange"));
-    toaster.create({
+    toaster.update("music", {
       title: `Musik ${music[index].label}`,
       type: "info",
     });
