@@ -33,6 +33,10 @@ export const Img = forwardRef<HTMLImageElement, Props__Img>((props, ref) => {
     if (onError) onError(e);
   };
 
+  const isGif =
+    typeof currentSrc === "string" &&
+    currentSrc.split("?")[0].toLowerCase().endsWith(".gif");
+
   return (
     <CContainer
       flexShrink={0}
@@ -68,6 +72,7 @@ export const Img = forwardRef<HTMLImageElement, Props__Img>((props, ref) => {
         width={fluid ? 100 : undefined}
         height={fluid ? 100 : undefined}
         quality={100}
+        unoptimized={isGif}
         sizes={
           imageProps?.sizes ??
           "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
