@@ -557,55 +557,19 @@ const Intro = () => {
         },
       });
 
-      tl.from(
-        ".brideName",
+      tl.fromTo(
+        ".intro_line",
         {
-          x: `-50px`,
-          opacity: 0,
+          height: "0px",
           ease: "none",
+        },
+        {
+          height: LINE_H_NUM,
+          ease: "none",
+          duration: 1.5,
         },
         "<",
       )
-        .from(
-          ".groomName",
-          {
-            x: `50px`,
-            opacity: 0,
-            ease: "none",
-          },
-          "<",
-        )
-        .to(
-          ".brideName",
-          {
-            y: LINE_H_NUM + 180,
-            ease: "none",
-            duration: 1.8,
-          },
-          ">+0.125",
-        )
-        .to(
-          ".groomName",
-          {
-            y: LINE_H_NUM + 180,
-            ease: "none",
-            duration: 1.8,
-          },
-          "<",
-        )
-        .fromTo(
-          ".intro_line",
-          {
-            height: "0px",
-            ease: "none",
-          },
-          {
-            height: LINE_H_NUM,
-            ease: "none",
-            duration: 1.5,
-          },
-          "<",
-        )
         .from(
           ".countdown",
           {
@@ -613,6 +577,24 @@ const Intro = () => {
             ease: "none",
           },
           ">",
+        )
+        .from(
+          ".brideName",
+          {
+            opacity: 0,
+            x: "-100px",
+            ease: "none",
+          },
+          ">",
+        )
+        .from(
+          ".groomName",
+          {
+            opacity: 0,
+            x: "100px",
+            ease: "none",
+          },
+          "<",
         );
     },
     { scope: containerRef },
@@ -640,6 +622,16 @@ const Intro = () => {
       <DividerOrnament color="black" />
 
       <ContainerLayout align={"center"} gap={12} zIndex={2}>
+        <VStack h={`${LINE_H_NUM}px`}>
+          <Box
+            className="intro_line"
+            bg={"dark"}
+            w={"1.2px"}
+            h={"0"}
+            zIndex={5}
+          />
+        </VStack>
+
         <SimpleGrid columns={2} gap={"64px"}>
           <CContainer className={"brideName"} justify={"end"} h={"60px"}>
             <P
@@ -672,22 +664,7 @@ const Intro = () => {
           </CContainer>
         </SimpleGrid>
 
-        <VStack h={`${LINE_H_NUM}px`}>
-          <Box
-            className="intro_line"
-            bg={"dark"}
-            w={"1.2px"}
-            h={"0"}
-            zIndex={5}
-          />
-        </VStack>
-
-        <CContainer
-          className="countdown"
-          align={"center"}
-          gap={12}
-          mt={"100px"}
-        >
+        <CContainer className="countdown" align={"center"} gap={12} mt={"20px"}>
           <Img
             src={INTRO.img}
             fluid
