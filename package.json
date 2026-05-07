@@ -9,7 +9,9 @@
     "lint": "eslint",
     "d": "npm run dev",
     "l": "node src/scripts/generate-translation.js",
+    "t": "npx tsc --noEmit --watch --preserveWatchOutput",
     "s": "node src/scripts/generate-sitemap.js"
+
   },
   "dependencies": {
     "@chakra-ui/charts": "^3.30.0",

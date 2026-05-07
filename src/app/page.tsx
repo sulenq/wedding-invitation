@@ -6,7 +6,6 @@ import { useColorMode } from "@/components/ui/color-mode";
 import { Img } from "@/components/ui/img";
 import { NavLink } from "@/components/ui/nav-link";
 import { P } from "@/components/ui/p";
-import { toaster } from "@/components/ui/toaster";
 import { AppIcon } from "@/components/widget/AppIcon";
 import { BgMusic } from "@/components/widget/BgMusic";
 import { CountDown } from "@/components/widget/CountDown";
@@ -19,7 +18,7 @@ import { IMAGES_PATH, SVGS_PATH } from "@/constants/paths";
 import { useInvitationContext } from "@/context/useInvitationContext";
 import { useDimension } from "@/hooks/useDimension";
 import { useIsSmScreenWidth } from "@/hooks/useIsSmScreenWidth";
-import { getStorage, setStorage } from "@/utils/client";
+import { removeStorage } from "@/utils/client";
 import {
   Box,
   Center,
@@ -40,7 +39,7 @@ import {
   MapPinIcon,
 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -1677,38 +1676,45 @@ const CoverOverlay = () => {
   } = useInvitationContext();
 
   // States
-  const [activeMusicIndex, setMusicIndex] = useState(0);
+  // const [
+  //   activeMusicIndex,
+  //   setMusicIndex,
+  // ] = useState(0);
 
   // Constants
-  const music = [
-    {
-      label: "Latar Biru - Asensio Bryan",
-      path: "/assets/music/bgMusic.mp3",
-    },
-    {
-      label: "One Only - Pamungkas",
-      path: "/assets/music/bgMusic2.mp3",
-    },
-    {
-      label: "Kicau Mania - Ndarboy Genk x Banditoz Yaow 86",
-      path: "/assets/music/bgMusic3.mp3",
-    },
-  ];
+  // const music = [
+  //   {
+  //     label: "Latar Biru - Asensio Bryan",
+  //     path: "/assets/music/bgMusic.mp3",
+  //   },
+  //   {
+  //     label: "One Only - Pamungkas",
+  //     path: "/assets/music/bgMusic2.mp3",
+  //   },
+  //   {
+  //     label: "Kicau Mania - Ndarboy Genk x Banditoz Yaow 86",
+  //     path: "/assets/music/bgMusic3.mp3",
+  //   },
+  // ];
   const guestName = useSearchParams().get("to") || "Tamu Undangan";
 
   // Handlers
-  const changeMusic = (index: number) => {
-    setStorage("bgMusicPath", music[index].path);
-    window.dispatchEvent(new Event("musicChange"));
-    toaster.update("music", {
-      title: `Musik ${music[index].label}`,
-      type: "info",
-    });
-  };
+  // const changeMusic = (index: number) => {
+  //   setStorage("bgMusicPath", music[index].path);
+  //   window.dispatchEvent(new Event("musicChange"));
+  //   toaster.update("music", {
+  //     title: `Musik ${music[index].label}`,
+  //     type: "info",
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   const activeMusicPath = getStorage("bgMusicPath");
+  //   setMusicIndex(music.findIndex((m) => m.path === activeMusicPath) || 0);
+  // }, []);
 
   useEffect(() => {
-    const activeMusicPath = getStorage("bgMusicPath");
-    setMusicIndex(music.findIndex((m) => m.path === activeMusicPath) || 0);
+    removeStorage("bgMusicPath");
   }, []);
 
   return (
@@ -1799,9 +1805,7 @@ const CoverOverlay = () => {
             </VStack>
 
             {/* Music change */}
-            <VStack align={"center"} gap={2} zIndex={11}>
-              {/* <P color={"fg.subtle"}>Musik</P> */}
-
+            {/* <VStack align={"center"} gap={2} zIndex={11}>
               <HStack gap={1}>
                 {music.map((_, i) => {
                   const isActive = i === activeMusicIndex;
@@ -1823,7 +1827,7 @@ const CoverOverlay = () => {
                   );
                 })}
               </HStack>
-            </VStack>
+            </VStack> */}
           </VStack>
         </CContainer>
       </Box>
