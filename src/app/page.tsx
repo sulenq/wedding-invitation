@@ -584,7 +584,7 @@ const Intro = () => {
             x: "-100px",
             ease: "none",
           },
-          ">",
+          "<",
         )
         .from(
           ".groomName",
@@ -625,7 +625,7 @@ const Intro = () => {
           <Box
             className="intro_line"
             bg={"dark"}
-            w={"1.2px"}
+            w={"1px"}
             h={"0"}
             zIndex={5}
           />
